@@ -21,6 +21,21 @@
 html[lang="en"] .lang-fa{display:none}
 html[lang="en"] .lang-en{display:block}
 html[lang="en"] body{direction:ltr;text-align:left}
+/* Magazine strip on home */
+.mag-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;margin-top:2rem}
+.mag-card{background:var(--charcoal);border:1px solid rgba(255,255,255,.06);border-radius:var(--r-lg);padding:1.6rem;transition:transform var(--t),border-color var(--t);display:flex;flex-direction:column;gap:.6rem}
+.mag-card:hover{transform:translateY(-4px);border-color:var(--gold-border)}
+.mag-card .kicker{font-size:.6rem;letter-spacing:.25em;color:var(--gold);text-transform:uppercase}
+.mag-card h3{font-size:1.05rem;font-weight:400;line-height:1.35}
+.mag-card p{color:var(--muted);font-size:.85rem;font-weight:300;line-height:1.6;flex:1}
+.mag-card .meta{font-size:.7rem;color:var(--muted);margin-top:.4rem}
+.mag-card .arrow{color:var(--gold);font-size:.85rem;margin-top:.6rem;display:inline-block}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+@media(max-width:768px){.about-grid{grid-template-columns:1fr}}
+.about-text p{color:var(--muted);font-weight:300;line-height:1.9;margin-bottom:1rem}
+.highlight-list{list-style:none;padding:0;margin:1.5rem 0 0}
+.highlight-list li{padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.9rem;font-weight:300;display:flex;align-items:center;gap:.7rem}
+.highlight-list li::before{content:'—';color:var(--gold)}
 </style>
 </head>
 <body>
@@ -61,25 +76,75 @@ html[lang="en"] body{direction:ltr;text-align:left}
 
 <section>
   <div class="container">
-    <div class="section-eyebrow">بخش‌ها</div>
-    <h2 class="section-title">چه چیزی <em>پیدا می‌کنید</em></h2>
-    <p class="section-desc">این سایت جامع شخصی من است. رزومهٔ کامل، مقالات و یادداشت‌های مجله، و راه‌های ارتباط.</p>
-    <div class="grid grid-3">
-      <a class="card" href="resume.html">
-        <div class="card-kicker">رزومه</div>
-        <h3>رزومهٔ کامل</h3>
-        <p>تجربه، مهارت‌ها، پروژه‌ها و تحصیلات به ۹ زبان.</p>
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-eyebrow">دربارهٔ من</div>
+        <h2 class="section-title">مدیریت پروژه با <em>دید عملیاتی</em></h2>
+        <p>من صادق وحیدی هستم — مدیر پروژه دیجیتال با تجربه در تحقیق بازار، طراحی فرایند، عملیات محتوا و تحویل دیجیتال. تمرکز من بر ساخت سیستم‌هایی است که کار را ساده‌تر، سریع‌تر و قابل اعتمادتر می‌کنند.</p>
+        <p>در این سایت می‌توانید رزومهٔ کامل، مقالات و یادداشت‌های مجله، و راه‌های ارتباط با من را پیدا کنید.</p>
+        <ul class="highlight-list">
+          <li>مدیریت پروژه‌های دیجیتال از صفر تا تحویل</li>
+          <li>طراحی فرایند و سیستم‌های عملیاتی</li>
+          <li>تحقیق بازار و تحلیل رقابتی</li>
+          <li>عملیات محتوا و تولید محتوای مقیاس‌پذیر</li>
+        </ul>
+      </div>
+      <div class="grid grid-2" style="gap:1rem">
+        <a class="card" href="resume.html">
+          <div class="card-kicker">رزومه</div>
+          <h3>رزومهٔ کامل</h3>
+          <p>تجربه، مهارت‌ها، پروژه‌ها به ۹ زبان.</p>
+        </a>
+        <a class="card" href="magazine.html">
+          <div class="card-kicker">مجله</div>
+          <h3>مجله و یادداشت‌ها</h3>
+          <p>مقالات دربارهٔ مدیریت و فناوری.</p>
+        </a>
+        <a class="card" href="contact.html">
+          <div class="card-kicker">تماس</div>
+          <h3>ارتباط با من</h3>
+          <p>ایمیل، لینکدین، تلگرام.</p>
+        </a>
+        <a class="card" href="https://www.linkedin.com/in/sadegh-vahidi-88a738150/" target="_blank" rel="noopener">
+          <div class="card-kicker">لینکدین</div>
+          <h3>پروفایل حرفه‌ای</h3>
+          <p>شبکه و تجربیات کاری.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">مجله</div>
+    <h2 class="section-title">آخرین <em>مقالات</em></h2>
+    <p class="section-desc">یادداشت‌ها و مقالات دربارهٔ مدیریت پروژه، بهره‌وری و فناوری.</p>
+    <div class="mag-strip">
+      <a class="mag-card" href="magazine/post-template.html">
+        <div class="kicker">مدیریت پروژه</div>
+        <h3>چگونه یک پروژهٔ دیجیتال را از صفر تا تحویل مدیریت کنیم</h3>
+        <p>راهنمای گام‌به‌گام برای مدیریت پروژه‌های دیجیتال: از تعریف scope تا تحویل نهایی.</p>
+        <div class="meta">۱۴۰۳/۰۸/۱۰ · ۵ دقیقه</div>
+        <span class="arrow">ادامهٔ مطلب ←</span>
       </a>
-      <a class="card" href="magazine.html">
-        <div class="card-kicker">مجله</div>
-        <h3>مجله و یادداشت‌ها</h3>
-        <p>مقالات دربارهٔ مدیریت پروژه، بهره‌وری، فناوری و تجربیات.</p>
+      <a class="mag-card" href="magazine/post-template.html">
+        <div class="kicker">بهره‌وری</div>
+        <h3>۵ عادت روزانه برای بهره‌وری بیشتر در کارهای دانشی</h3>
+        <p>عادات ساده اما مؤثر برای مدیریت زمان و تمرکز در محیط کار دانشی.</p>
+        <div class="meta">۱۴۰۳/۰۷/۲۲ · ۴ دقیقه</div>
+        <span class="arrow">ادامهٔ مطلب ←</span>
       </a>
-      <a class="card" href="contact.html">
-        <div class="card-kicker">تماس</div>
-        <h3>ارتباط با من</h3>
-        <p>ایمیل، لینکدین، تلگرام و فرم تماس.</p>
+      <a class="mag-card" href="magazine/post-template.html">
+        <div class="kicker">فناوری</div>
+        <h3>ابزارهایی که در مدیریت پروژه استفاده می‌کنم</h3>
+        <p>معرفی ابزارها و روش‌هایی که در پروژه‌های دیجیتال به کار می‌برم.</p>
+        <div class="meta">۱۴۰۳/۰۶/۱۵ · ۶ دقیقه</div>
+        <span class="arrow">ادامهٔ مطلب ←</span>
       </a>
+    </div>
+    <div style="margin-top:2rem;text-align:center">
+      <a class="btn btn-outline" href="magazine.html">مشاهدهٔ همهٔ مقالات</a>
     </div>
   </div>
 </section>
@@ -114,25 +179,75 @@ html[lang="en"] body{direction:ltr;text-align:left}
 
 <section>
   <div class="container">
-    <div class="section-eyebrow">Sections</div>
-    <h2 class="section-title">What you'll <em>find</em></h2>
-    <p class="section-desc">This is my personal comprehensive site. Full resume, magazine articles and notes, and ways to connect.</p>
-    <div class="grid grid-3">
-      <a class="card" href="resume.html">
-        <div class="card-kicker">Resume</div>
-        <h3>Full Resume</h3>
-        <p>Experience, skills, projects, and education in 9 languages.</p>
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-eyebrow">About</div>
+        <h2 class="section-title">Project management with an <em>operational mindset</em></h2>
+        <p>I'm Sadegh Vahidi — a digital project manager with experience in market research, process design, content operations, and digital delivery. My focus is building systems that make work simpler, faster, and more reliable.</p>
+        <p>On this site you'll find my full resume, magazine articles and notes, and ways to connect with me.</p>
+        <ul class="highlight-list">
+          <li>Managing digital projects from zero to delivery</li>
+          <li>Process design and operational systems</li>
+          <li>Market research and competitive analysis</li>
+          <li>Content operations and scalable content production</li>
+        </ul>
+      </div>
+      <div class="grid grid-2" style="gap:1rem">
+        <a class="card" href="resume.html">
+          <div class="card-kicker">Resume</div>
+          <h3>Full Resume</h3>
+          <p>Experience, skills, projects in 9 languages.</p>
+        </a>
+        <a class="card" href="magazine.html">
+          <div class="card-kicker">Magazine</div>
+          <h3>Magazine & Notes</h3>
+          <p>Articles on management and technology.</p>
+        </a>
+        <a class="card" href="contact.html">
+          <div class="card-kicker">Contact</div>
+          <h3>Get in Touch</h3>
+          <p>Email, LinkedIn, Telegram.</p>
+        </a>
+        <a class="card" href="https://www.linkedin.com/in/sadegh-vahidi-88a738150/" target="_blank" rel="noopener">
+          <div class="card-kicker">LinkedIn</div>
+          <h3>Professional Profile</h3>
+          <p>Network and work experience.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Magazine</div>
+    <h2 class="section-title">Latest <em>articles</em></h2>
+    <p class="section-desc">Notes and articles on project management, productivity, and technology.</p>
+    <div class="mag-strip">
+      <a class="mag-card" href="magazine/post-template.html">
+        <div class="kicker">Project Management</div>
+        <h3>How to Manage a Digital Project from Zero to Delivery</h3>
+        <p>A step-by-step guide to managing digital projects: from scope definition to final delivery.</p>
+        <div class="meta">2024-11-01 · 5 min read</div>
+        <span class="arrow">Read more →</span>
       </a>
-      <a class="card" href="magazine.html">
-        <div class="card-kicker">Magazine</div>
-        <h3>Magazine & Notes</h3>
-        <p>Articles on project management, productivity, technology, and experiences.</p>
+      <a class="mag-card" href="magazine/post-template.html">
+        <div class="kicker">Productivity</div>
+        <h3>5 Daily Habits for Greater Productivity in Knowledge Work</h3>
+        <p>Simple but effective habits for time management and focus in knowledge work.</p>
+        <div class="meta">2024-10-14 · 4 min read</div>
+        <span class="arrow">Read more →</span>
       </a>
-      <a class="card" href="contact.html">
-        <div class="card-kicker">Contact</div>
-        <h3>Get in Touch</h3>
-        <p>Email, LinkedIn, Telegram, and contact form.</p>
+      <a class="mag-card" href="magazine/post-template.html">
+        <div class="kicker">Technology</div>
+        <h3>Tools I Use in Project Management</h3>
+        <p>An introduction to the tools and methods I use in digital projects.</p>
+        <div class="meta">2024-09-06 · 6 min read</div>
+        <span class="arrow">Read more →</span>
       </a>
+    </div>
+    <div style="margin-top:2rem;text-align:center">
+      <a class="btn btn-outline" href="magazine.html">View all articles</a>
     </div>
   </div>
 </section>
