@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0" name="viewport">
+<title>عنوان مقاله — مجلهٔ Sadegh Vahidi</title>
+<meta name="description" content="توضیح کوتاه مقاله.">
+<meta property="og:title" content="عنوان مقاله">
+<meta property="og:description" content="توضیح کوتاه مقاله.">
+<meta property="og:type" content="article">
+<link rel="canonical" href="https://sadeghvahidi.ir/magazine/post-template.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-logo">S. VAHIDI</div>
+  <button class="nav-burger" id="burger" aria-label="منو"><span></span><span></span><span></span></button>
+  <div class="nav-links" id="navLinks">
+    <a href="../index.html">خانه</a>
+    <a href="../resume.html">رزومه</a>
+    <a href="../magazine.html">مجله</a>
+    <a href="../contact.html">تماس</a>
+  </div>
+</nav>
+
+<article class="article" style="padding-top:8rem">
+  <a class="back" href="../magazine.html">← بازگشت به مجله</a>
+  <h1>عنوان مقالهٔ شما</h1>
+  <div class="meta">تاریخ انتشار · زمان مطالعه</div>
+
+  <p>این یک قالب نمونه برای مقالات مجله است. محتوای واقعی خود را اینجا قرار دهید.</p>
+
+  <h2>زیرعنوان اول</h2>
+  <p>پاراگراف نمونه. می‌توانید از تگ‌های <code>h2</code>، <code>p</code>، <code>ul</code> و غیره استفاده کنید.</p>
+
+  <h2>زیرعنوان دوم</h2>
+  <ul>
+    <li>مورد اول</li>
+    <li>مورد دوم</li>
+    <li>مورد سوم</li>
+  </ul>
+
+  <p>برای افزودن مقالهٔ جدید، این فایل را کپی کنید و محتوا را جایگزین کنید، سپس لینک آن را در <code>magazine.html</code> اضافه کنید.</p>
+</article>
+
+<footer>
+  <div class="container">
+    <p>© 2026 Sadegh Vahidi. تمامی حقوق محفوظ است.</p>
+    <p style="margin-top:.5rem"><a href="../index.html">خانه</a> · <a href="../resume.html">رزومه</a> · <a href="../magazine.html">مجله</a> · <a href="../contact.html">تماس</a></p>
+  </div>
+</footer>
+
+<script>
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40)});
+  const burger=document.getElementById('burger');
+  const links=document.getElementById('navLinks');
+  burger.addEventListener('click',()=>links.classList.toggle('open'));
+</script>
+</body>
+</html>

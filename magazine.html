@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0" name="viewport">
+<title>مجله — Sadegh Vahidi</title>
+<meta name="description" content="مجلهٔ شخصی صادق وحیدی: مقالات دربارهٔ مدیریت پروژه، بهره‌وری، فناوری و تجربیات.">
+<meta property="og:title" content="مجله — Sadegh Vahidi">
+<meta property="og:description" content="مجلهٔ شخصی صادق وحیدی.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sadeghvahidi.ir/magazine.html">
+<link rel="canonical" href="https://sadeghvahidi.ir/magazine.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-logo">S. VAHIDI</div>
+  <button class="nav-burger" id="burger" aria-label="منو"><span></span><span></span><span></span></button>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html">خانه</a>
+    <a href="resume.html">رزومه</a>
+    <a href="magazine.html">مجله</a>
+    <a href="contact.html">تماس</a>
+  </div>
+</nav>
+
+<section style="padding-top:8rem">
+  <div class="container">
+    <div class="section-eyebrow">مجله</div>
+    <h1 class="section-title">مجله و <em>یادداشت‌ها</em></h1>
+    <p class="section-desc">مقالات، یادداشت‌ها و تجربیات من دربارهٔ مدیریت پروژه، بهره‌وری، فناوری و زندگی حرفه‌ای.</p>
+
+    <div class="grid grid-2" style="margin-top:2rem">
+      <a class="card" href="magazine/post-template.html">
+        <div class="card-kicker">نمونهٔ مقاله</div>
+        <h3>چگونه یک پروژهٔ دیجیتال را از صفر تا تحویل مدیریت کنیم</h3>
+        <p>راهنمای گام‌به‌گام برای مدیریت پروژه‌های دیجیتال: از تعریف scope تا تحویل نهایی.</p>
+        <div class="card-meta">۱۴۰۳/۰۸/۱۰ · ۵ دقیقه مطالعه</div>
+      </a>
+      <a class="card" href="magazine/post-template.html">
+        <div class="card-kicker">بهره‌وری</div>
+        <h3>۵ عادت روزانه برای بهره‌وری بیشتر در کارهای دانشی</h3>
+        <p>عادات ساده اما مؤثر برای مدیریت زمان و تمرکز در محیط کار دانشی.</p>
+        <div class="card-meta">۱۴۰۳/۰۷/۲۲ · ۴ دقیقه مطالعه</div>
+      </a>
+      <a class="card" href="magazine/post-template.html">
+        <div class="card-kicker">فناوری</div>
+        <h3>ابزارهایی که در مدیریت پروژه استفاده می‌کنم</h3>
+        <p>معرفی ابزارها و روش‌هایی که در پروژه‌های دیجیتال به کار می‌برم.</p>
+        <div class="card-meta">۱۴۰۳/۰۶/۱۵ · ۶ دقیقه مطالعه</div>
+      </a>
+    </div>
+
+    <div style="margin-top:3rem;padding:2rem;background:var(--charcoal);border:1px dashed var(--gold-border);border-radius:var(--r-lg);text-align:center">
+      <p class="muted">این مقالات نمونه هستند. مقالات واقعی خود را می‌توانید در پوشهٔ <code>magazine/</code> اضافه کنید.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>© 2026 Sadegh Vahidi. تمامی حقوق محفوظ است.</p>
+    <p style="margin-top:.5rem"><a href="index.html">خانه</a> · <a href="resume.html">رزومه</a> · <a href="contact.html">تماس</a></p>
+  </div>
+</footer>
+
+<script>
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40)});
+  const burger=document.getElementById('burger');
+  const links=document.getElementById('navLinks');
+  burger.addEventListener('click',()=>links.classList.toggle('open'));
+</script>
+
+<!-- Tawk.to chatbot: replace YOUR_TAWK_PROPERTY_ID -->
+<!--
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/YOUR_TAWK_PROPERTY_ID/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+-->
+</body>
+</html>
