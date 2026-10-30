@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0" name="viewport">
-<title>تماس — Sadegh Vahidi</title>
+<title>تماس — Sadegh Vahidi | Contact</title>
 <meta name="description" content="راه‌های ارتباط با صادق وحیدی: ایمیل، لینکدین، تلگرام، اینستاگرام.">
 <meta property="og:title" content="تماس — Sadegh Vahidi">
 <meta property="og:description" content="راه‌های ارتباط با صادق وحیدی.">
@@ -14,26 +14,41 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
+<style>
+.lang-en{display:none}
+html[lang="en"] .lang-fa{display:none}
+html[lang="en"] .lang-en{display:block}
+html[lang="en"] body{direction:ltr;text-align:left}
+</style>
 </head>
 <body>
 
 <nav id="nav">
   <div class="nav-logo">S. VAHIDI</div>
-  <button class="nav-burger" id="burger" aria-label="منو"><span></span><span></span><span></span></button>
+  <button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   <div class="nav-links" id="navLinks">
-    <a href="index.html">خانه</a>
-    <a href="resume.html">رزومه</a>
-    <a href="magazine.html">مجله</a>
-    <a href="contact.html">تماس</a>
+    <span class="lang-fa">
+      <a href="index.html">خانه</a>
+      <a href="resume.html">رزومه</a>
+      <a href="magazine.html">مجله</a>
+      <a href="contact.html">تماس</a>
+    </span>
+    <span class="lang-en">
+      <a href="index.html">Home</a>
+      <a href="resume.html">Resume</a>
+      <a href="magazine.html">Magazine</a>
+      <a href="contact.html">Contact</a>
+    </span>
   </div>
+  <button id="langToggle" class="btn btn-outline" style="padding:.4rem .9rem;font-size:.75rem" aria-label="Switch language">EN</button>
 </nav>
 
+<div class="lang-fa">
 <section style="padding-top:8rem">
   <div class="container">
     <div class="section-eyebrow">تماس</div>
     <h1 class="section-title">ارتباط با <em>من</em></h1>
     <p class="section-desc">برای همکاری، مشاوره، گفتگو یا هر سؤالی، از راه‌های زیر با من در تماس باشید.</p>
-
     <div class="grid grid-2" style="margin-top:2rem">
       <a class="card" href="mailto:sadeghvahidi80@gmail.com">
         <div class="card-kicker">ایمیل</div>
@@ -56,10 +71,9 @@
         <p>به‌روزرسانی‌ها و پشت‌صحنه.</p>
       </a>
     </div>
-
     <div style="margin-top:3rem">
       <h2 class="section-title" style="font-size:1.6rem">فرم تماس</h2>
-      <p class="section-desc">برای ارسال پیام، از فرم زیر استفاده کنید (نیاز به Formspree یا سرویس مشابه دارد).</p>
+      <p class="section-desc">برای ارسال پیام، از فرم زیر استفاده کنید.</p>
       <form action="https://formspree.io/f/mppplvez" method="POST" style="max-width:560px;display:flex;flex-direction:column;gap:1rem">
         <input type="text" name="name" placeholder="نام شما" required style="padding:.85rem 1rem;border-radius:var(--r);border:1px solid rgba(255,255,255,.1);background:var(--charcoal);color:var(--off-white);font-family:var(--font);font-size:.95rem">
         <input type="email" name="email" placeholder="ایمیل شما" required style="padding:.85rem 1rem;border-radius:var(--r);border:1px solid rgba(255,255,255,.1);background:var(--charcoal);color:var(--off-white);font-family:var(--font);font-size:.95rem">
@@ -69,11 +83,55 @@
     </div>
   </div>
 </section>
+</div>
+
+<div class="lang-en">
+<section style="padding-top:8rem">
+  <div class="container">
+    <div class="section-eyebrow">Contact</div>
+    <h1 class="section-title">Get in <em>Touch</em></h1>
+    <p class="section-desc">For collaboration, consulting, conversation, or any question, reach out through the channels below.</p>
+    <div class="grid grid-2" style="margin-top:2rem">
+      <a class="card" href="mailto:sadeghvahidi80@gmail.com">
+        <div class="card-kicker">Email</div>
+        <h3>sadeghvahidi80@gmail.com</h3>
+        <p>For formal correspondence and collaboration proposals.</p>
+      </a>
+      <a class="card" href="https://www.linkedin.com/in/sadegh-vahidi-88a738150/" target="_blank" rel="noopener">
+        <div class="card-kicker">LinkedIn</div>
+        <h3>sadegh-vahidi</h3>
+        <p>Professional network and work experience.</p>
+      </a>
+      <a class="card" href="https://t.me/SadeghVahidi" target="_blank" rel="noopener">
+        <div class="card-kicker">Telegram</div>
+        <h3>@SadeghVahidi</h3>
+        <p>Direct messages and quick chat.</p>
+      </a>
+      <a class="card" href="https://instagram.com/m.sadegh.vahidi" target="_blank" rel="noopener">
+        <div class="card-kicker">Instagram</div>
+        <h3>@m.sadegh.vahidi</h3>
+        <p>Updates and behind the scenes.</p>
+      </a>
+    </div>
+    <div style="margin-top:3rem">
+      <h2 class="section-title" style="font-size:1.6rem">Contact Form</h2>
+      <p class="section-desc">Use the form below to send a message.</p>
+      <form action="https://formspree.io/f/mppplvez" method="POST" style="max-width:560px;display:flex;flex-direction:column;gap:1rem">
+        <input type="text" name="name" placeholder="Your name" required style="padding:.85rem 1rem;border-radius:var(--r);border:1px solid rgba(255,255,255,.1);background:var(--charcoal);color:var(--off-white);font-family:var(--font);font-size:.95rem">
+        <input type="email" name="email" placeholder="Your email" required style="padding:.85rem 1rem;border-radius:var(--r);border:1px solid rgba(255,255,255,.1);background:var(--charcoal);color:var(--off-white);font-family:var(--font);font-size:.95rem">
+        <textarea name="message" placeholder="Your message" rows="5" required style="padding:.85rem 1rem;border-radius:var(--r);border:1px solid rgba(255,255,255,.1);background:var(--charcoal);color:var(--off-white);font-family:var(--font);font-size:.95rem;resize:vertical"></textarea>
+        <button type="submit" class="btn btn-primary" style="align-self:flex-start">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+</div>
 
 <footer>
   <div class="container">
-    <p>© 2026 Sadegh Vahidi. تمامی حقوق محفوظ است.</p>
-    <p style="margin-top:.5rem"><a href="index.html">خانه</a> · <a href="resume.html">رزومه</a> · <a href="magazine.html">مجله</a> · <a href="contact.html">تماس</a></p>
+    <p class="lang-fa">© 2026 Sadegh Vahidi. تمامی حقوق محفوظ است.</p>
+    <p class="lang-en">© 2026 Sadegh Vahidi. All rights reserved.</p>
+    <p style="margin-top:.5rem"><a href="index.html">خانه / Home</a> · <a href="resume.html">رزومه / Resume</a> · <a href="magazine.html">مجله / Magazine</a></p>
   </div>
 </footer>
 
@@ -83,21 +141,16 @@
   const burger=document.getElementById('burger');
   const links=document.getElementById('navLinks');
   burger.addEventListener('click',()=>links.classList.toggle('open'));
+  const toggle=document.getElementById('langToggle');
+  function applyLang(lang){
+    document.documentElement.lang=lang;
+    document.documentElement.dir=(lang==='fa')?'rtl':'ltr';
+    toggle.textContent=(lang==='fa')?'EN':'FA';
+    localStorage.setItem('site-lang',lang);
+  }
+  const saved=localStorage.getItem('site-lang')||'fa';
+  applyLang(saved);
+  toggle.addEventListener('click',()=>applyLang(document.documentElement.lang==='fa'?'en':'fa'));
 </script>
-
-<!-- Tawk.to chatbot: replace YOUR_TAWK_PROPERTY_ID -->
-<!--
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/YOUR_TAWK_PROPERTY_ID/default';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
--->
 </body>
 </html>

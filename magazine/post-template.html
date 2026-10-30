@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0" name="viewport">
-<title>عنوان مقاله — مجلهٔ Sadegh Vahidi</title>
+<title>عنوان مقاله — مجلهٔ Sadegh Vahidi | Article Title</title>
 <meta name="description" content="توضیح کوتاه مقاله.">
 <meta property="og:title" content="عنوان مقاله">
 <meta property="og:description" content="توضیح کوتاه مقاله.">
@@ -13,44 +13,76 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/style.css">
+<style>
+.lang-en{display:none}
+html[lang="en"] .lang-fa{display:none}
+html[lang="en"] .lang-en{display:block}
+html[lang="en"] body{direction:ltr;text-align:left}
+</style>
 </head>
 <body>
 
 <nav id="nav">
   <div class="nav-logo">S. VAHIDI</div>
-  <button class="nav-burger" id="burger" aria-label="منو"><span></span><span></span><span></span></button>
+  <button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   <div class="nav-links" id="navLinks">
-    <a href="../index.html">خانه</a>
-    <a href="../resume.html">رزومه</a>
-    <a href="../magazine.html">مجله</a>
-    <a href="../contact.html">تماس</a>
+    <span class="lang-fa">
+      <a href="../index.html">خانه</a>
+      <a href="../resume.html">رزومه</a>
+      <a href="../magazine.html">مجله</a>
+      <a href="../contact.html">تماس</a>
+    </span>
+    <span class="lang-en">
+      <a href="../index.html">Home</a>
+      <a href="../resume.html">Resume</a>
+      <a href="../magazine.html">Magazine</a>
+      <a href="../contact.html">Contact</a>
+    </span>
   </div>
+  <button id="langToggle" class="btn btn-outline" style="padding:.4rem .9rem;font-size:.75rem" aria-label="Switch language">EN</button>
 </nav>
 
+<div class="lang-fa">
 <article class="article" style="padding-top:8rem">
   <a class="back" href="../magazine.html">← بازگشت به مجله</a>
   <h1>عنوان مقالهٔ شما</h1>
   <div class="meta">تاریخ انتشار · زمان مطالعه</div>
-
   <p>این یک قالب نمونه برای مقالات مجله است. محتوای واقعی خود را اینجا قرار دهید.</p>
-
   <h2>زیرعنوان اول</h2>
   <p>پاراگراف نمونه. می‌توانید از تگ‌های <code>h2</code>، <code>p</code>، <code>ul</code> و غیره استفاده کنید.</p>
-
   <h2>زیرعنوان دوم</h2>
   <ul>
     <li>مورد اول</li>
     <li>مورد دوم</li>
     <li>مورد سوم</li>
   </ul>
-
   <p>برای افزودن مقالهٔ جدید، این فایل را کپی کنید و محتوا را جایگزین کنید، سپس لینک آن را در <code>magazine.html</code> اضافه کنید.</p>
 </article>
+</div>
+
+<div class="lang-en">
+<article class="article" style="padding-top:8rem">
+  <a class="back" href="../magazine.html">← Back to Magazine</a>
+  <h1>Your Article Title</h1>
+  <div class="meta">Publish date · Reading time</div>
+  <p>This is a sample template for magazine articles. Place your real content here.</p>
+  <h2>First Subheading</h2>
+  <p>Sample paragraph. You can use <code>h2</code>, <code>p</code>, <code>ul</code>, and other tags.</p>
+  <h2>Second Subheading</h2>
+  <ul>
+    <li>Item one</li>
+    <li>Item two</li>
+    <li>Item three</li>
+  </ul>
+  <p>To add a new article, copy this file, replace the content, then add its link in <code>magazine.html</code>.</p>
+</article>
+</div>
 
 <footer>
   <div class="container">
-    <p>© 2026 Sadegh Vahidi. تمامی حقوق محفوظ است.</p>
-    <p style="margin-top:.5rem"><a href="../index.html">خانه</a> · <a href="../resume.html">رزومه</a> · <a href="../magazine.html">مجله</a> · <a href="../contact.html">تماس</a></p>
+    <p class="lang-fa">© 2026 Sadegh Vahidi. تمامی حقوق محفوظ است.</p>
+    <p class="lang-en">© 2026 Sadegh Vahidi. All rights reserved.</p>
+    <p style="margin-top:.5rem"><a href="../index.html">خانه / Home</a> · <a href="../resume.html">رزومه / Resume</a> · <a href="../magazine.html">مجله / Magazine</a> · <a href="../contact.html">تماس / Contact</a></p>
   </div>
 </footer>
 
@@ -60,6 +92,16 @@
   const burger=document.getElementById('burger');
   const links=document.getElementById('navLinks');
   burger.addEventListener('click',()=>links.classList.toggle('open'));
+  const toggle=document.getElementById('langToggle');
+  function applyLang(lang){
+    document.documentElement.lang=lang;
+    document.documentElement.dir=(lang==='fa')?'rtl':'ltr';
+    toggle.textContent=(lang==='fa')?'EN':'FA';
+    localStorage.setItem('site-lang',lang);
+  }
+  const saved=localStorage.getItem('site-lang')||'fa';
+  applyLang(saved);
+  toggle.addEventListener('click',()=>applyLang(document.documentElement.lang==='fa'?'en':'fa'));
 </script>
 </body>
 </html>

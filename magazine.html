@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0" name="viewport">
-<title>مجله — Sadegh Vahidi</title>
+<title>مجله — Sadegh Vahidi | Magazine</title>
 <meta name="description" content="مجلهٔ شخصی صادق وحیدی: مقالات دربارهٔ مدیریت پروژه، بهره‌وری، فناوری و تجربیات.">
 <meta property="og:title" content="مجله — Sadegh Vahidi">
 <meta property="og:description" content="مجلهٔ شخصی صادق وحیدی.">
@@ -14,26 +14,41 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
+<style>
+.lang-en{display:none}
+html[lang="en"] .lang-fa{display:none}
+html[lang="en"] .lang-en{display:block}
+html[lang="en"] body{direction:ltr;text-align:left}
+</style>
 </head>
 <body>
 
 <nav id="nav">
   <div class="nav-logo">S. VAHIDI</div>
-  <button class="nav-burger" id="burger" aria-label="منو"><span></span><span></span><span></span></button>
+  <button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   <div class="nav-links" id="navLinks">
-    <a href="index.html">خانه</a>
-    <a href="resume.html">رزومه</a>
-    <a href="magazine.html">مجله</a>
-    <a href="contact.html">تماس</a>
+    <span class="lang-fa">
+      <a href="index.html">خانه</a>
+      <a href="resume.html">رزومه</a>
+      <a href="magazine.html">مجله</a>
+      <a href="contact.html">تماس</a>
+    </span>
+    <span class="lang-en">
+      <a href="index.html">Home</a>
+      <a href="resume.html">Resume</a>
+      <a href="magazine.html">Magazine</a>
+      <a href="contact.html">Contact</a>
+    </span>
   </div>
+  <button id="langToggle" class="btn btn-outline" style="padding:.4rem .9rem;font-size:.75rem" aria-label="Switch language">EN</button>
 </nav>
 
+<div class="lang-fa">
 <section style="padding-top:8rem">
   <div class="container">
     <div class="section-eyebrow">مجله</div>
     <h1 class="section-title">مجله و <em>یادداشت‌ها</em></h1>
     <p class="section-desc">مقالات، یادداشت‌ها و تجربیات من دربارهٔ مدیریت پروژه، بهره‌وری، فناوری و زندگی حرفه‌ای.</p>
-
     <div class="grid grid-2" style="margin-top:2rem">
       <a class="card" href="magazine/post-template.html">
         <div class="card-kicker">نمونهٔ مقاله</div>
@@ -54,17 +69,51 @@
         <div class="card-meta">۱۴۰۳/۰۶/۱۵ · ۶ دقیقه مطالعه</div>
       </a>
     </div>
-
     <div style="margin-top:3rem;padding:2rem;background:var(--charcoal);border:1px dashed var(--gold-border);border-radius:var(--r-lg);text-align:center">
       <p class="muted">این مقالات نمونه هستند. مقالات واقعی خود را می‌توانید در پوشهٔ <code>magazine/</code> اضافه کنید.</p>
     </div>
   </div>
 </section>
+</div>
+
+<div class="lang-en">
+<section style="padding-top:8rem">
+  <div class="container">
+    <div class="section-eyebrow">Magazine</div>
+    <h1 class="section-title">Magazine & <em>Notes</em></h1>
+    <p class="section-desc">Articles, notes, and experiences on project management, productivity, technology, and professional life.</p>
+    <div class="grid grid-2" style="margin-top:2rem">
+      <a class="card" href="magazine/post-template.html">
+        <div class="card-kicker">Sample Article</div>
+        <h3>How to Manage a Digital Project from Zero to Delivery</h3>
+        <p>A step-by-step guide to managing digital projects: from scope definition to final delivery.</p>
+        <div class="card-meta">2024-11-01 · 5 min read</div>
+      </a>
+      <a class="card" href="magazine/post-template.html">
+        <div class="card-kicker">Productivity</div>
+        <h3>5 Daily Habits for Greater Productivity in Knowledge Work</h3>
+        <p>Simple but effective habits for time management and focus in knowledge work.</p>
+        <div class="card-meta">2024-10-14 · 4 min read</div>
+      </a>
+      <a class="card" href="magazine/post-template.html">
+        <div class="card-kicker">Technology</div>
+        <h3>Tools I Use in Project Management</h3>
+        <p>An introduction to the tools and methods I use in digital projects.</p>
+        <div class="card-meta">2024-09-06 · 6 min read</div>
+      </a>
+    </div>
+    <div style="margin-top:3rem;padding:2rem;background:var(--charcoal);border:1px dashed var(--gold-border);border-radius:var(--r-lg);text-align:center">
+      <p class="muted">These are sample articles. Add your real articles in the <code>magazine/</code> folder.</p>
+    </div>
+  </div>
+</section>
+</div>
 
 <footer>
   <div class="container">
-    <p>© 2026 Sadegh Vahidi. تمامی حقوق محفوظ است.</p>
-    <p style="margin-top:.5rem"><a href="index.html">خانه</a> · <a href="resume.html">رزومه</a> · <a href="contact.html">تماس</a></p>
+    <p class="lang-fa">© 2026 Sadegh Vahidi. تمامی حقوق محفوظ است.</p>
+    <p class="lang-en">© 2026 Sadegh Vahidi. All rights reserved.</p>
+    <p style="margin-top:.5rem"><a href="index.html">خانه / Home</a> · <a href="resume.html">رزومه / Resume</a> · <a href="contact.html">تماس / Contact</a></p>
   </div>
 </footer>
 
@@ -74,21 +123,16 @@
   const burger=document.getElementById('burger');
   const links=document.getElementById('navLinks');
   burger.addEventListener('click',()=>links.classList.toggle('open'));
+  const toggle=document.getElementById('langToggle');
+  function applyLang(lang){
+    document.documentElement.lang=lang;
+    document.documentElement.dir=(lang==='fa')?'rtl':'ltr';
+    toggle.textContent=(lang==='fa')?'EN':'FA';
+    localStorage.setItem('site-lang',lang);
+  }
+  const saved=localStorage.getItem('site-lang')||'fa';
+  applyLang(saved);
+  toggle.addEventListener('click',()=>applyLang(document.documentElement.lang==='fa'?'en':'fa'));
 </script>
-
-<!-- Tawk.to chatbot: replace YOUR_TAWK_PROPERTY_ID -->
-<!--
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/YOUR_TAWK_PROPERTY_ID/default';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
--->
 </body>
 </html>
