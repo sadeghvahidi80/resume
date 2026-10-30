@@ -608,3 +608,7 @@ a:focus-visible,button:focus-visible{
 .btn-sm{padding:.4rem .9rem;font-size:.75rem}
 .btn-danger{background:#ff6b6b;color:#fff;border:none}
 .btn-danger:hover{background:#ff5252}
+
+/* Signature */
+.signature{font-family:'Great Vibes',cursive;font-size:1.6rem;color:var(--gold-light);font-weight:400;letter-spacing:.05em;display:inline-block;margin-top:.3rem}
+@media(max-width:768px){.signature{font-size:1.3rem}}
