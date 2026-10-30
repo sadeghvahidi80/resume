@@ -226,7 +226,7 @@ const DEFAULT_POSTS = [
   {id:2,titleFa:'۵ عادت روزانه برای بهره‌وری بیشتر در کارهای دانشی',titleEn:'5 Daily Habits for Greater Productivity in Knowledge Work',kickerFa:'بهره‌وری',kickerEn:'Productivity',descFa:'عادات ساده اما مؤثر برای مدیریت زمان و تمرکز در محیط کار دانشی.',descEn:'Simple but effective habits for time management and focus in knowledge work.',date:'۱۴۰۳/۰۷/۲۲',read:'۴ دقیقه',link:'magazine/post-template.html'},
   {id:3,titleFa:'ابزارهایی که در مدیریت پروژه استفاده می‌کنم',titleEn:'Tools I Use in Project Management',kickerFa:'فناوری',kickerEn:'Technology',descFa:'معرفی ابزارها و روش‌هایی که در پروژه‌های دیجیتال به کار می‌برم.',descEn:'An introduction to the tools and methods I use in digital projects.',date:'۱۴۰۳/۰۶/۱۵',read:'۶ دقیقه',link:'magazine/post-template.html'},
 ];
-const DEFAULT_SETTINGS = {titleFa:'Sadegh Vahidi',titleEn:'Sadegh Vahidi',descFa:'مدیر پروژه دیجیتال با تجربه در تحقیق بازار، طراحی فرایند، عملیات محتوا و تحویل دیجیتال.',email:'sadeghvahidi80@gmail.com',pwd:'admin123'};
+const DEFAULT_SETTINGS = {titleFa:'Sadegh Vahidi',titleEn:'Sadegh Vahidi',descFa:'مدیر پروژه دیجیتال با تجربه در تحقیق بازار، طراحی فرایند، عملیات محتوا و پیاده‌سازی دیجیتال.',email:'sadeghvahidi80@gmail.com',pwd:'admin123'};
 
 function getPosts(){try{return JSON.parse(localStorage.getItem('sv_posts'))||DEFAULT_POSTS;}catch(e){return DEFAULT_POSTS;}}
 function savePosts(p){localStorage.setItem('sv_posts',JSON.stringify(p));}
