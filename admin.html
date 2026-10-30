@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0" name="viewport">
+<title>پنل مدیریت — Sadegh Vahidi</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.lang-en{display:none}
+html[lang="en"] .lang-fa{display:none}
+html[lang="en"] .lang-en{display:block}
+html[lang="en"] body{direction:ltr;text-align:left}
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem}
+.login-card{background:var(--charcoal);border:1px solid var(--gold-border);border-radius:var(--r-lg);padding:2.5rem;max-width:400px;width:100%}
+.login-card h1{font-size:1.4rem;font-weight:400;margin-bottom:1.5rem;text-align:center}
+.login-card input{width:100%;padding:.85rem 1rem;border-radius:var(--r);border:1px solid rgba(255,255,255,.1);background:var(--black);color:var(--off-white);font-family:var(--font);font-size:.95rem;margin-bottom:1rem}
+.login-card button{width:100%}
+.err{color:#ff6b6b;font-size:.85rem;margin-top:.5rem;display:none}
+.admin{display:none}
+.sidebar{position:fixed;top:0;right:0;bottom:0;width:240px;background:var(--charcoal);border-left:1px solid rgba(255,255,255,.06);padding:2rem 1.2rem;z-index:100;overflow-y:auto}
+.sidebar .logo{font-size:.75rem;letter-spacing:.18em;color:var(--gold);margin-bottom:2rem;display:block}
+.sidebar nav a{display:block;padding:.7rem 1rem;border-radius:var(--r);color:var(--muted);font-size:.9rem;margin-bottom:.3rem;transition:all var(--t)}
+.sidebar nav a:hover,.sidebar nav a.active{background:var(--gold-dim);color:var(--gold)}
+.main{margin-right:240px;padding:2rem;min-height:100vh}
+@media(max-width:768px){.sidebar{position:static;width:100%;border-left:none;border-bottom:1px solid rgba(255,255,255,.06)}.main{margin-right:0}}
+.panel{display:none}
+.panel.active{display:block}
+.panel h2{font-size:1.6rem;font-weight:400;margin-bottom:1.5rem}
+.table{width:100%;border-collapse:collapse;margin-top:1rem}
+.table th,.table td{padding:.7rem 1rem;border-bottom:1px solid rgba(255,255,255,.06);text-align:right;font-size:.9rem}
+.table th{color:var(--gold);font-weight:400;font-size:.75rem;letter-spacing:.1em}
+.table tr:hover td{background:rgba(255,255,255,.02)}
+.btn-sm{padding:.4rem .9rem;font-size:.75rem}
+.btn-danger{background:#ff6b6b;color:#fff;border:none}
+.btn-danger:hover{background:#ff5252}
+.form-group{margin-bottom:1.2rem}
+.form-group label{display:block;font-size:.8rem;color:var(--muted);margin-bottom:.4rem}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:.7rem 1rem;border-radius:var(--r);border:1px solid rgba(255,255,255,.1);background:var(--black);color:var(--off-white);font-family:var(--font);font-size:.9rem}
+.form-group textarea{resize:vertical;min-height:120px}
+.card-box{background:var(--charcoal);border:1px solid rgba(255,255,255,.06);border-radius:var(--r-lg);padding:1.5rem;margin-bottom:1.5rem}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:2rem}
+.stat{background:var(--charcoal);border:1px solid rgba(255,255,255,.06);border-radius:var(--r-lg);padding:1.2rem}
+.stat .num{font-size:2rem;font-weight:300;color:var(--gold)}
+.stat .lbl{font-size:.75rem;color:var(--muted);margin-top:.3rem}
+.toast{position:fixed;bottom:1.5rem;left:1.5rem;background:var(--gold);color:var(--black);padding:.8rem 1.4rem;border-radius:var(--r);font-size:.85rem;display:none;z-index:500}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:400;padding:1rem}
+.modal{background:var(--charcoal);border:1px solid var(--gold-border);border-radius:var(--r-lg);padding:2rem;max-width:640px;width:100%;max-height:90vh;overflow-y:auto}
+.modal h3{margin-bottom:1.2rem;font-weight:400}
+.modal-actions{display:flex;gap:.8rem;margin-top:1.2rem;justify-content:flex-end}
+</style>
+</head>
+<body>
+
+<!-- Login -->
+<div class="login-wrap" id="loginWrap">
+  <div class="login-card">
+    <h1>پنل مدیریت</h1>
+    <input type="password" id="pwd" placeholder="رمز عبور" autocomplete="current-password">
+    <button class="btn btn-primary" id="loginBtn">ورود</button>
+    <div class="err" id="loginErr">رمز عبور اشتباه است.</div>
+    <p style="margin-top:1.2rem;font-size:.75rem;color:var(--muted);text-align:center">پیش‌فرض: admin123 (بعد از ورود تغییر دهید)</p>
+  </div>
+</div>
+
+<!-- Admin -->
+<div class="admin" id="admin">
+  <aside class="sidebar">
+    <span class="logo">ADMIN PANEL</span>
+    <nav>
+      <a href="#" data-panel="dashboard" class="active">📊 داشبورد</a>
+      <a href="#" data-panel="posts">📝 مقالات</a>
+      <a href="#" data-panel="settings">⚙️ تنظیمات</a>
+      <a href="#" data-panel="export">📦 خروجی</a>
+      <a href="index.html" style="margin-top:2rem">← بازگشت به سایت</a>
+      <a href="#" id="logoutBtn" style="color:#ff6b6b">🚪 خروج</a>
+    </nav>
+  </aside>
+  <main class="main">
+
+    <!-- Dashboard -->
+    <div class="panel active" id="panel-dashboard">
+      <h2>داشبورد</h2>
+      <div class="stat-grid">
+        <div class="stat"><div class="num" id="statPosts">0</div><div class="lbl">مقالات</div></div>
+        <div class="stat"><div class="num" id="statLang">2</div><div class="lbl">زبان‌ها</div></div>
+        <div class="stat"><div class="num">4</div><div class="lbl">صفحات</div></div>
+        <div class="stat"><div class="num" id="statVisits">—</div><div class="lbl">بازدید (localStorage)</div></div>
+      </div>
+      <div class="card-box">
+        <h3 style="font-weight:400;margin-bottom:.8rem">خوش آمدید</h3>
+        <p style="color:var(--muted);font-size:.9rem;line-height:1.7">از این پنل می‌توانید مقالات مجله را مدیریت کنید، تنظیمات سایت را تغییر دهید و خروجی JSON بگیرید. تغییرات در localStorage ذخیره می‌شوند.</p>
+        <p style="color:var(--muted);font-size:.85rem;margin-top:1rem">⚠️ توجه: GitHub Pages استاتیک است. برای اعمال دائمی تغییرات در سایت، از بخش «خروجی» استفاده کنید و فایل‌ها را در ریپازیتوری commit کنید.</p>
+      </div>
+    </div>
+
+    <!-- Posts -->
+    <div class="panel" id="panel-posts">
+      <h2>مدیریت مقالات</h2>
+      <button class="btn btn-primary" id="addPostBtn" style="margin-bottom:1.5rem">+ افزودن مقاله</button>
+      <table class="table">
+        <thead><tr><th>عنوان</th><th>دسته</th><th>تاریخ</th><th>عملیات</th></tr></thead>
+        <tbody id="postsTable"></tbody>
+      </table>
+    </div>
+
+    <!-- Settings -->
+    <div class="panel" id="panel-settings">
+      <h2>تنظیمات سایت</h2>
+      <div class="card-box">
+        <div class="form-group">
+          <label>عنوان سایت (فارسی)</label>
+          <input type="text" id="sTitleFa" placeholder="Sadegh Vahidi">
+        </div>
+        <div class="form-group">
+          <label>عنوان سایت (انگلیسی)</label>
+          <input type="text" id="sTitleEn" placeholder="Sadegh Vahidi">
+        </div>
+        <div class="form-group">
+          <label>توضیح کوتاه (فارسی)</label>
+          <textarea id="sDescFa"></textarea>
+        </div>
+        <div class="form-group">
+          <label>ایمیل تماس</label>
+          <input type="email" id="sEmail" placeholder="sadeghvahidi80@gmail.com">
+        </div>
+        <div class="form-group">
+          <label>رمز عبور جدید (خالی = بدون تغییر)</label>
+          <input type="password" id="sPwd" placeholder="••••••••">
+        </div>
+        <button class="btn btn-primary" id="saveSettingsBtn">ذخیرهٔ تنظیمات</button>
+      </div>
+    </div>
+
+    <!-- Export -->
+    <div class="panel" id="panel-export">
+      <h2>خروجی و پشتیبان</h2>
+      <div class="card-box">
+        <p style="color:var(--muted);font-size:.9rem;margin-bottom:1.2rem">برای اعمال دائمی تغییرات در GitHub Pages، خروجی JSON مقالات را بگیرید و در فایل‌های HTML قرار دهید یا به ریپازیتوری commit کنید.</p>
+        <button class="btn btn-primary" id="exportBtn" style="margin-right:.6rem">دانلود JSON مقالات</button>
+        <button class="btn btn-outline" id="importBtn">وارد کردن JSON</button>
+        <input type="file" id="importFile" accept="application/json" style="display:none">
+        <button class="btn btn-outline" id="resetBtn" style="margin-right:.6rem;background:#ff6b6b;color:#fff;border:none">بازنشانی به پیش‌فرض</button>
+      </div>
+      <div class="card-box">
+        <h3 style="font-weight:400;margin-bottom:.8rem">راهنمای اعمال تغییرات</h3>
+        <ol style="color:var(--muted);font-size:.88rem;line-height:1.9;padding-right:1.2rem">
+          <li>مقالات را در پنل ویرایش/اضافه کنید.</li>
+          <li>«دانلود JSON مقالات» را بزنید.</li>
+          <li>فایل JSON را در پوشهٔ پروژه قرار دهید.</li>
+          <li>با git commit & push تغییرات را به GitHub ارسال کنید.</li>
+          <li>GitHub Pages به صورت خودکار rebuild می‌شود.</li>
+        </ol>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Modal for add/edit post -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <h3 id="modalTitle">افزودن مقاله</h3>
+    <input type="hidden" id="postId">
+    <div class="form-group">
+      <label>عنوان (فارسی)</label>
+      <input type="text" id="pTitleFa">
+    </div>
+    <div class="form-group">
+      <label>Title (English)</label>
+      <input type="text" id="pTitleEn">
+    </div>
+    <div class="form-group">
+      <label>دسته (فارسی)</label>
+      <input type="text" id="pKickerFa" placeholder="مدیریت پروژه">
+    </div>
+    <div class="form-group">
+      <label>Category (English)</label>
+      <input type="text" id="pKickerEn" placeholder="Project Management">
+    </div>
+    <div class="form-group">
+      <label>خلاصه (فارسی)</label>
+      <textarea id="pDescFa"></textarea>
+    </div>
+    <div class="form-group">
+      <label>Summary (English)</label>
+      <textarea id="pDescEn"></textarea>
+    </div>
+    <div class="form-group">
+      <label>تاریخ</label>
+      <input type="text" id="pDate" placeholder="۱۴۰۳/۰۸/۱۰">
+    </div>
+    <div class="form-group">
+      <label>زمان مطالعه</label>
+      <input type="text" id="pRead" placeholder="۵ دقیقه">
+    </div>
+    <div class="form-group">
+      <label>لینک مقاله</label>
+      <input type="text" id="pLink" placeholder="magazine/post-template.html">
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" id="cancelBtn">انصراف</button>
+      <button class="btn btn-primary" id="savePostBtn">ذخیره</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const DEFAULT_POSTS = [
+  {id:1,titleFa:'چگونه یک پروژهٔ دیجیتال را از صفر تا تحویل مدیریت کنیم',titleEn:'How to Manage a Digital Project from Zero to Delivery',kickerFa:'مدیریت پروژه',kickerEn:'Project Management',descFa:'راهنمای گام‌به‌گام برای مدیریت پروژه‌های دیجیتال: از تعریف scope تا تحویل نهایی.',descEn:'A step-by-step guide to managing digital projects: from scope definition to final delivery.',date:'۱۴۰۳/۰۸/۱۰',read:'۵ دقیقه',link:'magazine/post-template.html'},
+  {id:2,titleFa:'۵ عادت روزانه برای بهره‌وری بیشتر در کارهای دانشی',titleEn:'5 Daily Habits for Greater Productivity in Knowledge Work',kickerFa:'بهره‌وری',kickerEn:'Productivity',descFa:'عادات ساده اما مؤثر برای مدیریت زمان و تمرکز در محیط کار دانشی.',descEn:'Simple but effective habits for time management and focus in knowledge work.',date:'۱۴۰۳/۰۷/۲۲',read:'۴ دقیقه',link:'magazine/post-template.html'},
+  {id:3,titleFa:'ابزارهایی که در مدیریت پروژه استفاده می‌کنم',titleEn:'Tools I Use in Project Management',kickerFa:'فناوری',kickerEn:'Technology',descFa:'معرفی ابزارها و روش‌هایی که در پروژه‌های دیجیتال به کار می‌برم.',descEn:'An introduction to the tools and methods I use in digital projects.',date:'۱۴۰۳/۰۶/۱۵',read:'۶ دقیقه',link:'magazine/post-template.html'},
+];
+const DEFAULT_SETTINGS = {titleFa:'Sadegh Vahidi',titleEn:'Sadegh Vahidi',descFa:'مدیر پروژه دیجیتال با تجربه در تحقیق بازار، طراحی فرایند، عملیات محتوا و تحویل دیجیتال.',email:'sadeghvahidi80@gmail.com',pwd:'admin123'};
+
+function getPosts(){try{return JSON.parse(localStorage.getItem('sv_posts'))||DEFAULT_POSTS;}catch(e){return DEFAULT_POSTS;}}
+function savePosts(p){localStorage.setItem('sv_posts',JSON.stringify(p));}
+function getSettings(){try{return Object.assign({},DEFAULT_SETTINGS,JSON.parse(localStorage.getItem('sv_settings')||'{}'));}catch(e){return DEFAULT_SETTINGS;}}
+function saveSettings(s){localStorage.setItem('sv_settings',JSON.stringify(s));}
+
+const loginWrap=document.getElementById('loginWrap');
+const admin=document.getElementById('admin');
+const pwd=document.getElementById('pwd');
+const loginBtn=document.getElementById('loginBtn');
+const loginErr=document.getElementById('loginErr');
+
+function checkAuth(){
+  const s=getSettings();
+  if(localStorage.getItem('sv_auth')==='1'){showAdmin();}
+}
+function showAdmin(){loginWrap.style.display='none';admin.style.display='block';renderDashboard();renderPosts();loadSettings();}
+loginBtn.addEventListener('click',()=>{
+  const s=getSettings();
+  if(pwd.value===s.pwd){localStorage.setItem('sv_auth','1');showAdmin();}
+  else{loginErr.style.display='block';}
+});
+pwd.addEventListener('keydown',e=>{if(e.key==='Enter')loginBtn.click();});
+document.getElementById('logoutBtn').addEventListener('click',e=>{e.preventDefault();localStorage.removeItem('sv_auth');location.reload();});
+
+document.querySelectorAll('.sidebar nav a[data-panel]').forEach(a=>{
+  a.addEventListener('click',e=>{e.preventDefault();
+    document.querySelectorAll('.sidebar nav a').forEach(x=>x.classList.remove('active'));
+    a.classList.add('active');
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    document.getElementById('panel-'+a.dataset.panel).classList.add('active');
+  });
+});
+
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',2500);}
+
+function renderDashboard(){
+  const posts=getPosts();
+  document.getElementById('statPosts').textContent=posts.length;
+  let v=parseInt(localStorage.getItem('sv_visits')||'0')+1;
+  localStorage.setItem('sv_visits',v);
+  document.getElementById('statVisits').textContent=v;
+}
+
+function renderPosts(){
+  const posts=getPosts();
+  const tb=document.getElementById('postsTable');
+  tb.innerHTML=posts.map(p=>`<tr>
+    <td>${p.titleFa||p.titleEn||'—'}</td>
+    <td>${p.kickerFa||'—'}</td>
+    <td>${p.date||'—'}</td>
+    <td>
+      <button class="btn btn-outline btn-sm" onclick="editPost(${p.id})">ویرایش</button>
+      <button class="btn btn-danger btn-sm" onclick="deletePost(${p.id})" style="margin-right:.4rem">حذف</button>
+    </td>
+  </tr>`).join('');
+}
+
+function openModal(post){
+  document.getElementById('modalTitle').textContent=post?'ویرایش مقاله':'افزودن مقاله';
+  document.getElementById('postId').value=post?post.id:'';
+  document.getElementById('pTitleFa').value=post?post.titleFa||'':'';
+  document.getElementById('pTitleEn').value=post?post.titleEn||'':'';
+  document.getElementById('pKickerFa').value=post?post.kickerFa||'':'';
+  document.getElementById('pKickerEn').value=post?post.kickerEn||'':'';
+  document.getElementById('pDescFa').value=post?post.descFa||'':'';
+  document.getElementById('pDescEn').value=post?post.descEn||'':'';
+  document.getElementById('pDate').value=post?post.date||'':'';
+  document.getElementById('pRead').value=post?post.read||'':'';
+  document.getElementById('pLink').value=post?post.link||'magazine/post-template.html':'magazine/post-template.html';
+  document.getElementById('modalBg').style.display='flex';
+}
+function closeModal(){document.getElementById('modalBg').style.display='none';}
+document.getElementById('addPostBtn').addEventListener('click',()=>openModal(null));
+document.getElementById('cancelBtn').addEventListener('click',closeModal);
+document.getElementById('modalBg').addEventListener('click',e=>{if(e.target.id==='modalBg')closeModal();});
+
+document.getElementById('savePostBtn').addEventListener('click',()=>{
+  const id=document.getElementById('postId').value;
+  const posts=getPosts();
+  const obj={
+    id:id?parseInt(id):Date.now(),
+    titleFa:document.getElementById('pTitleFa').value,
+    titleEn:document.getElementById('pTitleEn').value,
+    kickerFa:document.getElementById('pKickerFa').value,
+    kickerEn:document.getElementById('pKickerEn').value,
+    descFa:document.getElementById('pDescFa').value,
+    descEn:document.getElementById('pDescEn').value,
+    date:document.getElementById('pDate').value,
+    read:document.getElementById('pRead').value,
+    link:document.getElementById('pLink').value||'magazine/post-template.html',
+  };
+  if(id){
+    const idx=posts.findIndex(p=>p.id===parseInt(id));
+    if(idx>=0)posts[idx]=obj;
+  }else{
+    posts.unshift(obj);
+  }
+  savePosts(posts);
+  renderPosts();
+  renderDashboard();
+  closeModal();
+  toast('ذخیره شد');
+});
+function editPost(id){const p=getPosts().find(x=>x.id===id);if(p)openModal(p);}
+function deletePost(id){if(!confirm('حذف شود؟'))return;savePosts(getPosts().filter(p=>p.id!==id));renderPosts();renderDashboard();toast('حذف شد');}
+
+function loadSettings(){
+  const s=getSettings();
+  document.getElementById('sTitleFa').value=s.titleFa;
+  document.getElementById('sTitleEn').value=s.titleEn;
+  document.getElementById('sDescFa').value=s.descFa;
+  document.getElementById('sEmail').value=s.email;
+}
+document.getElementById('saveSettingsBtn').addEventListener('click',()=>{
+  const s=getSettings();
+  s.titleFa=document.getElementById('sTitleFa').value;
+  s.titleEn=document.getElementById('sTitleEn').value;
+  s.descFa=document.getElementById('sDescFa').value;
+  s.email=document.getElementById('sEmail').value;
+  const np=document.getElementById('sPwd').value;
+  if(np){s.pwd=np;}
+  saveSettings(s);
+  toast('تنظیمات ذخیره شد');
+});
+
+document.getElementById('exportBtn').addEventListener('click',()=>{
+  const data={posts:getPosts(),settings:getSettings()};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download='site-data.json';a.click();
+  URL.revokeObjectURL(url);
+  toast('دانلود شد');
+});
+document.getElementById('importBtn').addEventListener('click',()=>document.getElementById('importFile').click());
+document.getElementById('importFile').addEventListener('change',e=>{
+  const file=e.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    try{const d=JSON.parse(ev.target.result);if(d.posts)savePosts(d.posts);if(d.settings)saveSettings(d.settings);renderPosts();loadSettings();toast('وارد شد');}
+    catch(err){toast('خطا در فایل');}
+  };
+  reader.readAsText(file);
+});
+document.getElementById('resetBtn').addEventListener('click',()=>{
+  if(!confirm('بازنشانی به پیش‌فرض؟'))return;
+  localStorage.removeItem('sv_posts');localStorage.removeItem('sv_settings');
+  renderPosts();loadSettings();renderDashboard();toast('بازنشانی شد');
+});
+
+checkAuth();
+</script>
+</body>
+</html>
