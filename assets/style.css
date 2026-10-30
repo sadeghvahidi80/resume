@@ -18,7 +18,8 @@ img{max-width:100%;height:auto;display:block}
 /* NAV */
 nav{position:fixed;top:0;right:0;left:0;z-index:200;padding:1.3rem 3rem;display:flex;justify-content:space-between;align-items:center;transition:background var(--t),backdrop-filter var(--t);background:rgba(9,9,9,.6);backdrop-filter:blur(8px)}
 nav.scrolled{background:rgba(9,9,9,.97);backdrop-filter:blur(16px)}
-.nav-logo{display:flex;align-items:center;gap:.7rem;font-size:.75rem;font-weight:300;letter-spacing:.18em;color:var(--gold)}
+.nav-logo{display:flex;align-items:center;gap:.7rem}
+.nav-logo img{height:34px;width:auto;border-radius:4px}
 .nav-links{display:flex;gap:2rem;align-items:center}
 .nav-links a{font-size:.82rem;font-weight:300;letter-spacing:.12em;color:var(--muted);transition:color var(--t);white-space:nowrap}
 .nav-links a:hover{color:var(--gold)}
