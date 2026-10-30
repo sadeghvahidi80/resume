@@ -88,12 +88,21 @@ html[lang="en"] body{direction:ltr;text-align:left}
         <div class="stat"><div class="num" id="statPosts">0</div><div class="lbl">مقالات</div></div>
         <div class="stat"><div class="num" id="statLang">2</div><div class="lbl">زبان‌ها</div></div>
         <div class="stat"><div class="num">4</div><div class="lbl">صفحات</div></div>
-        <div class="stat"><div class="num" id="statVisits">—</div><div class="lbl">بازدید (localStorage)</div></div>
+        <div class="stat"><div class="num" id="statVisits">—</div><div class="lbl">بازدید محلی (این مرورگر)</div></div>
       </div>
       <div class="card-box">
         <h3 style="font-weight:400;margin-bottom:.8rem">خوش آمدید</h3>
         <p style="color:var(--muted);font-size:.9rem;line-height:1.7">از این پنل می‌توانید مقالات مجله را مدیریت کنید، تنظیمات سایت را تغییر دهید و خروجی JSON بگیرید. تغییرات در localStorage ذخیره می‌شوند.</p>
         <p style="color:var(--muted);font-size:.85rem;margin-top:1rem">⚠️ توجه: GitHub Pages استاتیک است. برای اعمال دائمی تغییرات در سایت، از بخش «خروجی» استفاده کنید و فایل‌ها را در ریپازیتوری commit کنید.</p>
+      </div>
+      <div class="card-box">
+        <h3 style="font-weight:400;margin-bottom:.8rem">📊 بازدید دقیق سایت</h3>
+        <p style="color:var(--muted);font-size:.9rem;line-height:1.7;margin-bottom:1rem">برای شمارش دقیق بازدید (همهٔ کاربران)، از یکی از سرویس‌های زیر استفاده کنید. اسکریپت‌های آن‌ها در تمام صفحات اضافه شده‌اند (commented).</p>
+        <div style="display:flex;gap:.8rem;flex-wrap:wrap">
+          <a class="btn btn-outline btn-sm" href="https://analytics.google.com/" target="_blank" rel="noopener">Google Analytics</a>
+          <a class="btn btn-outline btn-sm" href="https://www.goatcounter.com/" target="_blank" rel="noopener">GoatCounter</a>
+        </div>
+        <p style="color:var(--muted);font-size:.8rem;margin-top:1rem">پس از ثبت‌نام، Measurement ID (GA4) یا site code (GoatCounter) را در فایل‌های HTML جایگزین <code>G-XXXXXXXXXX</code> / <code>YOURCODE</code> کنید.</p>
       </div>
     </div>
 
@@ -256,9 +265,7 @@ function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t
 function renderDashboard(){
   const posts=getPosts();
   document.getElementById('statPosts').textContent=posts.length;
-  let v=parseInt(localStorage.getItem('sv_visits')||'0')+1;
-  localStorage.setItem('sv_visits',v);
-  document.getElementById('statVisits').textContent=v;
+  document.getElementById('statVisits').textContent='—';
 }
 
 function renderPosts(){
@@ -369,5 +376,21 @@ document.getElementById('resetBtn').addEventListener('click',()=>{
 
 checkAuth();
 </script>
+
+<!-- Analytics: Google Analytics 4 (replace G-XXXXXXXXXX with your Measurement ID) -->
+<!--
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());
+gtag('config','G-XXXXXXXXXX');
+</script>
+-->
+
+<!-- Analytics: GoatCounter (replace YOURCODE with your site code) -->
+<!--
+<script data-goatcounter="https://YOURCODE.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+-->
 </body>
 </html>
