@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://sadeghvahidi.ir/">
 <meta name="twitter:card" content="summary">
 <link rel="canonical" href="https://sadeghvahidi.ir/">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='20'%20fill='%23090909'/%3E%3Ctext%20x='50'%20y='68'%20text-anchor='middle'%20font-size='50'%20font-weight='300'%20fill='%23c8a44a'%3ESV%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='20'%20fill='%23031F44'/%3E%3Ctext%20x='50'%20y='68'%20text-anchor='middle'%20font-size='50'%20font-weight='600'%20fill='%23C39E4B'%3ESV%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -21,29 +21,15 @@
 html[lang="en"] .lang-fa{display:none}
 html[lang="en"] .lang-en{display:block}
 html[lang="en"] body{direction:ltr;text-align:left}
-/* Magazine strip on home */
-.mag-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;margin-top:2rem}
-.mag-card{background:var(--charcoal);border:1px solid rgba(255,255,255,.06);border-radius:var(--r-lg);padding:1.6rem;transition:transform var(--t),border-color var(--t);display:flex;flex-direction:column;gap:.6rem}
-.mag-card:hover{transform:translateY(-4px);border-color:var(--gold-border)}
-.mag-card .kicker{font-size:.6rem;letter-spacing:.25em;color:var(--gold);text-transform:uppercase}
-.mag-card h3{font-size:1.05rem;font-weight:400;line-height:1.35}
-.mag-card p{color:var(--muted);font-size:.85rem;font-weight:300;line-height:1.6;flex:1}
-.mag-card .meta{font-size:.7rem;color:var(--muted);margin-top:.4rem}
-.mag-card .arrow{color:var(--gold);font-size:.85rem;margin-top:.6rem;display:inline-block}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
-@media(max-width:768px){.about-grid{grid-template-columns:1fr}}
-.about-text p{color:var(--muted);font-weight:300;line-height:1.9;margin-bottom:1rem}
-.highlight-list{list-style:none;padding:0;margin:1.5rem 0 0}
-.highlight-list li{padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.9rem;font-weight:300;display:flex;align-items:center;gap:.7rem}
-.highlight-list li::before{content:'—';color:var(--gold)}
+html[lang="en"] .about-grid{direction:ltr}
 </style>
 </head>
 <body>
 
 <nav id="nav">
-  <div class="nav-logo"><img src="assets/logo.png" alt="Sadegh Vahidi" style="height:36px;width:auto"></div>
-  <button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
-  <div class="nav-links" id="navLinks">
+  <div class="nav-logo"><img src="assets/logo.png" alt="Sadegh Vahidi"></div>
+  <button class="nav-burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="navMobile"><span></span><span></span></button>
+  <div class="nav-links">
     <span class="lang-fa">
       <a href="index.html">خانه</a>
       <a href="resume.html">رزومه</a>
@@ -57,229 +43,312 @@ html[lang="en"] body{direction:ltr;text-align:left}
       <a href="contact.html">Contact</a>
     </span>
   </div>
-  <button id="langToggle" class="btn btn-outline" style="padding:.4rem .9rem;font-size:.75rem" aria-label="Switch language">EN</button>
+  <button id="langToggle" class="btn-print" style="position:static;background:transparent;border:1px solid var(--gold-border);color:var(--gold);padding:.4rem .9rem;font-size:.75rem;cursor:pointer" aria-label="Switch language">EN</button>
 </nav>
 
-<!-- Persian content -->
+<div class="nav-mobile" id="navMobile">
+  <span class="lang-fa">
+    <a href="index.html">خانه</a>
+    <a href="resume.html">رزومه</a>
+    <a href="magazine.html">مجله</a>
+    <a href="contact.html">تماس</a>
+  </span>
+  <span class="lang-en">
+    <a href="index.html">Home</a>
+    <a href="resume.html">Resume</a>
+    <a href="magazine.html">Magazine</a>
+    <a href="contact.html">Contact</a>
+  </span>
+</div>
+
+<!-- Persian -->
 <div class="lang-fa">
-<section class="hero">
-  <div>
-    <div class="hero-eyebrow">Digital Project Manager · Operational Systems Designer</div>
-    <h1>Sadegh <em>Vahidi</em></h1>
+<section id="hero">
+  <div aria-hidden="true" class="hero-bg">Operational systems</div>
+  <div class="hero-content">
+    <div class="hero-eye">Digital Project Manager · Operational Systems Designer</div>
+    <h1 class="hero-h1">Sadegh <em>Vahidi</em></h1>
     <p class="hero-sub">مدیر پروژه دیجیتال با تجربه در تحقیق بازار، طراحی فرایند، عملیات محتوا و تحویل دیجیتال. این سایت خانهٔ رزومه، مجله و راه‌های ارتباط با من است.</p>
-    <div class="hero-cta">
-      <a class="btn btn-primary" href="resume.html">مشاهدهٔ رزومه</a>
-      <a class="btn btn-outline" href="magazine.html">خواندن مجله</a>
+    <div class="hero-stats">
+      <div><span class="stat-n">9<span>+</span></span><span class="stat-l">زبان رزومه</span></div>
+      <div><span class="stat-n">4<span>+</span></span><span class="stat-l">سال تجربه</span></div>
+      <div><span class="stat-n">50<span>+</span></span><span class="stat-l">پروژه</span></div>
     </div>
+    <div class="hero-maten"><a class="ccta" href="resume.html">مشاهدهٔ رزومه</a> <a class="ccta" style="background:transparent;color:var(--gold);border:1px solid var(--gold-border)" href="magazine.html">خواندن مجله</a></div>
   </div>
 </section>
 
-<section>
-  <div class="container">
+<section id="about">
+  <div class="wrap">
+    <div class="sec-label">دربارهٔ من</div>
+    <h2 class="sec-title">مدیریت پروژه با <em>دید عملیاتی</em></h2>
+    <div class="sec-line"></div>
     <div class="about-grid">
       <div class="about-text">
-        <div class="section-eyebrow">دربارهٔ من</div>
-        <h2 class="section-title">مدیریت پروژه با <em>دید عملیاتی</em></h2>
-        <p>من صادق وحیدی هستم — مدیر پروژه دیجیتال با تجربه در تحقیق بازار، طراحی فرایند، عملیات محتوا و تحویل دیجیتال. تمرکز من بر ساخت سیستم‌هایی است که کار را ساده‌تر، سریع‌تر و قابل اعتمادتر می‌کنند.</p>
-        <p>در این سایت می‌توانید رزومهٔ کامل، مقالات و یادداشت‌های مجله، و راه‌های ارتباط با من را پیدا کنید.</p>
-        <ul class="highlight-list">
-          <li>مدیریت پروژه‌های دیجیتال از صفر تا تحویل</li>
-          <li>طراحی فرایند و سیستم‌های عملیاتی</li>
-          <li>تحقیق بازار و تحلیل رقابتی</li>
-          <li>عملیات محتوا و تولید محتوای مقیاس‌پذیر</li>
-        </ul>
+        <p class="about-intro">من صادق وحیدی هستم — مدیر پروژه دیجیتال با تجربه در تحقیق بازار، طراحی فرایند، عملیات محتوا و تحویل دیجیتال. تمرکز من بر ساخت سیستم‌هایی است که کار را ساده‌تر، سریع‌تر و قابل اعتمادتر می‌کنند.</p>
+        <p class="about-body">در این سایت می‌توانید رزومهٔ کامل، مقالات و یادداشت‌های مجله، و راه‌های ارتباط با من را پیدا کنید.</p>
+        <div class="tags">
+          <span class="tag">مدیریت پروژه</span>
+          <span class="tag">طراحی فرایند</span>
+          <span class="tag">تحقیق بازار</span>
+          <span class="tag">عملیات محتوا</span>
+          <span class="tag">تحویل دیجیتال</span>
+        </div>
       </div>
-      <div class="grid grid-2" style="gap:1rem">
-        <a class="card" href="resume.html">
-          <div class="card-kicker">رزومه</div>
-          <h3>رزومهٔ کامل</h3>
-          <p>تجربه، مهارت‌ها، پروژه‌ها به ۹ زبان.</p>
-        </a>
-        <a class="card" href="magazine.html">
-          <div class="card-kicker">مجله</div>
-          <h3>مجله و یادداشت‌ها</h3>
-          <p>مقالات دربارهٔ مدیریت و فناوری.</p>
-        </a>
-        <a class="card" href="contact.html">
-          <div class="card-kicker">تماس</div>
-          <h3>ارتباط با من</h3>
-          <p>ایمیل، لینکدین، تلگرام.</p>
-        </a>
-        <a class="card" href="https://www.linkedin.com/in/sadegh-vahidi-88a738150/" target="_blank" rel="noopener">
-          <div class="card-kicker">لینکدین</div>
-          <h3>پروفایل حرفه‌ای</h3>
-          <p>شبکه و تجربیات کاری.</p>
-        </a>
+      <div class="about-visual">
+        <div class="photo-wrap"><img src="assets/logo.png" alt="Sadegh Vahidi"><div class="photo-line"></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<section>
-  <div class="container">
-    <div class="section-eyebrow">مجله</div>
-    <h2 class="section-title">آخرین <em>مقالات</em></h2>
-    <p class="section-desc">یادداشت‌ها و مقالات دربارهٔ مدیریت پروژه، بهره‌وری و فناوری.</p>
-    <div class="mag-strip">
-      <a class="mag-card" href="magazine/post-template.html">
-        <div class="kicker">مدیریت پروژه</div>
-        <h3>چگونه یک پروژهٔ دیجیتال را از صفر تا تحویل مدیریت کنیم</h3>
-        <p>راهنمای گام‌به‌گام برای مدیریت پروژه‌های دیجیتال: از تعریف scope تا تحویل نهایی.</p>
-        <div class="meta">۱۴۰۳/۰۸/۱۰ · ۵ دقیقه</div>
-        <span class="arrow">ادامهٔ مطلب ←</span>
+<section id="maten">
+  <div class="wrap">
+    <div class="sec-label">بخش‌ها</div>
+    <h2 class="sec-title">چه چیزی <em>پیدا می‌کنید</em></h2>
+    <div class="sec-line"></div>
+    <div class="case-grid">
+      <a class="case-card" href="resume.html" style="text-decoration:none;color:inherit">
+        <span class="case-tag">رزومه</span>
+        <div class="case-name">رزومهٔ کامل</div>
+        <p class="case-desc">تجربه، مهارت‌ها، پروژه‌ها و تحصیلات به ۹ زبان.</p>
       </a>
-      <a class="mag-card" href="magazine/post-template.html">
-        <div class="kicker">بهره‌وری</div>
-        <h3>۵ عادت روزانه برای بهره‌وری بیشتر در کارهای دانشی</h3>
-        <p>عادات ساده اما مؤثر برای مدیریت زمان و تمرکز در محیط کار دانشی.</p>
-        <div class="meta">۱۴۰۳/۰۷/۲۲ · ۴ دقیقه</div>
-        <span class="arrow">ادامهٔ مطلب ←</span>
+      <a class="case-card" href="magazine.html" style="text-decoration:none;color:inherit">
+        <span class="case-tag">مجله</span>
+        <div class="case-name">مجله و یادداشت‌ها</div>
+        <p class="case-desc">مقالات دربارهٔ مدیریت پروژه، بهره‌وری، فناوری و تجربیات.</p>
       </a>
-      <a class="mag-card" href="magazine/post-template.html">
-        <div class="kicker">فناوری</div>
-        <h3>ابزارهایی که در مدیریت پروژه استفاده می‌کنم</h3>
-        <p>معرفی ابزارها و روش‌هایی که در پروژه‌های دیجیتال به کار می‌برم.</p>
-        <div class="meta">۱۴۰۳/۰۶/۱۵ · ۶ دقیقه</div>
-        <span class="arrow">ادامهٔ مطلب ←</span>
+      <a class="case-card" href="contact.html" style="text-decoration:none;color:inherit">
+        <span class="case-tag">تماس</span>
+        <div class="case-name">ارتباط با من</div>
+        <p class="case-desc">ایمیل، لینکدین، تلگرام و فرم تماس.</p>
       </a>
-    </div>
-    <div style="margin-top:2rem;text-align:center">
-      <a class="btn btn-outline" href="magazine.html">مشاهدهٔ همهٔ مقالات</a>
+      <a class="case-card" href="https://www.linkedin.com/in/sadegh-vahidi-88a738150/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+        <span class="case-tag">لینکدین</span>
+        <div class="case-name">پروفایل حرفه‌ای</div>
+        <p class="case-desc">شبکهٔ حرفه‌ای و تجربیات کاری.</p>
+      </a>
     </div>
   </div>
 </section>
 
 <section>
-  <div class="container text-center">
-    <div class="section-eyebrow">ارتباط سریع</div>
-    <h2 class="section-title">بیایید <em>گفتگو</em> کنیم</h2>
-    <p class="section-desc" style="margin:0 auto 2rem">برای همکاری، مشاوره یا گفتگو، با من در تماس باشید.</p>
-    <div class="hero-cta">
-      <a class="btn btn-primary" href="mailto:sadeghvahidi80@gmail.com">ایمیل</a>
-      <a class="btn btn-outline" href="https://www.linkedin.com/in/sadegh-vahidi-88a738150/" target="_blank" rel="noopener">لینکدین</a>
-      <a class="btn btn-outline" href="https://t.me/SadeghVahidi" target="_blank" rel="noopener">تلگرام</a>
+  <div class="wrap">
+    <div class="sec-label">مجله</div>
+    <h2 class="sec-title">آخرین <em>مقالات</em></h2>
+    <div class="sec-line"></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem">
+      <a href="magazine/post-template.html" style="text-decoration:none;color:inherit">
+        <div style="background:var(--charcoal);border:1px solid rgba(255,255,255,.06);border-radius:var(--r);padding:1.8rem;transition:all var(--t)" onmouseover="this.style.borderColor='var(--gold-border)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(255,255,255,.06)';this.style.transform='none'">
+          <div style="font-size:.6rem;letter-spacing:.17em;color:var(--gold);border:1px solid rgba(200,164,74,.26);border-radius:var(--r-sm);padding:.2rem .6rem;display:inline-block;margin-bottom:.8rem">مدیریت پروژه</div>
+          <div style="font-size:1.05rem;font-weight:400;color:var(--off-white);margin-bottom:.5rem">چگونه یک پروژهٔ دیجیتال را از صفر تا تحویل مدیریت کنیم</div>
+          <div style="font-size:.78rem;color:var(--mid);line-height:1.85;margin-bottom:.8rem">راهنمای گام‌به‌گام برای مدیریت پروژه‌های دیجیتال: از تعریف scope تا تحویل نهایی.</div>
+          <div style="font-size:.7rem;color:var(--gold);letter-spacing:.08em">۱۴۰۳/۰۸/۱۰ · ۵ دقیقه</div>
+        </div>
+      </a>
+      <a href="magazine/post-template.html" style="text-decoration:none;color:inherit">
+        <div style="background:var(--charcoal);border:1px solid rgba(255,255,255,.06);border-radius:var(--r);padding:1.8rem;transition:all var(--t)" onmouseover="this.style.borderColor='var(--gold-border)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(255,255,255,.06)';this.style.transform='none'">
+          <div style="font-size:.6rem;letter-spacing:.17em;color:var(--gold);border:1px solid rgba(200,164,74,.26);border-radius:var(--r-sm);padding:.2rem .6rem;display:inline-block;margin-bottom:.8rem">بهره‌وری</div>
+          <div style="font-size:1.05rem;font-weight:400;color:var(--off-white);margin-bottom:.5rem">۵ عادت روزانه برای بهره‌وری بیشتر در کارهای دانشی</div>
+          <div style="font-size:.78rem;color:var(--mid);line-height:1.85;margin-bottom:.8rem">عادات ساده اما مؤثر برای مدیریت زمان و تمرکز در محیط کار دانشی.</div>
+          <div style="font-size:.7rem;color:var(--gold);letter-spacing:.08em">۱۴۰۳/۰۷/۲۲ · ۴ دقیقه</div>
+        </div>
+      </a>
+      <a href="magazine/post-template.html" style="text-decoration:none;color:inherit">
+        <div style="background:var(--charcoal);border:1px solid rgba(255,255,255,.06);border-radius:var(--r);padding:1.8rem;transition:all var(--t)" onmouseover="this.style.borderColor='var(--gold-border)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(255,255,255,.06)';this.style.transform='none'">
+          <div style="font-size:.6rem;letter-spacing:.17em;color:var(--gold);border:1px solid rgba(200,164,74,.26);border-radius:var(--r-sm);padding:.2rem .6rem;display:inline-block;margin-bottom:.8rem">فناوری</div>
+          <div style="font-size:1.05rem;font-weight:400;color:var(--off-white);margin-bottom:.5rem">ابزارهایی که در مدیریت پروژه استفاده می‌کنم</div>
+          <div style="font-size:.78rem;color:var(--mid);line-height:1.85;margin-bottom:.8rem">معرفی ابزارها و روش‌هایی که در پروژه‌های دیجیتال به کار می‌برم.</div>
+          <div style="font-size:.7rem;color:var(--gold);letter-spacing:.08em">۱۴۰۳/۰۶/۱۵ · ۶ دقیقه</div>
+        </div>
+      </a>
+    </div>
+    <div style="margin-top:2.5rem;text-align:center">
+      <a class="ccta" href="magazine.html" style="background:transparent;color:var(--gold);border:1px solid var(--gold-border)">مشاهدهٔ همهٔ مقالات</a>
     </div>
   </div>
 </section>
-</div>
 
-<!-- English content -->
-<div class="lang-en">
-<section class="hero">
-  <div>
-    <div class="hero-eyebrow">Digital Project Manager · Operational Systems Designer</div>
-    <h1>Sadegh <em>Vahidi</em></h1>
-    <p class="hero-sub">Digital project manager with experience in market research, process design, content operations, and digital delivery. This site is home to my resume, magazine, and ways to connect.</p>
-    <div class="hero-cta">
-      <a class="btn btn-primary" href="resume.html">View Resume</a>
-      <a class="btn btn-outline" href="magazine.html">Read Magazine</a>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="container">
-    <div class="about-grid">
-      <div class="about-text">
-        <div class="section-eyebrow">About</div>
-        <h2 class="section-title">Project management with an <em>operational mindset</em></h2>
-        <p>I'm Sadegh Vahidi — a digital project manager with experience in market research, process design, content operations, and digital delivery. My focus is building systems that make work simpler, faster, and more reliable.</p>
-        <p>On this site you'll find my full resume, magazine articles and notes, and ways to connect with me.</p>
-        <ul class="highlight-list">
-          <li>Managing digital projects from zero to delivery</li>
-          <li>Process design and operational systems</li>
-          <li>Market research and competitive analysis</li>
-          <li>Content operations and scalable content production</li>
-        </ul>
-      </div>
-      <div class="grid grid-2" style="gap:1rem">
-        <a class="card" href="resume.html">
-          <div class="card-kicker">Resume</div>
-          <h3>Full Resume</h3>
-          <p>Experience, skills, projects in 9 languages.</p>
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-inner">
+      <div class="contact-pre">ارتباط سریع</div>
+      <h2 class="contact-h">بیایید <em>گفتگو</em> کنیم</h2>
+      <p class="contact-body">برای همکاری، مشاوره یا گفتگو، با من در تماس باشید.</p>
+      <div class="contact-links">
+        <a class="clink" href="mailto:sadeghvahidi80@gmail.com">
+          <span class="clink-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+          sadeghvahidi80@gmail.com
         </a>
-        <a class="card" href="magazine.html">
-          <div class="card-kicker">Magazine</div>
-          <h3>Magazine & Notes</h3>
-          <p>Articles on management and technology.</p>
+        <a class="clink" href="https://www.linkedin.com/in/sadegh-vahidi-88a738150/" target="_blank" rel="noopener">
+          <span class="clink-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 11v5M8 8v.01M12 16v-5M16 16v-3a2 2 0 0 0-4 0"/></svg></span>
+          LinkedIn
         </a>
-        <a class="card" href="contact.html">
-          <div class="card-kicker">Contact</div>
-          <h3>Get in Touch</h3>
-          <p>Email, LinkedIn, Telegram.</p>
+        <a class="clink" href="https://t.me/SadeghVahidi" target="_blank" rel="noopener">
+          <span class="clink-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></span>
+          Telegram
         </a>
-        <a class="card" href="https://www.linkedin.com/in/sadegh-vahidi-88a738150/" target="_blank" rel="noopener">
-          <div class="card-kicker">LinkedIn</div>
-          <h3>Professional Profile</h3>
-          <p>Network and work experience.</p>
+        <a class="clink" href="contact.html">
+          <span class="clink-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+          فرم تماس
         </a>
       </div>
     </div>
   </div>
 </section>
-
-<section>
-  <div class="container">
-    <div class="section-eyebrow">Magazine</div>
-    <h2 class="section-title">Latest <em>articles</em></h2>
-    <p class="section-desc">Notes and articles on project management, productivity, and technology.</p>
-    <div class="mag-strip">
-      <a class="mag-card" href="magazine/post-template.html">
-        <div class="kicker">Project Management</div>
-        <h3>How to Manage a Digital Project from Zero to Delivery</h3>
-        <p>A step-by-step guide to managing digital projects: from scope definition to final delivery.</p>
-        <div class="meta">2024-11-01 · 5 min read</div>
-        <span class="arrow">Read more →</span>
-      </a>
-      <a class="mag-card" href="magazine/post-template.html">
-        <div class="kicker">Productivity</div>
-        <h3>5 Daily Habits for Greater Productivity in Knowledge Work</h3>
-        <p>Simple but effective habits for time management and focus in knowledge work.</p>
-        <div class="meta">2024-10-14 · 4 min read</div>
-        <span class="arrow">Read more →</span>
-      </a>
-      <a class="mag-card" href="magazine/post-template.html">
-        <div class="kicker">Technology</div>
-        <h3>Tools I Use in Project Management</h3>
-        <p>An introduction to the tools and methods I use in digital projects.</p>
-        <div class="meta">2024-09-06 · 6 min read</div>
-        <span class="arrow">Read more →</span>
-      </a>
-    </div>
-    <div style="margin-top:2rem;text-align:center">
-      <a class="btn btn-outline" href="magazine.html">View all articles</a>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="container text-center">
-    <div class="section-eyebrow">Quick Connect</div>
-    <h2 class="section-title">Let's <em>talk</em></h2>
-    <p class="section-desc" style="margin:0 auto 2rem">For collaboration, consulting, or conversation, reach out.</p>
-    <div class="hero-cta">
-      <a class="btn btn-primary" href="mailto:sadeghvahidi80@gmail.com">Email</a>
-      <a class="btn btn-outline" href="https://www.linkedin.com/in/sadegh-vahidi-88a738150/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn btn-outline" href="https://t.me/SadeghVahidi" target="_blank" rel="noopener">Telegram</a>
-    </div>
-  </div>
-</section>
-</div>
 
 <footer>
-  <div class="container">
-    <p class="lang-fa">© 2026 Sadegh Vahidi. تمامی حقوق محفوظ است.</p>
-    <p class="lang-en">© 2026 Sadegh Vahidi. All rights reserved.</p>
-    <p style="margin-top:.5rem"><a href="https://github.com/sadeghvahidi80/resume" target="_blank" rel="noopener">منبع در GitHub / Source on GitHub</a></p>
-  </div>
+  <div class="ft-copy">© 2026 Sadegh Vahidi — تمامی حقوق محفوظ است</div>
+  <div class="ft-id">sadeghvahidi.ir</div>
 </footer>
+</div>
+
+<!-- English -->
+<div class="lang-en">
+<section id="en-hero">
+  <div aria-hidden="true" class="hero-bg">Operational systems</div>
+  <div class="hero-content">
+    <div class="hero-eye">Digital Project Manager · Operational Systems Designer</div>
+    <h1 class="hero-h1">Sadegh <em>Vahidi</em></h1>
+    <p class="hero-sub">Digital project manager with experience in market research, process design, content operations, and digital delivery. This site is home to my resume, magazine, and ways to connect.</p>
+    <div class="hero-stats">
+      <div><span class="stat-n">9<span>+</span></span><span class="stat-l">Resume languages</span></div>
+      <div><span class="stat-n">4<span>+</span></span><span class="stat-l">Years experience</span></div>
+      <div><span class="stat-n">50<span>+</span></span><span class="stat-l">Projects</span></div>
+    </div>
+    <div class="hero-maten"><a class="ccta" href="resume.html">View Resume</a> <a class="ccta" style="background:transparent;color:var(--gold);border:1px solid var(--gold-border)" href="magazine.html">Read Magazine</a></div>
+  </div>
+</section>
+
+<section id="en-about">
+  <div class="wrap">
+    <div class="sec-label">About</div>
+    <h2 class="sec-title">Project management with an <em>operational mindset</em></h2>
+    <div class="sec-line"></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="about-intro">I'm Sadegh Vahidi — a digital project manager with experience in market research, process design, content operations, and digital delivery. My focus is building systems that make work simpler, faster, and more reliable.</p>
+        <p class="about-body">On this site you'll find my full resume, magazine articles and notes, and ways to connect with me.</p>
+        <div class="tags">
+          <span class="tag">Project Management</span>
+          <span class="tag">Process Design</span>
+          <span class="tag">Market Research</span>
+          <span class="tag">Content Ops</span>
+          <span class="tag">Digital Delivery</span>
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="photo-wrap"><img src="assets/logo.png" alt="Sadegh Vahidi"><div class="photo-line"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="en-maten">
+  <div class="wrap">
+    <div class="sec-label">Sections</div>
+    <h2 class="sec-title">What you'll <em>find</em></h2>
+    <div class="sec-line"></div>
+    <div class="case-grid">
+      <a class="case-card" href="resume.html" style="text-decoration:none;color:inherit">
+        <span class="case-tag">Resume</span>
+        <div class="case-name">Full Resume</div>
+        <p class="case-desc">Experience, skills, projects, and education in 9 languages.</p>
+      </a>
+      <a class="case-card" href="magazine.html" style="text-decoration:none;color:inherit">
+        <span class="case-tag">Magazine</span>
+        <div class="case-name">Magazine & Notes</div>
+        <p class="case-desc">Articles on project management, productivity, technology, and experiences.</p>
+      </a>
+      <a class="case-card" href="contact.html" style="text-decoration:none;color:inherit">
+        <span class="case-tag">Contact</span>
+        <div class="case-name">Get in Touch</div>
+        <p class="case-desc">Email, LinkedIn, Telegram, and contact form.</p>
+      </a>
+      <a class="case-card" href="https://www.linkedin.com/in/sadegh-vahidi-88a738150/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+        <span class="case-tag">LinkedIn</span>
+        <div class="case-name">Professional Profile</div>
+        <p class="case-desc">Network and work experience.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-label">Magazine</div>
+    <h2 class="sec-title">Latest <em>articles</em></h2>
+    <div class="sec-line"></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem">
+      <a href="magazine/post-template.html" style="text-decoration:none;color:inherit">
+        <div style="background:var(--charcoal);border:1px solid rgba(255,255,255,.06);border-radius:var(--r);padding:1.8rem;transition:all var(--t)" onmouseover="this.style.borderColor='var(--gold-border)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(255,255,255,.06)';this.style.transform='none'">
+          <div style="font-size:.6rem;letter-spacing:.17em;color:var(--gold);border:1px solid rgba(200,164,74,.26);border-radius:var(--r-sm);padding:.2rem .6rem;display:inline-block;margin-bottom:.8rem">Project Management</div>
+          <div style="font-size:1.05rem;font-weight:400;color:var(--off-white);margin-bottom:.5rem">How to Manage a Digital Project from Zero to Delivery</div>
+          <div style="font-size:.78rem;color:var(--mid);line-height:1.85;margin-bottom:.8rem">A step-by-step guide to managing digital projects: from scope definition to final delivery.</div>
+          <div style="font-size:.7rem;color:var(--gold);letter-spacing:.08em">2024-11-01 · 5 min read</div>
+        </div>
+      </a>
+      <a href="magazine/post-template.html" style="text-decoration:none;color:inherit">
+        <div style="background:var(--charcoal);border:1px solid rgba(255,255,255,.06);border-radius:var(--r);padding:1.8rem;transition:all var(--t)" onmouseover="this.style.borderColor='var(--gold-border)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(255,255,255,.06)';this.style.transform='none'">
+          <div style="font-size:.6rem;letter-spacing:.17em;color:var(--gold);border:1px solid rgba(200,164,74,.26);border-radius:var(--r-sm);padding:.2rem .6rem;display:inline-block;margin-bottom:.8rem">Productivity</div>
+          <div style="font-size:1.05rem;font-weight:400;color:var(--off-white);margin-bottom:.5rem">5 Daily Habits for Greater Productivity in Knowledge Work</div>
+          <div style="font-size:.78rem;color:var(--mid);line-height:1.85;margin-bottom:.8rem">Simple but effective habits for time management and focus in knowledge work.</div>
+          <div style="font-size:.7rem;color:var(--gold);letter-spacing:.08em">2024-10-14 · 4 min read</div>
+        </div>
+      </a>
+      <a href="magazine/post-template.html" style="text-decoration:none;color:inherit">
+        <div style="background:var(--charcoal);border:1px solid rgba(255,255,255,.06);border-radius:var(--r);padding:1.8rem;transition:all var(--t)" onmouseover="this.style.borderColor='var(--gold-border)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(255,255,255,.06)';this.style.transform='none'">
+          <div style="font-size:.6rem;letter-spacing:.17em;color:var(--gold);border:1px solid rgba(200,164,74,.26);border-radius:var(--r-sm);padding:.2rem .6rem;display:inline-block;margin-bottom:.8rem">Technology</div>
+          <div style="font-size:1.05rem;font-weight:400;color:var(--off-white);margin-bottom:.5rem">Tools I Use in Project Management</div>
+          <div style="font-size:.78rem;color:var(--mid);line-height:1.85;margin-bottom:.8rem">An introduction to the tools and methods I use in digital projects.</div>
+          <div style="font-size:.7rem;color:var(--gold);letter-spacing:.08em">2024-09-06 · 6 min read</div>
+        </div>
+      </a>
+    </div>
+    <div style="margin-top:2.5rem;text-align:center">
+      <a class="ccta" href="magazine.html" style="background:transparent;color:var(--gold);border:1px solid var(--gold-border)">View all articles</a>
+    </div>
+  </div>
+</section>
+
+<section id="en-contact">
+  <div class="wrap">
+    <div class="contact-inner">
+      <div class="contact-pre">Quick Connect</div>
+      <h2 class="contact-h">Let's <em>talk</em></h2>
+      <p class="contact-body">For collaboration, consulting, or conversation, reach out.</p>
+      <div class="contact-links">
+        <a class="clink" href="mailto:sadeghvahidi80@gmail.com">
+          <span class="clink-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+          sadeghvahidi80@gmail.com
+        </a>
+        <a class="clink" href="https://www.linkedin.com/in/sadegh-vahidi-88a738150/" target="_blank" rel="noopener">
+          <span class="clink-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 11v5M8 8v.01M12 16v-5M16 16v-3a2 2 0 0 0-4 0"/></svg></span>
+          LinkedIn
+        </a>
+        <a class="clink" href="https://t.me/SadeghVahidi" target="_blank" rel="noopener">
+          <span class="clink-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></span>
+          Telegram
+        </a>
+        <a class="clink" href="contact.html">
+          <span class="clink-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+          Contact Form
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-copy">© 2026 Sadegh Vahidi — All rights reserved</div>
+  <div class="ft-id">sadeghvahidi.ir</div>
+</footer>
+</div>
 
 <script>
-  const nav=document.getElementById('nav');
-  window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40)});
   const burger=document.getElementById('burger');
-  const links=document.getElementById('navLinks');
-  burger.addEventListener('click',()=>links.classList.toggle('open'));
+  const navMobile=document.getElementById('navMobile');
+  if(burger){burger.addEventListener('click',()=>navMobile.classList.toggle('open'));}
   const toggle=document.getElementById('langToggle');
   function applyLang(lang){
     document.documentElement.lang=lang;
@@ -291,21 +360,6 @@ html[lang="en"] body{direction:ltr;text-align:left}
   applyLang(saved);
   toggle.addEventListener('click',()=>applyLang(document.documentElement.lang==='fa'?'en':'fa'));
 </script>
-
-<!-- Tawk.to chatbot: replace YOUR_TAWK_PROPERTY_ID -->
-<!--
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/YOUR_TAWK_PROPERTY_ID/default';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
--->
 
 <!-- Analytics: Google Analytics 4 (replace G-XXXXXXXXXX with your Measurement ID) -->
 <!--
