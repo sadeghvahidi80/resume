@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+Disallow: /admin.html
+Disallow: /admin
+Disallow: /_private/
+
 Sitemap: https://sadeghvahidi.ir/sitemap.xml

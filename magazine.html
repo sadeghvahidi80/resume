@@ -15,18 +15,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
-<style>
-.lang-en{display:none}
-html[lang="en"] .lang-fa{display:none}
-html[lang="en"] .lang-en{display:block}
-html[lang="en"] body{direction:ltr;text-align:left}
-html[lang="en"] .about-grid{direction:ltr}
-</style>
 </head>
 <body>
 
 <nav id="nav">
-  <div class="nav-logo"><img src="assets/logo.png" alt="Sadegh Vahidi"></div>
+  <div class="nav-logo"><a href="index.html" aria-label="Home"><img src="assets/logo.png" alt="Sadegh Vahidi"></a></div>
   <button class="nav-burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="navMobile"><span></span><span></span></button>
   <div class="nav-links">
     <span class="lang-fa">
@@ -42,7 +35,7 @@ html[lang="en"] .about-grid{direction:ltr}
       <a href="contact.html">Contact</a>
     </span>
   </div>
-  <button id="langToggle" style="background:transparent;border:1px solid var(--gold-border);color:var(--gold);padding:.4rem .9rem;font-size:.75rem;cursor:pointer;border-radius:var(--r-sm)" aria-label="Switch language">EN</button>
+  <button id="langToggle" type="button" aria-label="Switch language">EN</button>
 </nav>
 
 <div class="nav-mobile" id="navMobile">
@@ -189,42 +182,12 @@ html[lang="en"] .about-grid{direction:ltr}
   </div>
 </section>
 
-<footer>
+<footer class="site-footer">
   <div class="ft-copy">© 2026 Sadegh Vahidi — All rights reserved</div>
   <div class="ft-id">sadeghvahidi.ir</div>
 </footer>
 </div>
 
-<script>
-  const burger=document.getElementById('burger');
-  const navMobile=document.getElementById('navMobile');
-  if(burger){burger.addEventListener('click',()=>navMobile.classList.toggle('open'));}
-  const toggle=document.getElementById('langToggle');
-  function applyLang(lang){
-    document.documentElement.lang=lang;
-    document.documentElement.dir=(lang==='fa')?'rtl':'ltr';
-    toggle.textContent=(lang==='fa')?'EN':'FA';
-    localStorage.setItem('site-lang',lang);
-  }
-  const saved=localStorage.getItem('site-lang')||'fa';
-  applyLang(saved);
-  toggle.addEventListener('click',()=>applyLang(document.documentElement.lang==='fa'?'en':'fa'));
-</script>
-
-<!-- Analytics: Google Analytics 4 (replace G-XXXXXXXXXX with your Measurement ID) -->
-<!--
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>
-window.dataLayer=window.dataLayer||[];
-function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());
-gtag('config','G-XXXXXXXXXX');
-</script>
--->
-
-<!-- Analytics: GoatCounter (replace YOURCODE with your site code) -->
-<!--
-<script data-goatcounter="https://YOURCODE.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
--->
+<script src="assets/site.js"></script>
 </body>
 </html>
