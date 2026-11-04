@@ -34,7 +34,7 @@ nav.scrolled{background:rgba(9,9,9,.97);backdrop-filter:blur(16px)}
 
 .nav-links a:hover{color:var(--gold)}
 
-.nav-burger{display:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
+.nav-burger{display:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px;background:none;border:0;border-radius:0;box-shadow:none;color:inherit;-webkit-appearance:none;appearance:none}
 
 .nav-burger span{display:block;width:22px;height:1px;background:var(--off-white);transition:.3s}
 
