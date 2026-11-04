@@ -728,3 +728,9 @@ html[lang="en"] .hero-name-row{justify-content:flex-start}
 .nav-burger span{width:24px;height:2px;border-radius:1px}
 @media(min-width:769px){.nav-mobile{display:none!important}}
 
+
+
+/* Magazine empty state */
+.magazine-empty-state{margin-top:1.5rem;padding:2.25rem 1.5rem;border:1px dashed var(--gold-border);border-radius:var(--r);text-align:center;background:rgba(255,255,255,.015)}
+.magazine-empty-state h3{margin:0 0 .55rem;color:var(--off-white);font-size:1.05rem;font-weight:500}
+.magazine-empty-state p{margin:0;color:var(--mid);font-size:.88rem;line-height:1.9}

@@ -1,54 +1,108 @@
-/* Shared site behavior — sadeghvahidi.ir */
+/* Shared behavior for the bilingual public site. */
 (function () {
   'use strict';
 
+  var root = document.documentElement;
   var burger = document.getElementById('burger');
-  var navMobile = document.getElementById('navMobile');
+  var mobile = document.getElementById('navMobile');
   var toggle = document.getElementById('langToggle');
   var nav = document.getElementById('nav');
+  var valid = ['fa', 'en'];
+  var isOpen = false;
 
-  if (burger && navMobile) {
-    burger.addEventListener('click', function () {
-      var open = navMobile.classList.toggle('open');
-      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-    navMobile.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () {
-        navMobile.classList.remove('open');
-        burger.setAttribute('aria-expanded', 'false');
-      });
-    });
+  function safeStorageGet(key) {
+    try { return window.localStorage.getItem(key); } catch (e) { return null; }
+  }
+  function safeStorageSet(key, value) {
+    try { window.localStorage.setItem(key, value); } catch (e) {}
   }
 
-  function applyLang(lang) {
-    document.documentElement.lang = lang;
-    document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
-    if (toggle) toggle.textContent = lang === 'fa' ? 'EN' : 'FA';
-    try { localStorage.setItem('site-lang', lang); } catch (e) {}
+  function updateMeta(selector, attribute, lang) {
+    var node = document.querySelector(selector);
+    if (!node) return;
+    var value = node.getAttribute(lang === 'en' ? 'data-en' : 'data-fa');
+    if (value) node.setAttribute(attribute, value);
+  }
+
+  function applyLang(lang, updateUrl) {
+    if (valid.indexOf(lang) === -1) lang = 'fa';
+    root.lang = lang;
+    root.dir = lang === 'fa' ? 'rtl' : 'ltr';
+
+    if (toggle) {
+      toggle.textContent = lang === 'fa' ? 'EN' : 'FA';
+      toggle.setAttribute('aria-label', lang === 'fa' ? 'تغییر زبان به انگلیسی' : 'Switch language to Persian');
+      toggle.setAttribute('title', lang === 'fa' ? 'English' : 'فارسی');
+    }
+
+    var title = document.querySelector('title[data-fa][data-en]');
+    if (title) title.textContent = title.getAttribute(lang === 'en' ? 'data-en' : 'data-fa');
+    updateMeta('meta[name="description"][data-fa][data-en]', 'content', lang);
+    updateMeta('meta[property="og:title"][data-fa][data-en]', 'content', lang);
+    updateMeta('meta[property="og:description"][data-fa][data-en]', 'content', lang);
+    updateMeta('meta[name="twitter:title"][data-fa][data-en]', 'content', lang);
+    updateMeta('meta[name="twitter:description"][data-fa][data-en]', 'content', lang);
+    var ogLocale = document.querySelector('meta[property="og:locale"]');
+    if (ogLocale) ogLocale.setAttribute('content', lang === 'fa' ? 'fa_IR' : 'en_US');
+
+    safeStorageSet('site-lang', lang);
+    if (updateUrl && window.history && window.history.replaceState) {
+      try {
+        var url = new URL(window.location.href);
+        url.searchParams.set('lang', lang);
+        window.history.replaceState({}, '', url.pathname + url.search + url.hash);
+      } catch (e) {}
+    }
+  }
+
+  function closeMenu() {
+    if (!mobile || !burger) return;
+    isOpen = false;
+    mobile.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  if (burger && mobile) {
+    burger.addEventListener('click', function () {
+      isOpen = !isOpen;
+      mobile.classList.toggle('open', isOpen);
+      burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      if (isOpen) document.body.style.overflow = 'hidden';
+      else document.body.style.overflow = '';
+    });
+    mobile.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && isOpen) { closeMenu(); burger.focus(); }
+    });
+    document.addEventListener('click', function (event) {
+      if (isOpen && !mobile.contains(event.target) && !burger.contains(event.target)) closeMenu();
+    });
   }
 
   if (toggle) {
-    var saved = 'fa';
-    try { saved = localStorage.getItem('site-lang') || 'fa'; } catch (e) {}
-    applyLang(saved);
     toggle.addEventListener('click', function () {
-      applyLang(document.documentElement.lang === 'fa' ? 'en' : 'fa');
+      applyLang(root.lang === 'fa' ? 'en' : 'fa', true);
     });
   }
 
+  var requested = null;
+  try { requested = new URLSearchParams(window.location.search).get('lang'); } catch (e) {}
+  var initial = valid.indexOf(requested) !== -1 ? requested : (safeStorageGet('site-lang') || root.getAttribute('data-default-locale') || root.lang || 'fa');
+  applyLang(initial, false);
+
   if (nav) {
-    window.addEventListener('scroll', function () {
-      nav.classList.toggle('scrolled', window.scrollY > 40);
-    }, { passive: true });
+    var onScroll = function () { nav.classList.toggle('scrolled', window.scrollY > 40); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
   }
 
-  // Highlight current page in nav
-  var path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-  if (!path || path === '') path = 'index.html';
+  var current = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
   document.querySelectorAll('.nav-links a, .nav-mobile a').forEach(function (a) {
-    var href = (a.getAttribute('href') || '').toLowerCase();
-    if (href === path || (path === 'index.html' && (href === '/' || href === 'index.html'))) {
+    var href = (a.getAttribute('href') || '').split('?')[0].toLowerCase();
+    if (href === current || (current === 'index.html' && (href === '/' || href === 'index.html'))) {
       a.classList.add('active');
+      a.setAttribute('aria-current', 'page');
     }
   });
 })();
