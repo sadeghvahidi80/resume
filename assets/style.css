@@ -4,6 +4,8 @@
 
 
 
+@import url('fonts.css');
+
 :root{--black:#090909;--charcoal:#191919;--graphite:#222;--mid:#999;--muted:#aaa;--pale:#ccc;--off-white:#edeae4;--white:#fff;--gold:#c8a44a;--gold-light:#e4c06a;--gold-dim:rgba(200,164,74,.11);--gold-border:rgba(200,164,74,.26);--font:'Vazirmatn',Tahoma,sans-serif;--r:10px;--r-sm:6px;--r-lg:16px;--ease:cubic-bezier(.4,0,.2,1);--t:.35s}
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -719,7 +721,7 @@ html[lang="en"] .hero-layout .hero-content{order:1;direction:ltr;text-align:left
 html[lang="en"] .hero-name-row{justify-content:flex-start}
 .hero-name-row .hero-h1{margin-bottom:0}
 .hero-signature{
-  height:clamp(36px,5vw,52px);width:auto;background:transparent!important;
+  height:clamp(48px,6vw,64px);width:auto;background:transparent!important;
   opacity:.92;flex-shrink:0;margin-bottom:.15em;filter:none
 }
 .hero-maten img{height:52px;width:auto;border-radius:4px}
