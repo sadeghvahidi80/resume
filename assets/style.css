@@ -32,7 +32,7 @@ nav.scrolled{background:rgba(9,9,9,.97);backdrop-filter:blur(16px)}
 
 .nav-links{display:none;gap:2rem;align-items:center}
 
-.nav-links a{font-size:.9rem;font-weight:400;letter-spacing:.12em;color:var(--muted);text-decoration:none;transition:color var(--t);white-space:nowrap}
+.nav-links a{font-size:.9rem;font-weight:400;letter-spacing:.12em;color:var(--pale);text-decoration:none;transition:color var(--t);white-space:nowrap}
 
 .nav-links a:hover{color:var(--gold)}
 
