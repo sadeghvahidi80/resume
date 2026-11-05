@@ -721,7 +721,7 @@ html[lang="en"] .hero-layout .hero-content{order:1;direction:ltr;text-align:left
 html[lang="en"] .hero-name-row{justify-content:flex-start}
 .hero-name-row .hero-h1{margin-bottom:0}
 .hero-signature{
-  height:clamp(48px,6vw,64px);width:auto;background:transparent!important;
+  height:clamp(64px,7vw,80px);width:auto;background:transparent!important;
   opacity:.92;flex-shrink:0;margin-bottom:.15em;filter:none
 }
 .hero-maten img{height:52px;width:auto;border-radius:4px}
@@ -765,3 +765,5 @@ html[lang="en"] .hero-name-row{justify-content:flex-start}
 .magazine-empty-state{margin-top:1.5rem;padding:2.25rem 1.5rem;border:1px dashed var(--gold-border);border-radius:var(--r);text-align:center;background:rgba(255,255,255,.015)}
 .magazine-empty-state h3{margin:0 0 .55rem;color:var(--off-white);font-size:1.05rem;font-weight:500}
 .magazine-empty-state p{margin:0;color:var(--mid);font-size:.88rem;line-height:1.9}
+
+html[lang="fa"] .hero-name-row{flex-direction:row-reverse}
