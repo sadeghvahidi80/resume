@@ -645,7 +645,36 @@ a:focus-visible,button:focus-visible{
 .card-post .meta{font-size:.7rem;color:var(--gold);letter-spacing:.08em}
 .site-footer{padding:1.7rem 3rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.05);z-index:1;position:relative;flex-wrap:wrap;gap:1rem}
 .site-footer .ft-copy{font-size:.75rem;color:var(--mid);font-weight:300}
-.site-footer .ft-id{font-size:.75rem;color:var(--gold);letter-spacing:.08em}
+.site-footer .ft-id{font-size:.75rem;color:var(--gold);letter-spacing:.08em}                                          
+
+
+/* Persian (RTL): tracking breaks cursive joining — reset letter-spacing */
+html[lang="fa"] .nav-logo span,
+html[lang="fa"] .nav-links a,
+html[lang="fa"] .nav-mobile a,
+html[lang="fa"] .sec-label,
+html[lang="fa"] .hero-eye,
+html[lang="fa"] .stat-l,
+html[lang="fa"] .tag,
+html[lang="fa"] .case-tag,
+html[lang="fa"] .tools-label,
+html[lang="fa"] .exp-co,
+html[lang="fa"] .exp-role,
+html[lang="fa"] .exp-group-header,
+html[lang="fa"] .research-meta,
+html[lang="fa"] .combined-date,
+html[lang="fa"] .combined-section-title,
+html[lang="fa"] .contact-pre,
+html[lang="fa"] .ccta,
+html[lang="fa"] .ft-copy,
+html[lang="fa"] .ft-id,
+html[lang="fa"] .proj-tag,
+html[lang="fa"] .proj-role,
+html[lang="fa"] .cluster-label,
+html[lang="fa"] .edu-date,
+html[lang="fa"] .card-post .meta {
+  letter-spacing: 0;
+}
 html[lang="en"] body{direction:ltr;text-align:left}
 html[lang="en"] .about-grid{direction:ltr}
 .lang-en{display:none}
