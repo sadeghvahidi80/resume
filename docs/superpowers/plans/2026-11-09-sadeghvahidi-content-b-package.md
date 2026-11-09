@@ -416,9 +416,9 @@ foreach($f in $files){ if(Test-Path $f){ (Get-Content $f -Raw -Encoding UTF8) -r
 **Interfaces:**
 - Produces: `#contact-form` + فیلدهای `cf-*` (قرارداد در header بالایی)؛ `window.CONTACT_CONFIG = {endpoint:""}`؛ خروجی JS: POST JSON به endpoint؛ فیل بک → `mailto:` fallback با متن حفظ‌شده.
 
-- [ ] **Step 1: چک قرمز** — `Select-String -Path contact.html -Pattern 'id="contact-form"'` → 0.
+- [x] **Step 1: چک قرمز** — `Select-String -Path contact.html -Pattern 'id="contact-form"'` → 0.
 
-- [ ] **Step 2: CSS فرم (پیوست در style.css):**
+- [x] **Step 2: CSS فرم (پیوست در style.css):**
 
 ```css
 .cf-field{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.1rem}
@@ -429,7 +429,7 @@ foreach($f in $files){ if(Test-Path $f){ (Get-Content $f -Raw -Encoding UTF8) -r
 .cf-fallback{display:none;margin-top:.6rem}
 ```
 
-- [ ] **Step 3: بازنویسی بدنه `contact.html`** — کانال‌ها: main دو کارت (`#channel`):
+- [x] **Step 3: بازنویسی بدنه `contact.html`** — کانال‌ها: main دو کارت (`#channel`):
 
 ```html
 <section id="channel">
@@ -471,7 +471,7 @@ foreach($f in $files){ if(Test-Path $f){ (Get-Content $f -Raw -Encoding UTF8) -r
 </section>
 ```
 
-- [ ] **Step 4: JS انتهای صفحه (بدون ادیت `site.js`):**
+- [x] **Step 4: JS انتهای صفحه (بدون ادیت `site.js`):**
 
 ```js
 <script>
@@ -517,9 +517,9 @@ f.addEventListener('submit',async function(ev){
 ```
 (نسخه تمیز: فقط `document.getElementById(...)` — بدون هیچ ارجاع `f.cf_name`.)
 
-- [ ] **Step 5: چک سبز ساختاری** — `Select-String -Path contact.html -Pattern 'id="contact-form"','CONTACT_CONFIG','mailto:sadeghvahidi80'` → ≥3؛ H1 فرم صفحه = `contact-h` بی‌تغییر (یک H1 کل صفحه).
-- [ ] **Step 6: chrome-devtools:** submit بدون endpoint → پیام fallback و لینک mailto فعال با متن؛ honeypot/تایم‌چک؛ 390/360؛ keyboard Tab order.
-- [ ] **Step 7: Commit + Push** — `git commit -am "feat(contact): primary channels + collaboration form (Worker→TG, mailto fallback) fa/en" && git push origin main`.
+- [x] **Step 5: چک سبز ساختاری** — `Select-String -Path contact.html -Pattern 'id="contact-form"','CONTACT_CONFIG','mailto:sadeghvahidi80'` → ≥3؛ H1 فرم صفحه = `contact-h` بی‌تغییر (یک H1 کل صفحه).
+- [x] **Step 6: chrome-devtools:** submit بدون endpoint → پیام fallback و لینک mailto فعال با متن؛ honeypot/تایم‌چک؛ 390/360؛ keyboard Tab order.
+- [x] **Step 7: Commit + Push** — `git commit -am "feat(contact): primary channels + collaboration form (Worker→TG, mailto fallback) fa/en" && git push origin main`.
 
 ---
 
