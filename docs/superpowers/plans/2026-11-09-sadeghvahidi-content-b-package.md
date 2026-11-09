@@ -378,9 +378,9 @@ git push origin main
 
 **Interfaces:** Produces: page URL `/services.html`؛ CTA مؤخر به `contact.html#channel` (channel: بلاک تماس صفحه تماس؛ ID در Task 6 قفل می‌شود).
 
-- [ ] **Step 1: چک قرمز** — `Test-Path services.html` → False.
+- [x] **Step 1: چک قرمز** — `Test-Path services.html` → False.
 
-- [ ] **Step 2: ساخت صفحه** — head: `<title data-fa="خدمات مدیریت پروژه و سیستم‌سازی — صادق وحیدی" data-en="Digital PM & operational systems services — Sadegh Vahidi">`; description انطباق؛ `<link rel="canonical" href="https://sadeghvahidi.ir/services.html">`; nav کامل Task 1 با langToggle؛ footer.
+- [x] **Step 2: ساخت صفحه** — head: `<title data-fa="خدمات مدیریت پروژه و سیستم‌سازی — صادق وحیدی" data-en="Digital PM & operational systems services — Sadegh Vahidi">`; description انطباق؛ `<link rel="canonical" href="https://sadeghvahidi.ir/services.html">`; nav کامل Task 1 با langToggle؛ footer.
 
 بدنه fa (`lang-fa` wrapper) — sec-label «همکاری»، H1 `«services-h»: خدمات و <em>همکاری</em>`، سپس ۴ service block:
 
@@ -392,7 +392,7 @@ git push origin main
 CTA نهایی: `<a class="btn-primary" href="contact.html#form">درخواست بررسی پروژه</a>` + زیرش «چند روز کاری برای پاسخ — تلگرام بیشتر.»
 EN معادل با عناوین: Digital Project Management / Operational Systems Design & SOP / Market & Business Research / Platform Design & Dev Enablement.
 
-- [ ] **Step 3: فعال‌سازی نوبار خدمات** در ۴ ریشه‌صفحه + services خودش:
+- [x] **Step 3: فعال‌سازی نوبار خدمات** در ۴ ریشه‌صفحه + services خودش:
 پیش‌رشته فعلی: `<a class="nav-soon" href="services.html" title="به‌زودی" aria-disabled="true">خدمات</a>` → `href="services.html"` plain + EN equivalent. فرمان کمک:
 
 ```powershell
@@ -401,8 +401,8 @@ foreach($f in $files){ if(Test-Path $f){ (Get-Content $f -Raw -Encoding UTF8) -r
 ```
 (توجه: about/projects در این نقطه هنوز وجود ندارند → فایل حاضر (index/contact/magazine/services) اعمال می‌شود؛ در تسک‌های صفحه‌ساخت هم صفت این لینک از همان ابتدا plain نوشته می‌شود.)
 
-- [ ] **Step 4: چک سبز** — `Select-String -Path services.html -Pattern '<h1','canonical','btn-primary'` → هر ۳ پترن match (توجه: `<h1` دو خط match می‌کند — fa و en — در هر لحظه فقط یکی visible)؛ `Select-String -Path index.html -Pattern 'nav-soon" href="services'` → 0.
-- [ ] **Step 5: chrome-devtools** 390/360 (toggle + overflow + منو).
+- [x] **Step 4: چک سبز** — `Select-String -Path services.html -Pattern '<h1','canonical','btn-primary'` → هر ۳ پترن match (توجه: `<h1` دو خط match می‌کند — fa و en — در هر لحظه فقط یکی visible)؛ `Select-String -Path index.html -Pattern 'nav-soon" href="services'` → 0.
+- [x] **Step 5: chrome-devtools** 390/360 (toggle + overflow + منو).
 - [ ] **Step 6: Commit + Push** — `git add services.html index.html contact.html magazine.html && git commit -m "feat(services): new services & collaboration page (fa/en) + nav activation" && git push origin main` — Pages check + زنده verify.
 
 ---
