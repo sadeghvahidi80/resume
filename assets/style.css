@@ -820,3 +820,12 @@ html[lang="fa"] .contact-h{font-size:clamp(2rem,5.4vw,3.5rem);line-height:2;marg
 .channel-alt{margin-top:1.4rem;font-size:.85rem;color:var(--pale)}
 .channel-alt a{color:var(--gold);text-decoration:none}
 .channel-alt a:hover{text-decoration:underline}
+
+/* Task 8: case-detail accordion */
+.case-detail{border:1px solid rgba(200,164,74,.2);border-radius:var(--r);padding:1.2rem 1.4rem;margin-top:1.2rem;background:rgba(255,255,255,.02)}
+.case-detail summary{cursor:pointer;font-size:1rem;color:var(--off-white)}
+.case-detail summary::marker{color:var(--gold)}
+.case-detail dl{display:grid;grid-template-columns:110px 1fr;gap:.35rem .8rem;margin-top:1rem}
+.case-detail dt{font-size:.78rem;color:var(--gold);letter-spacing:.08em}
+.case-detail dd{font-size:.88rem;color:var(--muted);line-height:1.9}
+@media(max-width:560px){.case-detail dl{grid-template-columns:1fr}}
