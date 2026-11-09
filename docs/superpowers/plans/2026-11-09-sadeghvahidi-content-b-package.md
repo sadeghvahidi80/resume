@@ -532,7 +532,7 @@ f.addEventListener('submit',async function(ev){
 
 **Interfaces:** Consumes: payload ساختار Task 6 (`buildTelegramPayload`). Produces: endpoint URL — در `docs/cloudflare-form-setup.md` مستند، در `contact.html` ثابت.
 
-- [ ] **Step 1: کد Worker (`workers/contact-form/worker.js`):**
+- [x] **Step 1: کد Worker (`workers/contact-form/worker.js`):**
 
 ```js
 export default {
@@ -559,7 +559,7 @@ export default {
 }
 ```
 
-- [ ] **Step 2: `docs/cloudflare-form-setup.md`** — راهنمای قدم‌به‌قدم برای کاربر (~۱۰ دقیقه): ۱) BotFather: `/newbot` → نام+username → token ذخیره؛ ۲) ارسال پیام به خودت در تلگرام و بردن chat_id از `https://api.telegram.org/bot<TOKEN>/getUpdates`؛ ۳) Cloudflare dashboard → Workers → Create Worker (نام `contact-form`) → paste کد → در Settings/Variables دو secret: `TG_TOKEN`, `TG_CHAT_ID`؛ ۴) Deploy → endpoint URL را کپی؛ ۵) محدودسازی: کافی است خود worker را در `wrangler` نکنی — secretها از دش؛ ۶) تست:
+- [x] **Step 2: `docs/cloudflare-form-setup.md`** — راهنمای قدم‌به‌قدم برای کاربر (~۱۰ دقیقه): ۱) BotFather: `/newbot` → نام+username → token ذخیره؛ ۲) ارسال پیام به خودت در تلگرام و بردن chat_id از `https://api.telegram.org/bot<TOKEN>/getUpdates`؛ ۳) Cloudflare dashboard → Workers → Create Worker (نام `contact-form`) → paste کد → در Settings/Variables دو secret: `TG_TOKEN`, `TG_CHAT_ID`؛ ۴) Deploy → endpoint URL را کپی؛ ۵) محدودسازی: کافی است خود worker را در `wrangler` نکنی — secretها از دش؛ ۶) تست:
 
 ```powershell
 curl.exe -s -X POST <YOUR-ENDPOINT-URL> -H "content-type: application/json" -d '{"name":"تست سایت","contact":"@you","type":"سیستم‌سازی","message":"پیام تستی","open_ts":"0","lang":"fa","page":"https://sadeghvahidi.ir/"}'
@@ -568,7 +568,7 @@ Expected: `OK` + پیام در تلگرام شخصی شما.
 
 - [ ] **Step 3: بعد از setup کاربر** — در `contact.html`: `endpoint: "https://contact-form.<subdomain>.workers.dev"` + commit.
 - [ ] **Step 4: تست live** — فرم زنده را خودت submit کن → پیام تلگرام شخصی کاربر برسد (تست E2E).
-- [ ] **Step 5: Commit + Push وسط تسک هم مجاز** — `git commit -m "feat(worker): telegram relay for contact form + setup guide" workers/contact-form/worker.js docs/cloudflare-form-setup.md`
+- [x] **Step 5: Commit + Push وسط تسک هم مجاز** — `git commit -m "feat(worker): telegram relay for contact form + setup guide" workers/contact-form/worker.js docs/cloudflare-form-setup.md`
 **BLOCKED-ON-USER:** setup BotFather+Worker با کاربر (راهنمای قدم به قدم) — تنها تسک با وابستگی.
 
 ---
