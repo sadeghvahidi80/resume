@@ -4,6 +4,8 @@
 
 
 
+@import url('fonts.css');
+
 :root{--black:#090909;--charcoal:#191919;--graphite:#222;--mid:#999;--muted:#aaa;--pale:#ccc;--off-white:#edeae4;--white:#fff;--gold:#c8a44a;--gold-light:#e4c06a;--gold-dim:rgba(200,164,74,.11);--gold-border:rgba(200,164,74,.26);--font:'Vazirmatn',Tahoma,sans-serif;--r:10px;--r-sm:6px;--r-lg:16px;--ease:cubic-bezier(.4,0,.2,1);--t:.35s}
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -18,7 +20,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opa
 
 
 
-nav{position:fixed;top:0;right:0;left:0;z-index:200;padding:1.3rem 3rem;display:flex;justify-content:space-between;align-items:center;transition:background var(--t),backdrop-filter var(--t)}
+nav{position:fixed;top:0;right:0;left:0;z-index:300;padding:1.3rem 3rem;display:flex;justify-content:space-between;align-items:center;transition:background var(--t),backdrop-filter var(--t)}
 
 nav.scrolled{background:rgba(9,9,9,.97);backdrop-filter:blur(16px)}
 
@@ -34,7 +36,7 @@ nav.scrolled{background:rgba(9,9,9,.97);backdrop-filter:blur(16px)}
 
 .nav-links a:hover{color:var(--gold)}
 
-.nav-burger{display:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px;background:none;border:0;border-radius:0;box-shadow:none;color:inherit;-webkit-appearance:none;appearance:none}
+.nav-burger{display:none;cursor:pointer;flex-direction:column;justify-content:center;align-items:center;gap:6px;min-width:44px;min-height:44px;padding:10px;background:none;border:0;border-radius:0;box-shadow:none;color:inherit;-webkit-appearance:none;appearance:none}
 
 .nav-burger span{display:block;width:22px;height:1px;background:var(--off-white);transition:.3s}
 
@@ -1047,3 +1049,18 @@ html[lang="zh"] #languageSwitcher,html[lang="zh"] #languageSwitcher *{font-famil
 /* Fix language visibility: "lang-en" is also used as the shared LTR layout class. */
 body.is-en .resume-language[data-resume-locale]:not(.is-active){display:none!important}
 body.is-en .resume-language[data-resume-locale].is-active{display:block!important}
+
+/* ===================== NASTALIQ DISPLAY FACE ===================== */
+/* Persian headings + name only (gated by html[lang="fa"]); body text stays Vazirmatn.
+   Noto Nastaliq Urdu needs ~2x line-height and ~15% smaller sizes than Naskh. */
+html[lang="fa"] :is(.hero-h1,.sec-title,.contact-h){font-family:'IranNastaliq','Vazirmatn',Tahoma,sans-serif;font-weight:400;letter-spacing:normal}
+html[lang="fa"] .hero-h1{font-size:clamp(2.5rem,7vw,5rem);line-height:2.05}
+html[lang="fa"] .sec-title{font-size:clamp(1.9rem,4.8vw,3.2rem);line-height:2;margin-bottom:1.7rem}
+html[lang="fa"] .contact-h{font-size:clamp(2rem,5.4vw,3.5rem);line-height:2;margin-bottom:1.6rem}
+@media(max-width:768px){
+  html[lang="fa"] .sec-title{font-size:clamp(1.6rem,6.5vw,2rem);margin-bottom:1.4rem}
+  html[lang="fa"] .contact-h{font-size:clamp(1.7rem,6.5vw,2.1rem)}
+}
+@media(max-width:480px){
+  html[lang="fa"] .hero-h1{font-size:clamp(2rem,9vw,2.5rem);line-height:2.1}
+}
