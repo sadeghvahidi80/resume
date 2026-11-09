@@ -809,3 +809,14 @@ html[lang="fa"] .contact-h{font-size:clamp(2rem,5.4vw,3.5rem);line-height:2;marg
 @media(max-width:480px){
   html[lang="fa"] .hero-h1{font-size:clamp(2rem,9vw,2.5rem);line-height:2.1}
 }
+
+/* Task 6: contact form */
+.cf-field{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.1rem}
+.cf-field label{font-size:.8rem;color:var(--pale);letter-spacing:.06em}
+.cf-field input,.cf-field select,.cf-field textarea{background:rgba(255,255,255,.04);border:1px solid rgba(200,164,74,.25);border-radius:var(--r-sm);color:var(--off-white);padding:.8rem 1rem;font:inherit;min-height:44px}
+.cf-field input:focus,.cf-field select:focus,.cf-field textarea:focus{outline:none;border-color:var(--gold)}
+.cf-msg{margin-top:.8rem;font-size:.85rem;color:var(--gold);min-height:1.4em}
+.cf-fallback{display:none;margin-top:.6rem}
+.channel-alt{margin-top:1.4rem;font-size:.85rem;color:var(--pale)}
+.channel-alt a{color:var(--gold);text-decoration:none}
+.channel-alt a:hover{text-decoration:underline}
