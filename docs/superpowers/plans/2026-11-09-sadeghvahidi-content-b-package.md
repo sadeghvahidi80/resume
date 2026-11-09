@@ -78,14 +78,14 @@
 **Interfaces:**
 - Produces: الگوی نوبار ۷آیتمی که تسک‌های 5/8/9/12 در همان الگو آیتم‌های soon را فعال می‌کنند؛ وردمارک متنی.
 
-- [ ] **Step 1: چک فیل به‌عنوان مبنا (تست قرمز)**
+- [x] **Step 1: چک فیل به‌عنوان مبنا (تست قرمز)**
 
 ```powershell
 Select-String -Path index.html -Pattern 'lang-fa"><a href="index.html">Home</a>'
 ```
 Expected: MATCH فعلی (برچسب انگلیسی در lang-fa = ایراد) — بعد از فیکس باید صفر باشد.
 
-- [ ] **Step 2: افزودن CSS بعد از خط `.nav-links a:hover{color:var(--gold)}` در `assets/style.css`:**
+- [x] **Step 2: افزودن CSS بعد از خط `.nav-links a:hover{color:var(--gold)}` در `assets/style.css`:**
 
 ```css
 .nav-logo .wordmark{text-decoration:none;white-space:nowrap;color:var(--gold)}
@@ -95,7 +95,7 @@ Expected: MATCH فعلی (برچسب انگلیسی در lang-fa = ایراد) �
 .nav-soon{opacity:.4;cursor:not-allowed;pointer-events:none}
 ```
 
-- [ ] **Step 3: در هر ۴ فایل، جایگزینی nav**: (a) بلاک `.nav-logo` را با (b) `img` حذف و وردمارک جایگزین:
+- [x] **Step 3: در هر ۴ فایل، جایگزینی nav**: (a) بلاک `.nav-logo` را با (b) `img` حذف و وردمارک جایگزین:
 
 ```html
 <div class="nav-logo"><a class="wordmark" href="index.html" aria-label="صادق وحیدی"><span class="lang-fa">صادق وحیدی</span><span class="lang-en">Sadegh Vahidi</span></a></div>
@@ -129,16 +129,16 @@ Expected: MATCH فعلی (برچسب انگلیسی در lang-fa = ایراد) �
 
 (در resume.html آیتم رزومه `href="resume.html"` و `aria-current="page"` نگه داشته می‌شود.)
 
-- [ ] **Step 4: چک ساختاری سبز**
+- [x] **Step 4: چک ساختاری سبز**
 
 ```powershell
 Select-String -Path index.html -Pattern 'lang-fa"><a href="index.html">Home</a>'; Select-String -Path index.html,contact.html,magazine.html,resume.html -Pattern 'nav-soon' | Measure-Object | Select-Object -ExpandProperty Count
 ```
 Expected: اولِ خروجی = بدون نتیجه؛ دومی = ۱۶ خط matching (هر فایل ۴ خط: ۲ بلاک × ۲ زبان)؛ تعداد لینک‌های nav-soon = ۴۸ (هر فایل ۱۲: ۳ آیتم × ۲ زبان × ۲ بلاک).
 
-- [ ] **Step 5: chrome-devtools (390 و 360):** نوبار فارسی/انگلیسی با toggle سواچ می‌شود؛ وردمارک در nav فشرده نمی‌شود؛ overflow صفر؛ burger باز/بسته سالم؛ کلیک آیتم‌های soon هیچ فاکت منفی ندارد (pointer-events none).
+- [x] **Step 5: chrome-devtools (390 و 360):** نوبار فارسی/انگلیسی با toggle سواچ می‌شود؛ وردمارک در nav فشرده نمی‌شود؛ overflow صفر؛ burger باز/بسته سالم؛ کلیک آیتم‌های soon هیچ فاکت منفی ندارد (pointer-events none).
 
-- [ ] **Step 6: Commit + Push**
+- [x] **Step 6: Commit + Push**
 
 ```bash
 git add index.html contact.html magazine.html resume.html assets/style.css
