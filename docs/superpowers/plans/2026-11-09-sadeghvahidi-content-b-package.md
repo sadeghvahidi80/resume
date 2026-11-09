@@ -354,7 +354,7 @@ git push origin main
 
 **Interfaces:** Produces: فوتر خط «مؤسس گروه فناوری MATEN» / "Founder, MATEN Technology Group" — الگو برای پایین‌همه صفحات جدید.
 
-- [ ] **Step 1: فوتر fa/en** در پایین هر ۳ صفحه (قبل `</body>`) — اگر فوتر موجود است، یک خط append؛ else بلاک:
+- [x] **Step 1: فوتر fa/en** در پایین هر ۳ صفحه (قبل `</body>`) — اگر فوتر موجود است، یک خط append؛ else بلاک:
 
 ```html
 <footer style="text-align:center;padding:2rem 0;color:var(--mid);font-size:.8rem;letter-spacing:.05em">
@@ -363,10 +363,10 @@ git push origin main
 </footer>
 ```
 
-- [ ] **Step 2: push + Pages check** — `gh api repos/sadeghvahidi80/resume/pages/builds/latest --jq '.status'` → `"built"`؛ سپس `curl.exe -s https://sadeghvahidi.ir/ | Select-String -Pattern 'درخواست بررسی پروژه' -Encoding utf8` → match.
-- [ ] **Step 3: زنده موبایل drill** — chrome-devtools روی `https://sadeghvahidi.ir/` در 360: hero بدون هورفلو، نوبار فا، burger، lang toggle؛ کنسول صفر خطا.
-- [ ] **Step 4: Commit** — `git commit -am "feat(footer): personal brand + MATEN founder line (fa/en)" && git push origin main`
-- [ ] **Step 5: گزارش تغییرات بسته ب۱** (controlled-execution template) — به کاربر تحویل، شامل ۳ فاز باقی‌مانده و وابستگی فرم (ب۳).
+- [x] **Step 2: push + Pages check** — `gh api repos/sadeghvahidi80/resume/pages/builds/latest --jq '.status'` → `"built"`؛ سپس `curl.exe -s https://sadeghvahidi.ir/ | Select-String -Pattern 'درخواست بررسی پروژه' -Encoding utf8` → match.
+- [x] **Step 3: زنده موبایل drill** — chrome-devtools روی `https://sadeghvahidi.ir/` در 360: hero بدون هورفلو، نوبار فا، burger، lang toggle؛ کنسول صفر خطا.
+- [x] **Step 4: Commit** — `git commit -am "feat(footer): personal brand + MATEN founder line (fa/en)" && git push origin main`
+- [x] **Step 5: گزارش تغییرات بسته ب۱** (controlled-execution template) — به کاربر تحویل، شامل ۳ فاز باقی‌مانده و وابستگی فرم (ب۳).
 
 ---
 
@@ -403,7 +403,7 @@ foreach($f in $files){ if(Test-Path $f){ (Get-Content $f -Raw -Encoding UTF8) -r
 
 - [x] **Step 4: چک سبز** — `Select-String -Path services.html -Pattern '<h1','canonical','btn-primary'` → هر ۳ پترن match (توجه: `<h1` دو خط match می‌کند — fa و en — در هر لحظه فقط یکی visible)؛ `Select-String -Path index.html -Pattern 'nav-soon" href="services'` → 0.
 - [x] **Step 5: chrome-devtools** 390/360 (toggle + overflow + منو).
-- [ ] **Step 6: Commit + Push** — `git add services.html index.html contact.html magazine.html && git commit -m "feat(services): new services & collaboration page (fa/en) + nav activation" && git push origin main` — Pages check + زنده verify.
+- [x] **Step 6: Commit + Push** — `git add services.html index.html contact.html magazine.html && git commit -m "feat(services): new services & collaboration page (fa/en) + nav activation" && git push origin main` — Pages check + زنده verify.
 
 ---
 
