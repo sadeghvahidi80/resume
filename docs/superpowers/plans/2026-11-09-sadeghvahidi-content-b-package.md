@@ -259,9 +259,9 @@ git push origin main
 
 **Interfaces:** Produces: `<section id="evidence">` با کلاس `evidence-grid`؛ CTA نهایی به `contact.html#form`.
 
-- [ ] **Step 1: چک قرمز** — `Select-String -Path index.html -Pattern 'id="evidence"'` → 0.
+- [x] **Step 1: چک قرمز** — `Select-String -Path index.html -Pattern 'id="evidence"'` → 0.
 
-- [ ] **Step 2: CSS:**
+- [x] **Step 2: CSS:**
 
 ```css
 .cap-badge{display:inline-block;font-size:.68rem;letter-spacing:.14em;color:var(--gold);border:1px solid rgba(200,164,74,.3);border-radius:var(--r-sm);padding:.2rem .6rem}
@@ -272,7 +272,7 @@ git push origin main
 @media(max-width:760px){.evidence-grid{grid-template-columns:1fr}}
 ```
 
-- [ ] **Step 3: جایگزین `#deliverables` (fa) با `#capabilities` — ۴ کارت (ترتیب وزن ۴۰/۲۵/۲۰/۱۵، بدون توانمندی‌های اننغلو):**
+- [x] **Step 3: جایگزین `#deliverables` (fa) با `#capabilities` — ۴ کارت (ترتیب وزن ۴۰/۲۵/۲۰/۱۵، بدون توانمندی‌های اننغلو):**
 
 ```html
 <section id="capabilities">
@@ -290,7 +290,7 @@ git push origin main
 </section>
 ```
 
-- [ ] **Step 4: جایگزین `#paths` (fa) با دو بخش — `#flagships` (۳ teaser) + `#evidence`:**
+- [x] **Step 4: جایگزین `#paths` (fa) با دو بخش — `#flagships` (۳ teaser) + `#evidence`:**
 
 ```html
 <section id="flagships">
@@ -323,7 +323,7 @@ git push origin main
 </section>
 ```
 
-- [ ] **Step 5: `#contact` (fa) کوتاه به CTA مستقیم:**
+- [x] **Step 5: `#contact` (fa) کوتاه به CTA مستقیم:**
 
 ```html
 <section id="contact">
@@ -336,13 +336,13 @@ git push origin main
 </section>
 ```
 
-- [ ] **Step 6: معادل EN برای `#en-capabilities`، `#en-flagships`، `#en-evidence`، `#en-contact`** — همان ساختار با ترجمه: Core capabilities / Flagship projects / Measurable results / Let's talk. اعداد یکسان — واقعیتها همان فارسی: 30+ poolaki/Ronix و «Request a project review» و «All case studies» (لینک soon).
+- [x] **Step 6: معادل EN برای `#en-capabilities`، `#en-flagships`، `#en-evidence`، `#en-contact`** — همان ساختار با ترجمه: Core capabilities / Flagship projects / Measurable results / Let's talk. اعداد یکسان — واقعیتها همان فارسی: 30+ poolaki/Ronix و «Request a project review» و «All case studies» (لینک soon).
 
-- [ ] **Step 7: چک سبز** — `Select-String -Path index.html -Pattern 'id="evidence"','id="en-evidence"','nav-soon' | Measure-Object -Line` → ≥ 4؛ `[در انتظار آمار]` فقط ۱ بار در هر زبان (.fa + en برابر). `Select-String -Path index.html -Pattern 'در انتظار'|Measure-Object` → 1.
+- [x] **Step 7: چک سبز** — `Select-String -Path index.html -Pattern 'id="evidence"','id="en-evidence"','nav-soon' | Measure-Object -Line` → ≥ 4؛ `[در انتظار آمار]` فقط ۱ بار در هر زبان (.fa + en برابر). `Select-String -Path index.html -Pattern 'در انتظار'|Measure-Object` → 1.
 
-- [ ] **Step 8: chrome-devtools 390/360** — gridها به یک ستون فروری jezند؛ hexagon opacity کارت‌ها؛ toggle سواچ؛ overflow صفر.
+- [x] **Step 8: chrome-devtools 390/360** — gridها به یک ستون فروری jezند؛ hexagon opacity کارت‌ها؛ toggle سواچ؛ overflow صفر.
 
-- [ ] **Step 9: Commit + Push** — `git commit -am "feat(home): capabilities 40/25/20/15, flagship teasers, honest evidence grid (fa/en)" && git push origin main` — Release ب۱ کامل → چک Pages + verify زنده (عنوان، hero، nav fa).
+- [x] **Step 9: Commit + Push** — `git commit -am "feat(home): capabilities 40/25/20/15, flagship teasers, honest evidence grid (fa/en)" && git push origin main` — Release ب۱ کامل → چک Pages + verify زنده (عنوان، hero، nav fa).
 
 ---
 
