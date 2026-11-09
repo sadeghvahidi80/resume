@@ -159,9 +159,9 @@ git push origin main
 **Interfaces:**
 - Produces: CTA اصلی `<a href="contact.html#form" class="btn-primary">…` در hero (fa+en) — تسک‌های بعدی به همین مسیر لینک می‌دهند؛ بخش‌های جدید `#problem`/`#en-problem`.
 
-- [ ] **Step 1: چک قرمز** — `Select-String -Path index.html -Pattern 'درخواست بررسی پروژه'` → 0 match (بعد از این تسک = ۴: fa hero+CTA نهایی، en hero+CTA).
+- [x] **Step 1: چک قرمز** — `Select-String -Path index.html -Pattern 'درخواست بررسی پروژه'` → 0 match (بعد از این تسک = ۴: fa hero+CTA نهایی، en hero+CTA).
 
-- [ ] **Step 2: CSS `assets/style.css` (پیوست بعد `.hero-stats`):**
+- [x] **Step 2: CSS `assets/style.css` (پیوست بعد `.hero-stats`):**
 
 ```css
 .step-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2.2rem}
@@ -179,7 +179,7 @@ git push origin main
 .btn-row{display:flex;gap:1rem;flex-wrap:wrap}
 ```
 
-- [ ] **Step 3: جایگزینی کامل `<section id="hero">` (fa):**
+- [x] **Step 3: جایگزینی کامل `<section id="hero">` (fa):**
 
 ```html
 <section id="hero">
@@ -202,7 +202,7 @@ git push origin main
 </section>
 ```
 
-- [ ] **Step 4: جایگزینی کامل `<section id="about">` (fa) با `#problem`:**
+- [x] **Step 4: جایگزینی کامل `<section id="about">` (fa) با `#problem`:**
 
 ```html
 <section id="problem">
@@ -229,7 +229,7 @@ git push origin main
 </section>
 ```
 
-- [ ] **Step 5: معادل EN** — `#en-hero` و `#en-about`→`#en-problem` با همان ساختار و متن انگلیسی:
+- [x] **Step 5: معادل EN** — `#en-hero` و `#en-about`→`#en-problem` با همان ساختار و متن انگلیسی:
 
 ```html
 <section id="en-hero">…(hero-layout همان fa, h1: Sadegh <em>Vahidi</em>)…
@@ -242,12 +242,12 @@ git push origin main
 ```
 (متن کامل EN در فایل نوشته شود: sub-paragraph معادل + سه کارت «Analysis / System design / Hands-on execution» از spec §۵ + بخش «What you get» با ۶ value chip معادل: less wasted time · standardized processes · trackable projects · less person-dependency · steadier team output · extensible workflows.)
 
-- [ ] **Step 6: چک سبز** — `Select-String -Path index.html -Pattern 'درخواست بررسی پروژه','Request a project review','id="problem"','id="en-problem"' | Measure-Object -Line` → ≥ 4 lines match; hero fa/en هر ۹ زبان H1 دارند (در DOM دو H1 — fa و en — مجاز است؛ در هر لحظه فقط یکی visible).
+- [x] **Step 6: چک سبز** — `Select-String -Path index.html -Pattern 'درخواست بررسی پروژه','Request a project review','id="problem"','id="en-problem"' | Measure-Object -Line` → ≥ 4 lines match; hero fa/en هر ۹ زبان H1 دارند (در DOM دو H1 — fa و en — مجاز است؛ در هر لحظه فقط یکی visible).
   نکته: کنترل نهایی H1 روی صفحه زنده در Task 13.
 
-- [ ] **Step 7: chrome-devtools 390/360:** btn-row در fa/en زیر هم (flex-wrap)؛ متن hero بدون هورفلو؛ toggle سواچ.
+- [x] **Step 7: chrome-devtools 390/360:** btn-row در fa/en زیر هم (flex-wrap)؛ متن hero بدون هورفلو؛ toggle سواچ.
 
-- [ ] **Step 8: Commit** — `git commit -am "feat(home): position statement hero + problem-to-approach (fa/en)" && git push origin main`
+- [x] **Step 8: Commit** — `git commit -am "feat(home): position statement hero + problem-to-approach (fa/en)" && git push origin main`
 
 ---
 
