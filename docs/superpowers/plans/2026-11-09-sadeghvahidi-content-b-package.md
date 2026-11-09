@@ -581,9 +581,9 @@ Expected: `OK` + پیام در تلگرام شخصی شما.
 
 **Interfaces:** Produces: `#flagship` بلاک ۵ case، کلاس `case-detail/details/summary` — Task 9 همین ساختار را با نمونه‌های تخصصی و آرشیو ادامه می‌دهد.
 
-- [ ] **Step 1: چک قرمز** — `Test-Path projects.html` → False.
+- [x] **Step 1: چک قرمز** — `Test-Path projects.html` → False.
 
-- [ ] **Step 2: CSS:**
+- [x] **Step 2: CSS:**
 
 ```css
 .case-detail{border:1px solid rgba(200,164,74,.2);border-radius:var(--r);padding:1.2rem 1.4rem;margin-top:1.2rem;background:rgba(255,255,255,.02)}
@@ -595,7 +595,7 @@ Expected: `OK` + پیام در تلگرام شخصی شما.
 @media(max-width:560px){.case-detail dl{grid-template-columns:1fr}}
 ```
 
-- [ ] **Step 3: صفحه** — head/canonical/og/nav/footer مطابق الگوی؛ body fa: H1 `پروژه‌ها و مطالعات <em>موردی</em>`؟ نه: `پروژه‌ها و مطالعات <em>موردی</em>` بر مبنای spec: عنوان H1 «پروژه‌ها و مطالعات موردی». سپس ۵ `<details class="case-detail">` — محتوای dt/dd از جدول spec §۶ (مسئله/مسئولیت/راهکار/ابزار/نتیجه/مستندات). «نتیجه» فقط واقعی، مدارک جای خالی. مثال full کارت ۱:
+- [x] **Step 3: صفحه** — head/canonical/og/nav/footer مطابق الگوی؛ body fa: H1 `پروژه‌ها و مطالعات <em>موردی</em>`؟ نه: `پروژه‌ها و مطالعات <em>موردی</em>` بر مبنای spec: عنوان H1 «پروژه‌ها و مطالعات موردی». سپس ۵ `<details class="case-detail">` — محتوای dt/dd از جدول spec §۶ (مسئله/مسئولیت/راهکار/ابزار/نتیجه/مستندات). «نتیجه» فقط واقعی، مدارک جای خالی. مثال full کارت ۱:
 
 ```html
 <details class="case-detail" open><summary>۱ — پلتفرم فروشگاه قطعات تویوتا (ماتن)</summary>
@@ -612,10 +612,10 @@ Expected: `OK` + پیام در تلگرام شخصی شما.
 
 کارت ۲ (سبزوار)، ۳ (پولکی/رونیکس با واقعی‌ها: تیم ۳–۴، ۳۰+، ۱۲+)، ۴ (خوراک دام، ۴ افق)، ۵ (کنترل کیفی کتاب، ۵+ عنوان) — full در فایل.
 
-- [ ] **Step 4: EN mirror** (`lang-en` wrapper) — همان محتوا با ترجمه انگلیسی؛ نشان‌های EN جای‌خالی: `[Results pending]` / `[Evidence pending]` / `[Date pending]` (به Global Constraints و چک Task 16 افزوده شود).
-- [ ] **Step 5: چک سبز** — تعداد `<h1` در هر wrapper زبانی = 1 (صفحه دوزبانه در DOM دو H1 دارد — fa و en — ولی در هر لحظه فقط یکی visible؛ قید: H1 visible per locale = 1، چک در chrome).
-- [ ] **Step 6: chrome-devtools 390/360** — `<details>` باز/بسته؛ nav-soon «پروژه‌ها» هنوز آیتم منو فعال می‌شود در تسک ۹ (اینجا صفحه هست اما منو فعال‌سازی Task 9).
-- [ ] **Step 7: Commit** — `git add projects.html assets/style.css && git commit -m "feat(projects): 5 flagship case cards with honest evidence slots (fa/en)" && git push origin main`
+- [x] **Step 4: EN mirror** (`lang-en` wrapper) — همان محتوا با ترجمه انگلیسی؛ نشان‌های EN جای‌خالی: `[Results pending]` / `[Evidence pending]` / `[Date pending]` (به Global Constraints و چک Task 16 افزوده شود).
+- [x] **Step 5: چک سبز** — تعداد `<h1` در هر wrapper زبانی = 1 (صفحه دوزبانه در DOM دو H1 دارد — fa و en — ولی در هر لحظه فقط یکی visible؛ قید: H1 visible per locale = 1، چک در chrome).
+- [x] **Step 6: chrome-devtools 390/360** — `<details>` باز/بسته؛ nav-soon «پروژه‌ها» هنوز آیتم منو فعال می‌شود در تسک ۹ (اینجا صفحه هست اما منو فعال‌سازی Task 9).
+- [x] **Step 7: Commit** — `git add projects.html assets/style.css && git commit -m "feat(projects): 5 flagship case cards with honest evidence slots (fa/en)" && git push origin main`
 
 ---
 
