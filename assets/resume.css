@@ -1051,16 +1051,11 @@ body.is-en .resume-language[data-resume-locale]:not(.is-active){display:none!imp
 body.is-en .resume-language[data-resume-locale].is-active{display:block!important}
 
 /* ===================== NASTALIQ DISPLAY FACE ===================== */
-/* Persian headings + name only (gated by html[lang="fa"]); body text stays Vazirmatn.
-   Noto Nastaliq Urdu needs ~2x line-height and ~15% smaller sizes than Naskh. */
-html[lang="fa"] :is(.hero-h1,.sec-title,.contact-h){font-family:'IranNastaliq','Vazirmatn',Tahoma,sans-serif;font-weight:400;letter-spacing:normal}
-html[lang="fa"] .hero-h1{font-size:clamp(2.5rem,7vw,5rem);line-height:2.05}
-html[lang="fa"] .sec-title{font-size:clamp(1.9rem,4.8vw,3.2rem);line-height:2;margin-bottom:1.7rem}
-html[lang="fa"] .contact-h{font-size:clamp(2rem,5.4vw,3.5rem);line-height:2;margin-bottom:1.6rem}
-@media(max-width:768px){
-  html[lang="fa"] .sec-title{font-size:clamp(1.6rem,6.5vw,2rem);margin-bottom:1.4rem}
-  html[lang="fa"] .contact-h{font-size:clamp(1.7rem,6.5vw,2.1rem)}
-}
+/* Nastaliq reserved for the NAME heading ONLY (.nas-keep = first «صادق وحیدی» h1 on the fa resume,
+   per user directive 2026-11-10). All other headings (sec-title, contact-h, other heroes) stay
+   Vazirmatn via the base rules above. Noto Nastaliq Urdu needs ~2x line-height and ~15% smaller sizes than Naskh. */
+html[lang="fa"] .nas-keep{font-family:'IranNastaliq','Vazirmatn',Tahoma,sans-serif;font-weight:400;letter-spacing:normal}
+html[lang="fa"] .nas-keep.hero-h1{font-size:clamp(2.5rem,7vw,5rem);line-height:2.05}
 @media(max-width:480px){
-  html[lang="fa"] .hero-h1{font-size:clamp(2rem,9vw,2.5rem);line-height:2.1}
+  html[lang="fa"] .nas-keep.hero-h1{font-size:clamp(2rem,9vw,2.5rem);line-height:2.1}
 }
