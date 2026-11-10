@@ -119,20 +119,27 @@
 </div>
 <script src="assets/site.js"></script>
 <script>
-window.CONTACT_CONFIG = { endpoint: "" };
+window.CONTACT_CONFIG = { endpoint: "https://formspree.io/f/mppplvez" };
 (function(){
 var L={
  fa:{miss:'فیلدهای ستاره‌دار را کامل کنید.',slow:'لطفاً چند لحظه صبر کنید یا از تلگرام/ایمیل استفاده کنید.',send:'در حال ارسال…',done:'دریافت شد — در تلگرام و ایمیل پاسخ می‌دهم.',subj:'درخواست همکاری — ',n:'نام: ',c:'ارتباط: ',b:'درخواست همکاری — '},
  en:{miss:'Please complete the required fields.',slow:'Please wait a few seconds, or use Telegram/email.',send:'Sending…',done:'Received — I will reply via Telegram or email.',subj:'Collaboration request — ',n:'Name: ',c:'Contact: ',b:'Collaboration request — '}
 };
-function buildTelegramPayload(d){
-  return {name:d.name, contact:d.contact, type:d.type, message:d.message, open_ts:d.open_ts, page:location.href, lang:document.documentElement.lang};
+function buildTelegramPayload(d,lang){
+  var isMail=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.contact);
+  var p={name:d.name, contact:d.contact, type:d.type, message:d.message, open_ts:d.open_ts, page:location.href, lang:document.documentElement.lang,
+    email: isMail ? d.contact : "sadeghvahidi80@gmail.com",
+    _subject: L[lang].subj+d.type,
+    _gotcha: ""};
+  return p;
 }
 async function sendToWorker(payload){
   var ep=(window.CONTACT_CONFIG&&window.CONTACT_CONFIG.endpoint)||"";
   if(!ep){return {ok:false,reason:"no-endpoint"};}
-  var r=await fetch(ep,{method:"POST",headers:{'content-type':'application/json'},body:JSON.stringify(payload)});
-  return {ok:r.ok};
+  try{
+    var r=await fetch(ep,{method:"POST",headers:{'content-type':'application/json','accept':'application/json'},body:JSON.stringify(payload)});
+    return {ok:r.ok,status:r.status};
+  }catch(e){return {ok:false,reason:"network"};}
 }
 function bind(pre,formId,lang){
   var f=document.getElementById(formId);if(!f)return;
@@ -154,7 +161,7 @@ function bind(pre,formId,lang){
     };
     if(!d.name||!d.contact||!d.type||!d.message){msgEl.textContent=L[lang].miss;return;}
     msgEl.textContent=L[lang].send;
-    var res=await sendToWorker(buildTelegramPayload(d));
+    var res=await sendToWorker(buildTelegramPayload(d,lang));
     if(res.ok){msgEl.textContent=L[lang].done;f.reset();return;}
     msgEl.textContent='';
     var body=L[lang].b+d.type+'\n'+L[lang].n+d.name+'\n'+L[lang].c+d.contact+'\n\n'+d.message;
