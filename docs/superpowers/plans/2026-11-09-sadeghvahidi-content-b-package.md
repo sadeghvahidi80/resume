@@ -673,10 +673,10 @@ Expected: `OK` + پیام در تلگرام شخصی شما.
 - Modify: nav ریشه‌ها (فعال‌سازی درباره)
 
 **Steps:**
-- [ ] head: title «درباره صادق وحیدی — روایت حرفه‌ای» + description انطباق؛ canonical `https://sadeghvahidi.ir/about.html`؛ JSON-LD Person (همان بلوک موجود index، با `url` صفحه درباره).
-- [ ] بدنه fa: H1 «درباره من»؛ story (از resume واقعی: کارشناسی حسابداری، دانشگاه تهران، ۱۳۹۸–۱۴۰۱؛ مسیر: از تحلیل داده و محتوا تا سیستم‌سازی؛ founder گروه فناوری ماتن)؛ فلسفه (عبارت: «سیستم، جایگزین حافظه فردی است»)؛ بخش سوابق مختصر + مؤسس گروه فناوری ماتن؛ EN معادل؛
-- [ ] فعال‌سازی منو درباره در ۵ صفحه (پیش از این ۴ صفحه + سایر).
-- [ ] چک/DevTools؛ `git commit -am "feat(about): career story + Person schema (fa/en) + nav activation" && git push`.
+- [x] head: title «درباره صادق وحیدی — روایت حرفه‌ای» + description انطباق؛ canonical `https://sadeghvahidi.ir/about.html`؛ JSON-LD Person (همان بلوک موجود index، با `url` صفحه درباره).
+- [x] بدنه fa: H1 «درباره من»؛ story (از resume واقعی: کارشناسی مدیریت مالی، دانشگاه تهران، ۱۳۹۸–۱۴۰۱؛ مسیر: از تحلیل داده و محتوا تا سیستم‌سازی؛ founder گروه فناوری ماتن)؛ فلسفه (عبارت: «سیستم، جایگزین حافظه فردی است»)؛ بخش سوابق مختصر + مؤسس گروه فناوری ماتن؛ EN معادل؛
+- [x] فعال‌سازی منو درباره در ۶ صفحه ریشه (+ فعال‌سازی services در resume.html — nav-soon صفر در ریشه).
+- [x] چک/DevTools؛ `git commit -am "feat(about): career story + Person schema (fa/en) + nav activation" && git push` — **انجام‌شده: `aecc6ff` (2026-11-10) + sitemap +3 (about/projects/services، lastmod امروز؛ magazine خارج) + چک‌های به‌روزشده task3/5/8/9 سبز + verify زنده (about=200، build=built).**
 
 ---
 
