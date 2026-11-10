@@ -887,7 +887,7 @@ body.is-en .resume-language.lang-en{display:block!important}
   .p-brandline img{width:27mm;height:auto;max-height:11mm;object-fit:contain;background:transparent}
   .p-eyebrow{font-size:7.5pt;letter-spacing:.16em;color:#c7a04a;text-transform:uppercase;font-weight:600;margin-bottom:5mm}
   .print-fa .p-eyebrow{letter-spacing:0}
-  .p-cover-copy h1{font-size:39pt;line-height:1.05;margin:0 0 5mm;color:inherit;font-weight:700;letter-spacing:-.03em}
+  .p-cover-copy h1,.p-cover-copy .print-h1{font-size:39pt;line-height:1.05;margin:0 0 5mm;color:inherit;font-weight:700;letter-spacing:-.03em}
   .p-lead{font-size:14pt;line-height:1.8;max-width:102mm;margin:0;color:inherit;opacity:.88}
   .p-rule{width:28mm;height:1.2mm;background:#c7a04a;margin:8mm 0}
   .p-about-block{max-width:113mm;margin-top:5mm}
@@ -1058,4 +1058,37 @@ html[lang="fa"] .nas-keep{font-family:'IranNastaliq','Vazirmatn',Tahoma,sans-ser
 html[lang="fa"] .nas-keep.hero-h1{font-size:clamp(2.5rem,7vw,5rem);line-height:2.05}
 @media(max-width:480px){
   html[lang="fa"] .nas-keep.hero-h1{font-size:clamp(2rem,9vw,2.5rem);line-height:2.1}
+}
+
+/* ===================== TASK 10: THREE-TIER RESUME (fa/en) ===================== */
+/* Tier 1 — flagship case accordions (mirrors projects.html / assets/style.css). */
+.case-detail{border:1px solid rgba(200,164,74,.2);border-radius:var(--r);padding:1.2rem 1.4rem;margin-top:1.2rem;background:rgba(255,255,255,.02)}
+.case-detail summary{cursor:pointer;font-size:1rem;color:var(--off-white)}
+.case-detail summary::marker{color:var(--gold)}
+.case-detail dl{display:grid;grid-template-columns:110px 1fr;gap:.35rem .8rem;margin-top:1rem}
+.case-detail dt{font-size:.78rem;color:var(--gold);letter-spacing:.08em}
+.case-detail dd{font-size:.88rem;color:var(--muted);line-height:1.9}
+@media(max-width:560px){.case-detail dl{grid-template-columns:1fr}}
+
+/* Tier 3 — collapsed full archive: all 40 works kept, only grouped (nothing deleted). */
+.archive-full{margin-top:1.4rem;border:1px solid rgba(200,164,74,.16);border-radius:var(--r);padding:.2rem 1.2rem 1.2rem;background:rgba(255,255,255,.015)}
+.archive-full>summary{cursor:pointer;display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap;padding:1rem 0;margin:0}
+.archive-full>summary::marker{color:var(--gold)}
+.archive-h{font-size:1.12rem;font-weight:500;color:var(--off-white);margin:0}
+.archive-hint{font-size:.72rem;color:var(--mid);letter-spacing:.06em}
+.archive-full[open]>summary .archive-h{color:var(--gold)}
+
+/* In-development cards: honest status + pending date placeholder (قرارداد صداقت). */
+.proj-upd{display:block;font-size:.78rem;color:var(--gold);letter-spacing:.03em}
+.proj-upd-date{display:block;font-size:.72rem;color:var(--mid);margin-top:.3rem}
+
+/* Print cover name as h2 so the page keeps exactly one <h1> (hero). */
+.print-h1{font-size:2.2rem;font-weight:300;color:var(--off-white);margin-bottom:.6rem}
+
+@media print{
+  /* Nothing may be dropped in print: force the collapsed archive open. */
+  .archive-full{display:block!important;border:0;background:none;padding:0}
+  .archive-full>summary{display:none!important}
+  .archive-full>*{display:block!important}
+  .case-detail{break-inside:avoid}
 }
