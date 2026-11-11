@@ -60,9 +60,11 @@
 <option>مدیریت پروژه</option><option>سیستم‌سازی</option><option>پژوهش بازار</option><option>محتوا</option><option>استخدام</option>
 </select></div>
 <div class="cf-field"><label for="cf-message">شرح کوتاه وضعیت و انتظار شما</label><textarea id="cf-message" name="message" rows="6" required></textarea></div>
+<div class="cf-field"><label for="cf-budget">بودجه تقریبی (اختیاری)</label><input autocomplete="off" id="cf-budget" name="budget"></div>
 <input type="text" id="cf-honeypot" name="honeypot" style="position:absolute;opacity:0;pointer-events:none" tabindex="-1" aria-hidden="true">
 <input type="hidden" id="cf-open-ts" name="open_ts">
 <input id="cf-cf-type-x" type="text" style="display:none">
+<p class="cf-privacy" id="cf-privacy">اطلاعات این فرم فقط برای پاسخ به درخواست شماست؛ از طریق سرویس ارسال فرم به ایمیل و تلگرام صاحب سایت می‌رسد و در جای دیگری منتشر نمی‌شود.</p>
 <button class="btn-primary" type="submit">ارسال درخواست</button>
 <p class="cf-msg" id="cf-msg" aria-live="polite"></p>
 <p class="cf-fallback" id="cf-fallback">اگر ارسال خودکار ممکن نشد، <a id="cf-mailto" href="#">کلیک کنید</a> تا پیش‌فرض ایمیل‌تان متن را حفظ کند.</p>
@@ -105,8 +107,10 @@
 <option>Project management</option><option>Systems design</option><option>Market research</option><option>Content</option><option>Hiring</option>
 </select></div>
 <div class="cf-field"><label for="ecf-message">Short description of your situation and expectation</label><textarea id="ecf-message" name="message" rows="6" required></textarea></div>
+<div class="cf-field"><label for="ecf-budget">Approximate budget (optional)</label><input autocomplete="off" id="ecf-budget" name="budget"></div>
 <input type="text" id="ecf-honeypot" name="honeypot" style="position:absolute;opacity:0;pointer-events:none" tabindex="-1" aria-hidden="true">
 <input type="hidden" id="ecf-open-ts" name="open_ts">
+<p class="cf-privacy" id="ecf-privacy">This form’s data is used only to answer your request: it is delivered via the form service to the site owner’s email and Telegram, and is not published anywhere else.</p>
 <button class="btn-primary" type="submit">Send request</button>
 <p class="cf-msg" id="ecf-msg" aria-live="polite"></p>
 <p class="cf-fallback" id="ecf-fallback">If auto-send isn't possible, <a id="ecf-mailto" href="#">click here</a> and your email app will keep the text.</p>
@@ -132,7 +136,7 @@ var L={
 };
 function buildTelegramPayload(d,lang){
   var isMail=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.contact);
-  var p={name:d.name, contact:d.contact, type:d.type, message:d.message, open_ts:d.open_ts, page:location.href, lang:document.documentElement.lang,
+  var p={name:d.name, contact:d.contact, type:d.type, message:d.message, budget:d.budget, open_ts:d.open_ts, page:location.href, lang:document.documentElement.lang,
     email: isMail ? d.contact : "sadeghvahidi80@gmail.com",
     _subject: L[lang].subj+d.type,
     _gotcha: ""};
@@ -164,6 +168,7 @@ function bind(pre,formId,lang){
       contact:   document.getElementById(pre+'contact').value.trim(),
       type:      document.getElementById(pre+'type').value,
       message:   document.getElementById(pre+'message').value,
+      budget:    (document.getElementById(pre+'budget')||{value:''}).value.trim(),
       open_ts:   document.getElementById(pre+'open-ts').value
     };
     if(!d.name||!d.contact||!d.type||!d.message){msgEl.textContent=L[lang].miss;return;}
