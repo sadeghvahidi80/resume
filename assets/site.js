@@ -24,6 +24,22 @@
     if (value) node.setAttribute(attribute, value);
   }
 
+  // SEO-002: the static canonical cannot see ?lang=en, so keep it
+  // self-referential for the language actually rendered. Guarded to the
+  // bilingual root pages (they declare hreflang="en" with ?lang=en).
+  function syncCanonical(lang) {
+    var canon = document.querySelector('link[rel="canonical"]');
+    var altEn = document.querySelector('link[rel="alternate"][hreflang="en"]');
+    if (!canon || !altEn) return;
+    if ((altEn.getAttribute('href') || '').indexOf('lang=en') === -1) return;
+    var base = canon.getAttribute('data-canonical-base');
+    if (!base) {
+      base = (canon.getAttribute('href') || '').split('?')[0];
+      canon.setAttribute('data-canonical-base', base);
+    }
+    canon.setAttribute('href', lang === 'en' ? base + '?lang=en' : base);
+  }
+
   function applyLang(lang, updateUrl) {
     if (valid.indexOf(lang) === -1) lang = 'fa';
     root.lang = lang;
@@ -44,6 +60,8 @@
     updateMeta('meta[name="twitter:description"][data-fa][data-en]', 'content', lang);
     var ogLocale = document.querySelector('meta[property="og:locale"]');
     if (ogLocale) ogLocale.setAttribute('content', lang === 'fa' ? 'fa_IR' : 'en_US');
+
+    syncCanonical(lang);
 
     safeStorageSet('site-lang', lang);
     if (updateUrl && window.history && window.history.replaceState) {
