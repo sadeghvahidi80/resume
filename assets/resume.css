@@ -1092,3 +1092,21 @@ html[lang="fa"] .nas-keep.hero-h1{font-size:clamp(2.5rem,7vw,5rem);line-height:2
   .archive-full>*{display:block!important}
   .case-detail{break-inside:avoid}
 }
+
+/* ===================== PDF DOWNLOAD CLUSTER (RESUME-002) =====================
+   Print button + direct PDF download, side by side, screen only.
+   Inside @media print the whole cluster is dropped by body > *:not(#print-resume). */
+.print-actions{
+  position:fixed;
+  bottom:1.5rem;
+  left:1.5rem;
+  z-index:99;
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+}
+.print-actions .btn-print{position:static}
+.print-actions a{text-decoration:none;white-space:nowrap}
+@media(max-width:768px){.print-actions{bottom:1rem;left:1rem;gap:.4rem}}
+@media(min-width:769px){.print-actions{bottom:2rem;left:2rem}}
+@media print{.print-actions{display:none!important}}
