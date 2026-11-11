@@ -76,6 +76,7 @@
 
 **فاز ۳ (تجاری):** services/contact/about بقیه، C17/C18-new/C19-new.
 **فاز ۴ (کنترل):** C23/C24/C26/C32/C33/C34 + فهرست فنی دوستان (OG 800×800، meta keywords، hreflang، JSON-LD، Core Web Vitals، تست mailto، Google Fonts Great Vibes → کامیت جداگانه، tel: links).
+**فاز ۵ (نگارخانه):** طراحی صفحهٔ گالری/نگارخانه برای عکس‌های شخصی کاربر (منبع عکس‌ها، تعداد، سبک شبکه/نوربکس، محل صفحه و hreflang — تصمیم کاربر در شروع فاز).
 **C02** — Master Portfolio Registry (تک‌منبع حقیقت) بعد از تأیید.
 **C09** — Task 11 (آینهٔ سه‌لایهٔ EN).
 
