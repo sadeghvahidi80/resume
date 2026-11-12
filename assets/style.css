@@ -826,3 +826,12 @@ html[lang="fa"] .nas-keep.hero-h1{font-size:clamp(2.5rem,7vw,5rem);line-height:2
 @media(max-width:560px){.case-detail dl{grid-template-columns:1fr}}
 
 .cf-privacy{margin-top:.9rem;font-size:.78rem;color:var(--muted);line-height:1.8}
+
+/* SERVICES-001 (2026-11-12): per-service detail fields + collaboration modes */
+.svc-meta{margin-top:1.4rem;display:grid;gap:.55rem;list-style:none;padding:0}
+.svc-meta li{font-size:.85rem;color:var(--pale);line-height:1.85;border-inline-start:2px solid rgba(200,164,74,.25);padding-inline-start:.9rem}
+.svc-meta strong{color:var(--gold);font-weight:500}
+.svc-req{margin-top:1.2rem;font-size:.85rem;color:var(--muted);line-height:1.8}
+.svc-req a{color:var(--gold);text-decoration:underline;text-underline-offset:3px}
+.modes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem}
+@media(max-width:1024px){.modes-grid{grid-template-columns:1fr}}
