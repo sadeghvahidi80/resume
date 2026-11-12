@@ -51,6 +51,10 @@
       toggle.setAttribute('title', lang === 'fa' ? 'English' : 'فارسی');
     }
 
+    if (burger) {
+      burger.setAttribute('aria-label', lang === 'fa' ? 'باز کردن منو' : 'Open menu');
+    }
+
     var title = document.querySelector('title[data-fa][data-en]');
     if (title) title.textContent = title.getAttribute(lang === 'en' ? 'data-en' : 'data-fa');
     updateMeta('meta[name="description"][data-fa][data-en]', 'content', lang);

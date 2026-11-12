@@ -801,6 +801,7 @@ html[lang="fa"] .nas-keep.hero-h1{font-size:clamp(2.5rem,7vw,5rem);line-height:2
 .cf-field label{font-size:.8rem;color:var(--pale);letter-spacing:.06em}
 .cf-field input,.cf-field select,.cf-field textarea{background:rgba(255,255,255,.04);border:1px solid rgba(200,164,74,.25);border-radius:var(--r-sm);color:var(--off-white);padding:.8rem 1rem;font:inherit;min-height:44px}
 .cf-field input:focus,.cf-field select:focus,.cf-field textarea:focus{outline:none;border-color:var(--gold)}
+.cf-field input:focus-visible,.cf-field select:focus-visible,.cf-field textarea:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .cf-msg{margin-top:.8rem;font-size:.85rem;color:var(--gold);min-height:1.4em}
 .cf-fallback{display:none;margin-top:.6rem}
 .channel-alt{margin-top:1.4rem;font-size:.85rem;color:var(--pale)}
