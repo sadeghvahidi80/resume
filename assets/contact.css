@@ -21,6 +21,12 @@
 .contact-form-inner .sec-label{justify-content:center}
 .contact-form-inner .sec-title{text-align:center}
 
+/* LTR parity: the shared .contact-inner centres text for the RTL layout, but
+   the resume's English cards are left-aligned (measured: resume/en .clink
+   text-align:left vs contact page center). Keep the card text on the start
+   edge in LTR so the two pages match. */
+html[lang="en"] .contact-links .clink{text-align:left}
+
 /* Resume parity below 768px (style.css only collapses the grid) */
 @media(max-width:768px){
   .contact-links{gap:.8rem}
