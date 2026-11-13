@@ -32,7 +32,7 @@ nav.scrolled{background:rgba(9,9,9,.97);backdrop-filter:blur(16px)}
 
 .nav-links{display:none;gap:2rem;align-items:center}
 
-.nav-links a{font-size:.9rem;font-weight:400;letter-spacing:.12em;color:var(--pale);text-decoration:none;transition:color var(--t);white-space:nowrap}
+.nav-links a{font-size:.9rem;font-weight:400;letter-spacing:.12em;color:var(--pale);text-decoration:none;transition:color var(--t);white-space:nowrap;word-break:keep-all;overflow-wrap:normal}
 
 .nav-links a:hover{color:var(--gold)}
 .nav-logo .wordmark{text-decoration:none;white-space:nowrap;color:var(--gold)}
@@ -49,7 +49,7 @@ nav.scrolled{background:rgba(9,9,9,.97);backdrop-filter:blur(16px)}
 
 .nav-mobile.open{display:flex}
 
-.nav-mobile a{font-size:1.15rem;letter-spacing:.12em;color:var(--off-white);text-decoration:none}
+.nav-mobile a{font-size:1.15rem;letter-spacing:.12em;color:var(--off-white);text-decoration:none;word-break:keep-all;overflow-wrap:normal}
 
 
 
@@ -307,6 +307,10 @@ footer{padding:1.7rem 3rem;display:flex;justify-content:space-between;align-item
 
 .ft-id{font-size:.62rem;color:rgba(255,255,255,.13);letter-spacing:.1em}
 
+.ft-links{display:flex;flex-wrap:wrap;gap:.45rem .9rem;align-items:center}
+.ft-links a{font-size:.67rem;color:var(--mid);text-decoration:none;letter-spacing:.05em;transition:color var(--t)}
+.ft-links a:hover{color:var(--gold)}
+
 
 
 @media(min-width:769px){.nav-links{display:flex}.nav-burger{display:none!important}}
@@ -495,7 +499,7 @@ footer{padding:1.7rem 3rem;display:flex;justify-content:space-between;align-item
 
 /* Long links: prevent horizontal overflow */
 
-a{word-break:break-word;overflow-wrap:anywhere}
+a{word-break:normal;overflow-wrap:anywhere}
 
 
 
@@ -771,7 +775,7 @@ html[lang="en"] .hero-name-row{justify-content:flex-start}
 .nav-links a:hover{background:var(--gold-dim)}
 .nav-mobile{position:fixed;inset:0;background:rgba(3,31,68,.98);backdrop-filter:blur(16px);flex-direction:column;justify-content:flex-start;align-items:stretch;gap:.3rem;padding:5.75rem 1.4rem 2rem;overflow-y:auto;z-index:250}
 .nav-mobile.open{padding:5.75rem 1.4rem 2rem}
-.nav-mobile a{display:block;padding:.85rem 1rem;border-radius:var(--r-sm);font-size:1.05rem;transition:all var(--t)}
+.nav-mobile a{display:block;padding:.85rem 1rem;border-radius:var(--r-sm);font-size:1.05rem;transition:all var(--t);word-break:keep-all;overflow-wrap:normal}
 .nav-mobile a:hover{background:var(--gold-dim);color:var(--gold-light)}
 .nav-burger{gap:6px}
 .nav-burger span{width:24px;height:2px;border-radius:1px}
