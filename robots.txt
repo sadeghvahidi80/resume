@@ -1,3 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /docs/
+Disallow: /deploy/
+Disallow: /workers/
+
 Sitemap: https://sadeghvahidi.ir/sitemap.xml
