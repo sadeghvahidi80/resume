@@ -1110,3 +1110,32 @@ html[lang="fa"] .nas-keep.hero-h1{font-size:clamp(2.5rem,7vw,5rem);line-height:2
 @media(max-width:768px){.print-actions{bottom:1rem;left:1rem;gap:.4rem}}
 @media(min-width:769px){.print-actions{bottom:2rem;left:2rem}}
 @media print{.print-actions{display:none!important}}
+
+/* ===================== NAVBAR RESPONSIVE v2 — 2026-11-13 =====================
+   Client spec: hamburger starts at 820px (previously 768px).
+   Nav-only change. Palette, Persian type, link order, hrefs and page layout
+   are untouched. .nav-mobile stays position:fixed, so it opens over the page
+   and never pushes content (no layout shift). */
+@media (max-width:820px){
+  .nav-links{display:none!important}
+  .nav-burger{display:flex!important}
+}
+@media (min-width:769px) and (max-width:820px){
+  #nav{padding:1.1rem 1.4rem}
+  .nav-mobile.open{display:flex!important}
+}
+@media (min-width:821px){
+  .nav-links{display:flex}
+  .nav-burger{display:none!important}
+  .nav-mobile{display:none!important}
+}
+/* Open state: the two bars become a centred X. */
+.nav-burger{position:relative}
+.nav-burger[aria-expanded="true"] span{position:absolute;top:50%;left:50%;margin:0}
+.nav-burger[aria-expanded="true"] span:nth-child(1){transform:translate(-50%,-50%) rotate(45deg)}
+.nav-burger[aria-expanded="true"] span:nth-child(2){transform:translate(-50%,-50%) rotate(-45deg)}
+/* Keyboard focus must stay visible on the navy surface. */
+.nav-links a:focus-visible,.nav-mobile a:focus-visible,.nav-burger:focus-visible,#langToggle:focus-visible,.language-toggle:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:var(--r-sm)}
+@media (prefers-reduced-motion:reduce){
+  .nav-burger span,.nav-mobile a,.nav-links a{transition:none!important}
+}
