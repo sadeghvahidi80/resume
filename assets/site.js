@@ -47,7 +47,7 @@
 
     if (toggle) {
       toggle.textContent = lang === 'fa' ? 'EN' : 'FA';
-      toggle.setAttribute('aria-label', lang === 'fa' ? 'تغییر زبان به انگلیسی' : 'Switch language to Persian');
+      toggle.setAttribute('aria-label', lang === 'fa' ? 'EN — تغییر زبان به انگلیسی' : 'FA — Switch language to Persian');
       toggle.setAttribute('title', lang === 'fa' ? 'English' : 'فارسی');
     }
 
