@@ -907,3 +907,14 @@ html[lang="fa"] .nas-keep.hero-h1{font-size:clamp(2.5rem,7vw,5rem);line-height:2
 @media (prefers-reduced-motion:reduce){
   .nav-burger span,.nav-mobile a,.nav-links a{transition:none!important}
 }
+
+
+/* ===== SKIP-LINK OVERFLOW FIX (2026-11-14, integration QA) =====
+   The head-level rule parks the link at left:-9999px. In the RTL resume
+   documents that becomes 10,000px of scrollable width (measured:
+   resume/fa scrollWidth 11,437 at a 1,437px client width). Anchor it to the
+   inline start and hide it above the viewport instead; a negative top never
+   expands the scrollable area in either direction. width:max-content keeps
+   the focused pill shrink-wrapped instead of stretching across the viewport. */
+a.skip-link{left:auto;right:auto;inset-inline-start:1rem;top:-6rem;width:max-content;max-width:calc(100% - 2rem);height:auto;overflow:visible}
+a.skip-link:focus{top:1rem;width:max-content;max-width:calc(100% - 2rem)}
