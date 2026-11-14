@@ -708,9 +708,19 @@ html[lang="en"] .about-grid{direction:ltr}
 .lang-en{display:none}
 html[lang="en"] .lang-fa{display:none}
 html[lang="en"] .lang-en{display:block}
+/* Footer links: make the active-language span layout-transparent so the
+   .ft-links flex gap separates the links themselves. Proven defect (2026-11-13):
+   inter-link gap measured 0px at 1200/820/390/360 — the <a> tags sit adjacent
+   inside the inline span, so they visually merged. Scoped to the ACTIVE lang
+   span only, so the inactive span keeps display:none. */
+html[lang="fa"] .ft-links > span.lang-fa,
+html[lang="en"] .ft-links > span.lang-en{display:contents}
 @media(max-width:768px){
   .site-footer{padding:1.4rem 1.4rem;flex-direction:column;text-align:center}
   #langToggle{padding:.35rem .7rem}
+  /* Signature: centre it with the rest of the mobile footer column
+     (as a RTL block box it previously hugged the start edge off-centre). */
+  .site-footer .signature-img{margin-inline:auto}
 }
 
 /* Signature in footer — transparent gold mark */
@@ -878,6 +888,11 @@ html[lang="fa"] .nas-keep.hero-h1{font-size:clamp(2.5rem,7vw,5rem);line-height:2
   .nav-mobile.open{display:flex!important}
 }
 @media (min-width:821px){
+  /* Uniform bar height: content height differs between the links row and the
+     burger, and padding 1.3rem vs 1.1rem made the bar jump 74px↔79px at this
+     breakpoint. Fixed 79px on both sides = no jump at the breakpoint
+     (bar is position:fixed, so page content never moved — CLS stays 0). */
+  #nav{min-height:79px;padding-block:0}
   .nav-links{display:flex}
   .nav-burger{display:none!important}
   .nav-mobile{display:none!important}

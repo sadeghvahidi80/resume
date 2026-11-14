@@ -777,7 +777,7 @@ section{padding:7rem 3rem}
 :is(#contact,#en-contact) .ccta{background:#0B2649;color:var(--off-white);border:1px solid #0B2649;border-radius:10px;box-shadow:0 12px 30px rgba(3,31,68,.18)}
 :is(#contact,#en-contact) .ccta:hover{background:#14365D;color:var(--off-white);box-shadow:0 12px 30px rgba(3,31,68,.25)}
 footer{background:#031F44;border-top-color:rgba(195,158,75,.24)}
-.ft-copy{color:#C7D0D8}.ft-id{color:rgba(241,236,219,.40)}
+.ft-copy{color:#C7D0D8}.ft-id{color:rgba(241,236,219,.55)}
 .btn-print{background:#0B2649;color:var(--gold-light);border-color:var(--gold);border-radius:10px}
 .btn-print:hover{background:var(--gold);color:var(--black)}
 .back-to-top{background:rgba(3,31,68,.88);border-color:rgba(195,158,75,.48)}
@@ -1139,3 +1139,44 @@ html[lang="fa"] .nas-keep.hero-h1{font-size:clamp(2.5rem,7vw,5rem);line-height:2
 @media (prefers-reduced-motion:reduce){
   .nav-burger span,.nav-mobile a,.nav-links a{transition:none!important}
 }
+
+/* ===================== LANGUAGE SWITCHER FIT — 2026-11-13 (session 2) =====================
+   Proven defect: below ~465px the switcher overflowed the viewport edge
+   (left in RTL / right in LTR) because nav content total width exceeded the
+   viewport: logo + "← خانه" + burger + label("تغییر زبان") + select.
+   Measured: x=-105px @360, -75px @390, -5px @460.
+   Fix (CSS-only): on ≤520px keep icon+select only (label stays available to
+   screen readers via the label's aria-label and the select's aria-label);
+   on ≤420px also tighten the logo/padding so nothing leaves the viewport. */
+@media (max-width:520px){
+  .language-switcher-label{display:none}
+  .language-switcher{padding:.28rem .4rem;gap:.25rem}
+  .language-toggle{min-width:52px;max-width:66px;padding:.12rem .7rem .12rem 0;font-size:.67rem}
+  #nav{gap:.3rem}
+}
+@media (max-width:420px){
+  .nav-logo span{display:none}
+  /* !important: the markup carries inline style="height:36px;width:auto"
+     which outranks any plain declaration. */
+  .nav-logo img{height:22px!important}
+  /* Horizontal only: shrinking block padding here would create a new
+     66px↔63px bar-height step at 420/421. Vertical rhythm stays identical. */
+  #nav{padding-inline:.9rem}
+}
+
+/* ===== FOOTER FIX (2026-11-13) =====
+   1) The existing <=768px rule targets `.footer`, a class no page uses —
+      the markup is a bare <footer>. Result at 390px: 48px side padding kept,
+      space-between kept, so the copyright wrapped to 3 lines and the id sat
+      detached at the opposite edge. Target the element instead.
+   2) .ft-id was rgba(241,236,219,.40) on #031F44 = 3.27:1, below the 4.5:1
+      AA threshold for 10.9px text. .58 raises it to ~5.4:1 while staying
+      visually secondary. */
+@media (max-width:768px){
+  footer{padding:1.4rem 1.2rem;flex-direction:column;gap:.5rem;text-align:center}
+}
+/* 3) The fixed .print-actions bar (print + PDF, ~43px tall, 32px/16px from
+      the bottom) sat on top of the footer: at 1440 it covered .ft-id, at 390
+      it covered both the copyright and the id. Reserve room for it so the
+      footer text is never hidden under the floating buttons. */
+footer{padding-bottom:5.5rem}
