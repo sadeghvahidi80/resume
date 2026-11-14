@@ -1,0 +1,34 @@
+/* Contact page — resume contact layout.
+   Loaded from contact.html after assets/style.css.
+   style.css already carries the shared .contact-* / .clink / .ccta metrics;
+   this file only adds what the mirrored markup needs (card text stack, CTA
+   row, form column) plus the resume's <=768px spacing. */
+
+/* Link card: icon + label (+ preserved legacy note) */
+.clink{min-width:0}
+.clink-text{display:flex;flex-direction:column;gap:.15rem;min-width:0}
+.clink-label{line-height:1.45}
+.clink-sub{font-size:.72rem;font-weight:300;line-height:1.6;color:var(--muted)}
+
+/* CTA row mirrors the resume pair (primary + outlined secondary) */
+.contact-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.8rem}
+.contact-actions .ccta{letter-spacing:.06em}
+.contact-actions .ccta-secondary{background:transparent;color:var(--gold);border:1px solid var(--gold-border)}
+.contact-actions .ccta-secondary:hover{background:var(--gold-dim);color:var(--gold-light);transform:translateY(-1px);box-shadow:none}
+
+/* Form keeps the same 740px column and heading rhythm as the contact block */
+.contact-form-inner{max-width:740px;margin:0 auto}
+.contact-form-inner .sec-label{justify-content:center}
+.contact-form-inner .sec-title{text-align:center}
+
+/* LTR parity: the shared .contact-inner centres text for the RTL layout, but
+   the resume's English cards are left-aligned (measured: resume/en .clink
+   text-align:left vs contact page center). Keep the card text on the start
+   edge in LTR so the two pages match. */
+html[lang="en"] .contact-links .clink{text-align:left}
+
+/* Resume parity below 768px (style.css only collapses the grid) */
+@media(max-width:768px){
+  .contact-links{gap:.8rem}
+  .clink{font-size:.82rem;padding:.7rem 1rem}
+}
