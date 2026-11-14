@@ -3,5 +3,6 @@ Allow: /
 Disallow: /docs/
 Disallow: /deploy/
 Disallow: /workers/
+Disallow: /demos/
 
 Sitemap: https://sadeghvahidi.ir/sitemap.xml
