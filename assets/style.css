@@ -622,7 +622,7 @@ a:focus-visible,button:focus-visible{
 
 
 /* Article / magazine post */
-.article{max-width:760px;margin:0 auto;padding:2rem 0}
+.article{max-width:760px;margin:0 auto;padding:2rem 0;text-align:right}
 .article h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:600;line-height:1.2;margin-bottom:1rem;color:var(--off-white)}
 .article .meta{color:var(--muted);font-size:.8rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(255,255,255,.08)}
 .article p{margin-bottom:1.3rem;font-weight:300;line-height:1.9;color:var(--off-white)}
@@ -631,6 +631,17 @@ a:focus-visible,button:focus-visible{
 .article .back:hover{color:var(--gold)}
 .article ul{margin-bottom:1.3rem;padding-right:1.5rem}
 .article li{margin-bottom:.5rem;color:var(--off-white);font-weight:300;line-height:1.8}
+.article a{color:var(--gold-light);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.article a:hover{color:var(--gold)}
+.article .lede{font-size:1.05rem;color:var(--pale);margin-bottom:2rem}
+.article h3{font-size:1.1rem;font-weight:600;margin:1.6rem 0 .8rem;color:var(--off-white)}
+.article ol{margin-bottom:1.3rem;padding-right:1.5rem}
+.article .meta time{color:var(--pale)}
+.article strong{font-weight:600;color:var(--white)}
+.article-sign{margin:2.5rem 0 0;padding-top:1.8rem;border-top:1px solid rgba(255,255,255,.08)}
+.article-sign img{display:block;width:min(260px,70%);height:auto;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.article-sign figcaption{margin-top:1rem;font-size:.82rem;color:var(--muted)}
+.article-sign figcaption a{color:var(--gold-light);text-decoration:none;direction:ltr;unicode-bidi:embed;letter-spacing:.06em}
 
 /* Button variants (shared) */
 .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.8rem;border-radius:var(--r);font-size:.85rem;font-weight:400;letter-spacing:.08em;transition:all var(--t);cursor:pointer;border:1px solid transparent;font-family:var(--font)}
@@ -799,6 +810,11 @@ html[lang="en"] .hero-name-row{justify-content:flex-start}
 .magazine-empty-state p{margin:0;color:var(--mid);font-size:.88rem;line-height:1.9}
 .mag-cats{margin-top:1.4rem}
 .mag-cta{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;margin-top:1.3rem}
+.mag-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;margin-top:2rem;justify-items:start}
+.mag-card{display:block;width:100%;max-width:860px;padding:2rem;border:1px solid rgba(255,255,255,.06);border-radius:var(--r);transition:all var(--t);text-decoration:none}
+.mag-card:hover{border-color:var(--gold-border);transform:translateY(-2px)}
+.mag-card .case-name{line-height:1.6}
+.mag-card-meta{margin-top:1rem;font-size:.72rem;color:var(--muted);letter-spacing:.04em}
 .art-meta{margin-top:1.2rem;justify-content:center}
 .art-date{font-size:.75rem;color:var(--pale)}
 
