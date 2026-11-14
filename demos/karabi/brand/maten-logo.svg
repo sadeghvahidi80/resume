@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 180" width="1000" height="180" role="img" aria-labelledby="title desc">
+<title id="title">MATEN — In the beginning was the Word</title>
+<desc id="desc">MATEN logotype: navy M with gold scissors-pen monogram, serif wordmark and tagline — exact recreation of original upload, high-quality vector</desc>
+<g id="icon">
+  <rect x="22" y="28" width="26" height="82" rx="1.5" fill="#0F2340"/>
+  <rect x="132" y="28" width="26" height="82" rx="1.5" fill="#0F2340"/>
+  <rect x="22" y="116" width="136" height="2.2" rx="1" fill="#C2A46B"/>
+  <circle cx="72" cy="62" r="22" fill="none" stroke="#C2A46B" stroke-width="3.2"/>
+  <circle cx="72" cy="62" r="7.5" fill="#0F2340"/>
+  <circle cx="108" cy="62" r="22" fill="none" stroke="#C2A46B" stroke-width="3.2"/>
+  <circle cx="108" cy="62" r="7.5" fill="#0F2340"/>
+  <rect x="84.5" y="78" width="11" height="10" rx="1.2" fill="#C2A46B"/>
+  <polygon points="90,86 78,108 82,112 90,96 98,112 102,108" fill="#C2A46B" stroke="#C2A46B" stroke-linejoin="round"/>
+  <polygon points="90,96 78,110 90,128 102,110" fill="#C2A46B" stroke="#B9975B" stroke-width="1.1" stroke-linejoin="round"/>
+  <polygon points="90,96 84,102 90,110 96,102" fill="#FFF8E7" opacity="0.95"/>
+  <line x1="90" y1="102" x2="90" y2="119" stroke="#0F2340" stroke-width="0.9" opacity="0.9"/>
+</g>
+<g id="wordmark" font-family="Georgia, 'Times New Roman', Times, serif">
+  <text x="210" y="78" font-size="72" font-weight="700" letter-spacing="14" fill="#0F2340">MATEN</text>
+  <rect x="210" y="92" width="560" height="2" rx="1" fill="#C2A46B"/>
+  <text x="210" y="122" font-size="15.5" font-weight="500" letter-spacing="4.2" fill="#6E7F91" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">IN THE BEGINNING WAS THE WORD</text>
+</g>
+</svg>

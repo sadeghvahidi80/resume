@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 48" fill="none" role="img" aria-label="سبزوار تعمیر">
+  <defs>
+    <linearGradient id="sz-g" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FB923C"/>
+      <stop offset="55%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#C2410C"/>
+    </linearGradient>
+    <linearGradient id="sz-shine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.32"/>
+      <stop offset="45%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <!-- Mark: rounded square with home + power bolt -->
+  <rect width="44" height="44" rx="13" fill="url(#sz-g)"/>
+  <rect width="44" height="44" rx="13" fill="url(#sz-shine)"/>
+  <rect x="0.9" y="0.9" width="42.2" height="42.2" rx="12.1" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="1.8"/>
+  <g stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M9.5 21.8 22 10.6 34.5 21.8"/>
+    <path d="M13 19.8v13.6M31 19.8v13.6M11.6 33.4h20.8"/>
+  </g>
+  <path d="M24.4 17.8 18.6 26.2h3.6l-1.3 5.3 5.9-8.4h-3.7z" fill="#fff"/>
+  <!-- Wordmark -->
+  <text x="56" y="22" font-family="Tahoma, Arial, sans-serif" font-size="18" font-weight="900" fill="#FFFFFF" letter-spacing="0">سبزوار تعمیر</text>
+  <text x="56" y="37" font-family="Tahoma, Arial, sans-serif" font-size="10" font-weight="700" fill="#FDBA74" letter-spacing="0.3">فروشگاه تکنیک سرویس</text>
+</svg>

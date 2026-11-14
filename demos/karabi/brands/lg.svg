@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+  <rect width="200" height="60" rx="8" fill="#fff"/>
+  <text x="100" y="28" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="bold" fill="#A50034" letter-spacing="1">Life's</text>
+  <text x="100" y="46" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="900" fill="#A50034" letter-spacing="2">GOOD</text>
+  <circle cx="30" cy="30" r="14" fill="none" stroke="#A50034" stroke-width="2"/>
+  <text x="30" y="35" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="#A50034">LG</text>
+</svg>

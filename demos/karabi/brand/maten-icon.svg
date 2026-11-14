@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 140" width="180" height="140" role="img" aria-label="MATEN icon — M with scissors-pen">
+<rect x="22" y="18" width="26" height="82" rx="1.5" fill="#0F2340"/>
+<rect x="132" y="18" width="26" height="82" rx="1.5" fill="#0F2340"/>
+<rect x="22" y="106" width="136" height="2.2" rx="1" fill="#C2A46B"/>
+<circle cx="72" cy="52" r="22" fill="none" stroke="#C2A46B" stroke-width="3.2"/>
+<circle cx="72" cy="52" r="7.5" fill="#0F2340"/>
+<circle cx="108" cy="52" r="22" fill="none" stroke="#C2A46B" stroke-width="3.2"/>
+<circle cx="108" cy="52" r="7.5" fill="#0F2340"/>
+<rect x="84.5" y="68" width="11" height="10" rx="1.2" fill="#C2A46B"/>
+<polygon points="90,76 78,98 82,102 90,86 98,102 102,98" fill="#C2A46B"/>
+<polygon points="90,86 78,100 90,118 102,100" fill="#C2A46B" stroke="#B9975B" stroke-width="1.1" stroke-linejoin="round"/>
+<polygon points="90,86 84,92 90,100 96,92" fill="#FFF8E7" opacity="0.95"/>
+<line x1="90" y1="92" x2="90" y2="109" stroke="#0F2340" stroke-width="0.9"/>
+</svg>

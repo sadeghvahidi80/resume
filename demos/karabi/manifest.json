@@ -1,0 +1,49 @@
+{
+  "name": "سبزوار تعمیر — تعمیر لوازم خانگی در سبزوار",
+  "short_name": "سبزوار تعمیر",
+  "description": "تعمیر تخصصی لوازم خانگی در سبزوار — یخچال، لباسشویی، تلویزیون، پکیج، کولر گازی با گارانتی کتبی",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "lang": "fa",
+  "dir": "rtl",
+  "theme_color": "#0C0A09",
+  "background_color": "#0C0A09",
+  "categories": ["home", "utilities"],
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/hero-repair.webp",
+      "sizes": "1280x720",
+      "type": "image/webp",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "ثبت درخواست تعمیر",
+      "url": "/repair-request",
+      "description": "ثبت آنلاین درخواست تعمیر با تایید OTP"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "روان‌یار — شبکه حمایتی روان‌درمانی فارسی‌زبان",
+  "short_name": "روان‌یار",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fffdfa",
+  "theme_color": "#35422e",
+  "icons": [
+    {
+      "src": "media/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "media/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "scope": "."
+}
