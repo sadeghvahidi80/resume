@@ -30,35 +30,56 @@
     var btn = document.createElement("button");
     btn.type = "button";
     btn.className = "gal-ph " + (p.ratio || "gal-r11");
-    btn.setAttribute(
-      "aria-label",
-      isEn()
-        ? "Enlarge placeholder image " + p.id
-        : "\u0628\u0632\u0631\u06af\u200c\u0646\u0645\u0627\u06cc\u06cc \u062a\u0635\u0648\u06cc\u0631 \u0646\u0645\u0627\u062f\u06cc\u0646 " + p.id
-    );
-    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("fill", "none");
-    svg.setAttribute("stroke", "currentColor");
-    svg.setAttribute("stroke-width", "1.5");
-    svg.setAttribute("viewBox", "0 0 24 24");
-    var rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    rect.setAttribute("height", "14");
-    rect.setAttribute("rx", "2");
-    rect.setAttribute("width", "18");
-    rect.setAttribute("x", "3");
-    rect.setAttribute("y", "5");
-    var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    path.setAttribute("d", "M3 7l9 6 9-6");
-    svg.appendChild(rect);
-    svg.appendChild(path);
-    btn.appendChild(svg);
-    var span = document.createElement("span");
-    span.className = "gal-ph-t";
-    span.textContent = isEn() ? p.label_en : p.label_fa;
-    btn.appendChild(span);
+    var caption = isEn() ? p.caption_en : p.caption_fa;
+    if (p.src) {
+      btn.className += " has-img";
+      if (p.w && p.h) btn.style.aspectRatio = p.w + " / " + p.h;
+      btn.setAttribute(
+        "aria-label",
+        (isEn() ? "Enlarge image: " : "\u0628\u0632\u0631\u06af\u200c\u0646\u0645\u0627\u06cc\u06cc \u062a\u0635\u0648\u06cc\u0631: ") + caption
+      );
+      var img = document.createElement("img");
+      img.className = "gal-img";
+      img.src = p.src;
+      img.alt = caption;
+      img.loading = "lazy";
+      img.decoding = "async";
+      if (p.w && p.h) {
+        img.width = p.w;
+        img.height = p.h;
+      }
+      btn.appendChild(img);
+    } else {
+      btn.setAttribute(
+        "aria-label",
+        isEn()
+          ? "Enlarge placeholder image " + p.id
+          : "\u0628\u0632\u0631\u06af\u200c\u0646\u0645\u0627\u06cc\u06cc \u062a\u0635\u0648\u06cc\u0631 \u0646\u0645\u0627\u062f\u06cc\u0646 " + p.id
+      );
+      var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttribute("fill", "none");
+      svg.setAttribute("stroke", "currentColor");
+      svg.setAttribute("stroke-width", "1.5");
+      svg.setAttribute("viewBox", "0 0 24 24");
+      var rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      rect.setAttribute("height", "14");
+      rect.setAttribute("rx", "2");
+      rect.setAttribute("width", "18");
+      rect.setAttribute("x", "3");
+      rect.setAttribute("y", "5");
+      var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("d", "M3 7l9 6 9-6");
+      svg.appendChild(rect);
+      svg.appendChild(path);
+      btn.appendChild(svg);
+      var span = document.createElement("span");
+      span.className = "gal-ph-t";
+      span.textContent = isEn() ? p.label_en : p.label_fa;
+      btn.appendChild(span);
+    }
     fig.appendChild(btn);
     var fc = document.createElement("figcaption");
-    fc.textContent = isEn() ? p.caption_en : p.caption_fa;
+    fc.textContent = caption;
     fig.appendChild(fc);
     return fig;
   }
@@ -107,11 +128,26 @@
     var ph = item.querySelector(".gal-ph");
     if (!ph) return;
     var m = ph.className.match(/gal-r[0-9]+/);
-    view.className = "gal-lb-view " + (m ? m[0] : "gal-r11");
-    var svg = ph.querySelector("svg");
-    ico.innerHTML = svg ? svg.outerHTML : "";
-    var t = ph.querySelector(".gal-ph-t");
-    txt.textContent = t ? t.textContent : "";
+    var photo = ph.querySelector(".gal-img");
+    var oldPhoto = view.querySelector(".gal-lb-img");
+    if (oldPhoto) oldPhoto.remove();
+    if (photo) {
+      view.className = "gal-lb-view has-img";
+      ico.innerHTML = "";
+      txt.textContent = "";
+      var big = document.createElement("img");
+      big.className = "gal-lb-img";
+      big.src = photo.currentSrc || photo.src;
+      big.alt = photo.alt;
+      big.decoding = "async";
+      view.appendChild(big);
+    } else {
+      view.className = "gal-lb-view " + (m ? m[0] : "gal-r11");
+      var svg = ph.querySelector("svg");
+      ico.innerHTML = svg ? svg.outerHTML : "";
+      var t = ph.querySelector(".gal-ph-t");
+      txt.textContent = t ? t.textContent : "";
+    }
     var c = item.querySelector("figcaption");
     cap.textContent =
       (c ? c.textContent : "") + " \u00B7 " + (current + 1) + "/" + list.length;

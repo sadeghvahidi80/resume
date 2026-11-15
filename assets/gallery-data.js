@@ -1,13 +1,13 @@
 window.GALLERY_DATA = [
-  { "id": 1, "ratio": "gal-r34", "caption_fa": "تصویر نمادین ۱", "caption_en": "Placeholder image 1", "label_fa": "تصویر نمادین · ۳:۴", "label_en": "Placeholder · 3:4" },
-  { "id": 2, "ratio": "gal-r11", "caption_fa": "تصویر نمادین ۲", "caption_en": "Placeholder image 2", "label_fa": "تصویر نمادین · ۱:۱", "label_en": "Placeholder · 1:1" },
-  { "id": 3, "ratio": "gal-r45", "caption_fa": "تصویر نمادین ۳", "caption_en": "Placeholder image 3", "label_fa": "تصویر نمادین · ۴:۵", "label_en": "Placeholder · 4:5" },
-  { "id": 4, "ratio": "gal-r32", "caption_fa": "تصویر نمادین ۴", "caption_en": "Placeholder image 4", "label_fa": "تصویر نمادین · ۳:۲", "label_en": "Placeholder · 3:2" },
-  { "id": 5, "ratio": "gal-r23", "caption_fa": "تصویر نمادین ۵", "caption_en": "Placeholder image 5", "label_fa": "تصویر نمادین · ۲:۳", "label_en": "Placeholder · 2:3" },
-  { "id": 6, "ratio": "gal-r169", "caption_fa": "تصویر نمادین ۶", "caption_en": "Placeholder image 6", "label_fa": "تصویر نمادین · ۱۶:۹", "label_en": "Placeholder · 16:9" },
-  { "id": 7, "ratio": "gal-r54", "caption_fa": "تصویر نمادین ۷", "caption_en": "Placeholder image 7", "label_fa": "تصویر نمادین · ۵:۴", "label_en": "Placeholder · 5:4" },
-  { "id": 8, "ratio": "gal-r23", "caption_fa": "تصویر نمادین ۸", "caption_en": "Placeholder image 8", "label_fa": "تصویر نمادین · ۲:۳", "label_en": "Placeholder · 2:3" },
-  { "id": 9, "ratio": "gal-r34", "caption_fa": "تصویر نمادین ۹", "caption_en": "Placeholder image 9", "label_fa": "تصویر نمادین · ۳:۴", "label_en": "Placeholder · 3:4" }
+  { "id": 1, "ratio": "gal-r34", "src": "assets/gallery/gallery-01.webp", "w": 1050, "h": 1400, "caption_fa": "در آستانه", "caption_en": "In the doorway" },
+  { "id": 2, "ratio": "gal-r169", "src": "assets/gallery/gallery-02.webp", "w": 1400, "h": 646, "caption_fa": "دروازه و درختان", "caption_en": "Gate and trees" },
+  { "id": 3, "ratio": "gal-r34", "src": "assets/gallery/gallery-03.webp", "w": 1050, "h": 1400, "caption_fa": "دانشکدهٔ هنرهای زیبا", "caption_en": "Faculty of Fine Arts" },
+  { "id": 4, "ratio": "gal-r34", "src": "assets/gallery/gallery-04.webp", "w": 1050, "h": 1400, "caption_fa": "سکان کشتی", "caption_en": "Ship's wheel" },
+  { "id": 5, "ratio": "gal-r34", "src": "assets/gallery/gallery-05.webp", "w": 1050, "h": 1400, "caption_fa": "اتاق با فرش", "caption_en": "Room with a carpet" },
+  { "id": 6, "ratio": "gal-r34", "src": "assets/gallery/gallery-06.webp", "w": 1050, "h": 1400, "caption_fa": "برج آجری", "caption_en": "Brick tower" },
+  { "id": 7, "ratio": "gal-r34", "src": "assets/gallery/gallery-07.webp", "w": 1050, "h": 1400, "caption_fa": "منظرهٔ فرودگاه", "caption_en": "Airport view" },
+  { "id": 8, "ratio": "gal-r34", "src": "assets/gallery/gallery-08.webp", "w": 1050, "h": 1400, "caption_fa": "درب و کتیبه", "caption_en": "Door and inscription" },
+  { "id": 9, "ratio": "gal-r34", "src": "assets/gallery/gallery-09.webp", "w": 1050, "h": 1400, "caption_fa": "ورودی ساختمان", "caption_en": "Building entrance" },
+  { "id": 10, "ratio": "gal-r23", "src": "assets/gallery/gallery-10.webp", "w": 720, "h": 1280, "caption_fa": "درخت در دشت", "caption_en": "Tree in dry land" },
+  { "id": 11, "ratio": "gal-r23", "src": "assets/gallery/gallery-11.webp", "w": 720, "h": 1280, "caption_fa": "گردباد خاک", "caption_en": "Dust devil" }
 ];
-/* To add more photos: append entries to window.GALLERY_DATA above.
-   Each entry: { id, ratio (gal-rXX class), caption_fa, caption_en, label_fa, label_en, src (optional real image url) } */

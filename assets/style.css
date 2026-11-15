@@ -866,6 +866,11 @@ html[lang="fa"] .nas-keep.hero-h1{font-size:clamp(2.5rem,7vw,5rem);line-height:2
 .gal-item{break-inside:avoid;page-break-inside:avoid;margin:0 0 14px;border:1px solid rgba(255,255,255,.08);border-radius:var(--r);overflow:hidden;background:var(--charcoal)}
 .gal-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.65rem;width:100%;min-height:170px;padding:1.4rem;border:0;background:linear-gradient(150deg,#131313,#1c1c1c);color:var(--muted);font-family:inherit;cursor:zoom-in;text-align:center;transition:filter var(--t)}
 .gal-ph:hover{filter:brightness(1.35)}
+.gal-ph.has-img{padding:0;overflow:hidden;background:#0f0f0f}
+.gal-ph.has-img:hover{filter:none}
+.gal-img{display:block;width:100%;height:100%;object-fit:cover;transition:transform var(--t)}
+.gal-ph.has-img:hover .gal-img,.gal-ph.has-img:focus-visible .gal-img{transform:scale(1.03)}
+@media(prefers-reduced-motion:reduce){.gal-img{transition:none}.gal-ph.has-img:hover .gal-img,.gal-ph.has-img:focus-visible .gal-img{transform:none}}
 .gal-ph svg{width:34px;height:34px;stroke:var(--gold);opacity:.8}
 .gal-ph-t{font-size:.76rem;letter-spacing:.02em;line-height:1.7}
 .gal-item figcaption{font-size:.75rem;color:var(--muted);padding:.55rem .8rem;border-top:1px solid rgba(255,255,255,.06);line-height:1.7}
@@ -880,6 +885,8 @@ html[lang="fa"] .nas-keep.hero-h1{font-size:clamp(2.5rem,7vw,5rem);line-height:2
 .gal-lb{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;flex-direction:column;gap:1.1rem;padding:3.4rem 1.2rem;background:rgba(9,9,9,.96);backdrop-filter:blur(6px)}
 .gal-lb.open{display:flex}
 .gal-lb-view{width:min(76vw,440px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.8rem;border:1px dashed var(--gold-border);border-radius:var(--r);background:linear-gradient(150deg,#131313,#1c1c1c);color:var(--muted);box-shadow:0 26px 90px rgba(0,0,0,.65);min-height:170px}
+.gal-lb-view.has-img{width:auto;min-height:0;border:0;background:transparent;box-shadow:none}
+.gal-lb-img{display:block;max-width:min(88vw,1100px);max-height:74vh;width:auto;height:auto;border-radius:var(--r);box-shadow:0 26px 90px rgba(0,0,0,.65)}
 .gal-lb-ico svg{width:44px;height:44px;stroke:var(--gold);opacity:.85}
 .gal-lb-cap{font-size:.85rem;color:var(--pale);line-height:1.8}
 .gal-lb-close{position:absolute;top:1.1rem;inset-inline-end:1.3rem;width:42px;height:42px;border:1px solid var(--gold-border);border-radius:50%;background:var(--charcoal);color:var(--gold);font-size:1.4rem;line-height:1;cursor:pointer}
