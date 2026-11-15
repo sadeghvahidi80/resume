@@ -934,3 +934,5 @@ html[lang="fa"] .nas-keep.hero-h1{font-size:clamp(2.5rem,7vw,5rem);line-height:2
    the focused pill shrink-wrapped instead of stretching across the viewport. */
 a.skip-link{left:auto;right:auto;inset-inline-start:1rem;top:-6rem;width:max-content;max-width:calc(100% - 2rem);height:auto;overflow:visible}
 a.skip-link:focus{top:1rem;width:max-content;max-width:calc(100% - 2rem)}
+.evi-label a{color:var(--gold);text-decoration:none}
+.evi-label a:hover,.evi-label a:focus-visible{text-decoration:underline}
