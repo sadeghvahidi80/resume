@@ -9,7 +9,7 @@ var L={
 function buildTelegramPayload(d,lang){
   var isMail=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.contact);
   var p={name:d.name, contact:d.contact, type:d.type, message:d.message, budget:d.budget, open_ts:d.open_ts, page:location.href, lang:document.documentElement.lang,
-    email: isMail ? d.contact : "sadeghvahidi80@gmail.com",
+    email: isMail ? d.contact : "contact@sadeghvahidi.ir",
     _subject: L[lang].subj+d.type,
     _gotcha: ""};
   return p;
@@ -52,7 +52,7 @@ function bind(pre,formId,lang){
     if(res.ok){msgEl.textContent=L[lang].done;f.reset();document.getElementById(pre+'open-ts').value=String(Math.floor(Date.now()/1000));return;}
     msgEl.textContent=L[lang].err;
     var body=L[lang].b+d.type+'\n'+L[lang].n+d.name+'\n'+L[lang].c+d.contact+'\n\n'+d.message;
-    mail.href='mailto:sadeghvahidi80@gmail.com?subject='+encodeURIComponent(L[lang].subj+d.type)+'&body='+encodeURIComponent(body);
+    mail.href='mailto:contact@sadeghvahidi.ir?subject='+encodeURIComponent(L[lang].subj+d.type)+'&body='+encodeURIComponent(body);
     fb.style.display='block';mail.focus();
   });
 }
