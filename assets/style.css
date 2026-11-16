@@ -946,3 +946,6 @@ a.skip-link{left:auto;right:auto;inset-inline-start:1rem;top:-6rem;width:max-con
 a.skip-link:focus{top:1rem;width:max-content;max-width:calc(100% - 2rem)}
 .evi-label a{color:var(--gold);text-decoration:none}
 .evi-label a:hover,.evi-label a:focus-visible{text-decoration:underline}
+.case-fig{margin:1.25rem 0 .25rem;border:1px solid rgba(255,255,255,.08);border-radius:10px;overflow:hidden;background:#0b1220}
+.case-fig img{display:block;width:100%;height:auto}
+.case-fig figcaption{padding:.6rem .85rem;border-top:1px solid rgba(255,255,255,.06);font-size:.74rem;line-height:1.75;color:var(--muted)}
