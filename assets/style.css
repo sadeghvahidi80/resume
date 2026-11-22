@@ -634,6 +634,8 @@ a:focus-visible,button:focus-visible{
 .article a{color:var(--gold-light);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
 .article a:hover{color:var(--gold)}
 .article .lede{font-size:1.05rem;color:var(--pale);margin-bottom:2rem}
+.article .note{font-size:.86rem;line-height:1.85;color:var(--muted);background:rgba(255,255,255,.035);border-right:3px solid var(--gold);border-radius:0 8px 8px 0;padding:.9rem 1.1rem;margin-bottom:2rem}
+.article .note a{color:var(--gold-light)}
 .article h3{font-size:1.1rem;font-weight:600;margin:1.6rem 0 .8rem;color:var(--off-white)}
 .article ol{margin-bottom:1.3rem;padding-right:1.5rem}
 .article .meta time{color:var(--pale)}
