@@ -861,6 +861,17 @@ html[lang="fa"] .nas-keep.hero-h1{font-size:clamp(2.5rem,7vw,5rem);line-height:2
 .svc-req a{color:var(--gold);text-decoration:underline;text-underline-offset:3px}
 .modes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem}
 @media(max-width:1024px){.modes-grid{grid-template-columns:1fr}}
+
+/* SERVICES-002 (2026-11-22): visible FAQ, mirrors the FAQPage JSON-LD */
+.faq-list{margin-top:1.8rem;display:grid;gap:.7rem;max-width:860px}
+.faq-item{border:1px solid rgba(255,255,255,.08);border-radius:var(--r-sm);background:var(--charcoal);padding:.15rem 1rem}
+.faq-item>summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.95rem 0;font-size:.9rem;color:var(--gold-light);line-height:1.75}
+.faq-item>summary::-webkit-details-marker{display:none}
+.faq-item>summary::after{content:"+";color:var(--gold);font-size:1.15rem;line-height:1;flex:0 0 auto}
+.faq-item[open]>summary::after{content:"\2013"}
+.faq-item>summary:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.faq-a p{margin:0;padding:0 0 1rem;font-size:.85rem;color:var(--muted);line-height:1.95}
+
 /* GALLERY-001: masonry gallery (owner decision 2026-11-12) + lightbox */
 .gal-grid{column-count:3;column-gap:14px}
 .gal-item{break-inside:avoid;page-break-inside:avoid;margin:0 0 14px;border:1px solid rgba(255,255,255,.08);border-radius:var(--r);overflow:hidden;background:var(--charcoal)}
