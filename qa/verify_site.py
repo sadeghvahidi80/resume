@@ -17,6 +17,17 @@ def read(name):
     return io.open(os.path.join(S, name.replace("\\", "/")), encoding="utf-8").read()
 
 
+def h1_ok(text):
+    """Exactly one h1 per language view (bilingual pages keep two views)."""
+    marker = re.search(r'<(?:div|section) class="lang-en">', text)
+    if marker is None:
+        return text.count("<h1") == 1
+    return (
+        text[: marker.start()].count("<h1") == 1
+        and text[marker.start() :].count("<h1") == 1
+    )
+
+
 def ld_blocks(text):
     """Parsed JSON-LD blocks in document order."""
     return [
@@ -30,7 +41,7 @@ def ld_blocks(text):
 pages = [f for f in sorted(os.listdir(S)) if f.endswith(".html")]
 for name in pages:
     t = read(name)
-    check(t.count("<h1") == 1, "%s: exactly one h1 (%d)" % (name, t.count("<h1")))
+    check(h1_ok(t), "%s: one h1 per language view (%d total)" % (name, t.count("<h1")))
     check("پروۚه" not in t, "%s: no broken glyph" % name)
     nav_blk = re.search(r'<div class="nav-links">(.*?)</div>', t, re.S)
     check(
@@ -275,7 +286,7 @@ check(
     wk.count('href="index.html"') == 0,
     "works: home links use / not index.html",
 )
-check(wk.count("<h1") == 1, "works: exactly one h1 (%d)" % wk.count("<h1"))
+check(h1_ok(wk), "works: one h1 per language view (%d total)" % wk.count("<h1"))
 check(
     wk.count('src="assets/maten-console.webp"') == 2,
     "works: MATEN console image in both locales",
@@ -801,8 +812,13 @@ check("Founder & CEO" not in ab and "founder & CEO" not in ab, "about: no CEO ti
 check("Formspree" in ct, "contact: form service named")
 check("بودجه تقریبی (تومان، اختیاری)" in ct, "contact: budget unit (fa)")
 check("Approximate budget (USD or EUR, optional)" in ct, "contact: budget unit (en)")
-check("شمارهٔ اصلی" in ct and "شمارهٔ دوم" in ct, "contact: phone labels (fa)")
-check("— primary" in ct and "— secondary" in ct, "contact: phone labels (en)")
+ct_plain = ct.replace("&nbsp;", " ")
+check(
+    "شمارهٔ اصلی" in ct_plain and "شمارهٔ دوم" in ct_plain, "contact: phone labels (fa)"
+)
+check(
+    "— primary" in ct_plain and "— secondary" in ct_plain, "contact: phone labels (en)"
+)
 check("همه با لینک مستقیم" not in rfa, "resume fa: no direct-link claim")
 check("all with direct, verifiable links" not in ren, "resume en: no direct-link claim")
 check("مهر ۱۴۰۴ — شهریور ۱۴۰۵، بدون تأخیر" in rfa, "resume fa: Poolaki period bounded")

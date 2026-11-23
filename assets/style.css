@@ -643,7 +643,7 @@ a:focus-visible,button:focus-visible{
 .article-sign{margin:2.5rem 0 0;padding-top:1.8rem;border-top:1px solid rgba(255,255,255,.08)}
 .article-sign img{display:block;width:min(260px,70%);height:auto;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
 .article-sign figcaption{margin-top:1rem;font-size:.82rem;color:var(--muted)}
-.article-sign figcaption a{color:var(--gold-light);text-decoration:none;direction:ltr;unicode-bidi:embed;letter-spacing:.06em}
+.article-sign figcaption a{color:var(--gold-light);text-decoration:underline;text-underline-offset:.18em;direction:ltr;unicode-bidi:embed;letter-spacing:.06em}
 
 /* Button variants (shared) */
 .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.8rem;border-radius:var(--r);font-size:.85rem;font-weight:400;letter-spacing:.08em;transition:all var(--t);cursor:pointer;border:1px solid transparent;font-family:var(--font)}
@@ -859,6 +859,7 @@ html[lang="fa"] .nas-keep.hero-h1{font-size:clamp(2.5rem,7vw,5rem);line-height:2
 .svc-meta{margin-top:1.4rem;display:grid;gap:.55rem;list-style:none;padding:0}
 .svc-meta li{font-size:.85rem;color:var(--pale);line-height:1.85;border-inline-start:2px solid rgba(200,164,74,.25);padding-inline-start:.9rem}
 .svc-meta strong{color:var(--gold);font-weight:500}
+.svc-meta a{color:var(--gold-light);text-decoration:underline;text-underline-offset:.16em}
 .svc-req{margin-top:1.2rem;font-size:.85rem;color:var(--muted);line-height:1.8}
 .svc-req a{color:var(--gold);text-decoration:underline;text-underline-offset:3px}
 .modes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem}

@@ -41,7 +41,7 @@
 <button aria-controls="navMobile" aria-expanded="false" aria-label="باز کردن منو" class="nav-burger" id="burger" type="button">
 <span></span><span></span>
 </button>
-<label aria-label="انتخاب زبان" class="language-switcher" dir="ltr" for="languageToggle" id="languageSwitcher"><svg aria-hidden="true" class="language-switcher-icon" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"></circle><path d="M3.5 12h17M12 3c2.3 2.4 3.5 5.4 3.5 9s-1.2 6.6-3.5 9c-2.3-2.4-3.5-5.4-3.5-9S9.7 5.4 12 3Z"></path></svg><span class="language-switcher-label" id="languageSwitcherLabel" lang="fa">تغییر زبان</span><select aria-label="Choose language" class="language-toggle" dir="ltr" id="languageToggle" lang="en" value="en"><option value="en">English</option><option value="it">Italiano</option><option value="de">Deutsch</option><option value="fr">Français</option><option value="zh">中文</option><option value="ru">Русский</option><option value="es">Español</option><option value="ar">العربية</option><option selected="selected" value="fa">فارسی</option></select></label></nav>
+<label aria-label="انتخاب زبان" class="language-switcher" dir="ltr" id="languageSwitcher"><svg aria-hidden="true" class="language-switcher-icon" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"></circle><path d="M3.5 12h17M12 3c2.3 2.4 3.5 5.4 3.5 9s-1.2 6.6-3.5 9c-2.3-2.4-3.5-5.4-3.5-9S9.7 5.4 12 3Z"></path></svg><span class="language-switcher-label" id="languageSwitcherLabel" lang="fa">تغییر زبان</span><select aria-label="Choose language" class="language-toggle" dir="ltr" id="languageToggle" lang="en" value="en"><option value="en">English</option><option value="it">Italiano</option><option value="de">Deutsch</option><option value="fr">Français</option><option value="zh">中文</option><option value="ru">Русский</option><option value="es">Español</option><option value="ar">العربية</option><option selected value="fa">فارسی</option></select></label></nav>
 <div class="nav-mobile" id="navMobile">
 <a href="#about">درباره من</a>
 <a href="#maten">ماتن</a>
@@ -360,10 +360,10 @@
 <div class="ft-copy">© ۲۰۲۶ صادق وحیدی — تمامی حقوق محفوظ است</div>
 <div class="ft-id">صادق وحیدی</div>
 </footer>
-</div></main><div class="print-actions"><button aria-label="View and print PDF" class="btn-print" type="button">
+</div></main><aside class="print-actions" aria-label="چاپ و دریافت PDF"><button aria-label="View and print PDF" class="btn-print" type="button">
 <svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"></path><rect height="8" width="12" x="6" y="14"></rect></svg>
-<span id="printButtonLabel">View and print PDF</span></button><a aria-label="دانلود رزومه به صورت PDF" class="btn-print btn-pdf" download="resume-fa.pdf" href="/assets/pdf/resume-fa.pdf" type="application/pdf"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M12 3v12"></path><path d="M8 11l4 4 4-4"></path><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"></path></svg>
-<span>دانلود PDF</span></a></div>
+<span id="printButtonLabel">View and print PDF</span></button><a class="btn-print btn-pdf" download="resume-fa.pdf" href="/assets/pdf/resume-fa.pdf" type="application/pdf"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M12 3v12"></path><path d="M8 11l4 4 4-4"></path><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"></path></svg>
+<span>دانلود PDF</span></a></aside>
 
 <div class="print-resume" id="print-resume"><section aria-hidden="false" class="print-page print-fa navy is-print-active" data-print-index="1" data-print-locale="fa" dir="rtl" lang="fa"><div class="p-page-head"><span>پروفایل</span><span>فارسی</span></div><div class="p-page-content">
 <div class="p-cover-grid">
@@ -396,5 +396,5 @@ s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
 -->
-<script defer="True" src="/assets/resume.js"></script></body>
+<script defer src="/assets/resume.js"></script></body>
 </html>

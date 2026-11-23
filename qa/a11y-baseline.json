@@ -1,32 +1,13 @@
 {
   "note": "Node counts per page/rule. A higher count fails the gate.",
   "pages": {
-    "/contact.html": {
-      "label-content-name-mismatch": 1,
-      "region": 18
-    },
+    "/contact.html": {},
     "/index.html": {},
     "/magazine.html": {},
-    "/magazine/agency-mongol-narrative.html": {
-      "link-in-text-block": 1
-    },
-    "/magazine/content-system-customers.html": {
-      "link-in-text-block": 1
-    },
-    "/resume/en/index.html": {
-      "color-contrast": 28,
-      "label-content-name-mismatch": 1,
-      "region": 1
-    },
-    "/resume/fa/index.html": {
-      "color-contrast": 12,
-      "label-content-name-mismatch": 1,
-      "region": 1
-    },
-    "/works.html": {
-      "color-contrast": 1,
-      "label-content-name-mismatch": 1,
-      "region": 6
-    }
+    "/magazine/agency-mongol-narrative.html": {},
+    "/magazine/content-system-customers.html": {},
+    "/resume/en/index.html": {},
+    "/resume/fa/index.html": {},
+    "/works.html": {}
   }
 }

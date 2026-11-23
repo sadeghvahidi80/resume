@@ -161,6 +161,7 @@
     labels();
     fill(i);
     lb.classList.add("open");
+    lb.removeAttribute("inert");
     lb.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
     closeBtn.focus();
@@ -168,6 +169,7 @@
   function close() {
     lb.classList.remove("open");
     lb.setAttribute("aria-hidden", "true");
+    lb.setAttribute("inert", "");
     document.body.style.overflow = "";
     if (trigger && trigger.focus) trigger.focus();
     trigger = null;

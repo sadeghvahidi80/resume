@@ -9,7 +9,9 @@ FAIL = []
 
 
 def read(rel):
-    return io.open(os.path.join(ROOT, rel.replace("\\", "/")), encoding="utf-8", newline="").read()
+    return io.open(
+        os.path.join(ROOT, rel.replace("\\", "/")), encoding="utf-8", newline=""
+    ).read()
 
 
 def check(cond, label):
@@ -134,8 +136,9 @@ print("\n### contact")
 check("Formspree" in ct, "contact: service named")
 check("بودجه تقریبی (تومان، اختیاری)" in ct, "contact: budget unit FA")
 check("Approximate budget (USD or EUR, optional)" in ct, "contact: budget unit EN")
-check("شمارهٔ اصلی" in ct and "شمارهٔ دوم" in ct, "contact: phone labels FA")
-check("— primary" in ct and "— secondary" in ct, "contact: phone labels EN")
+ct_plain = ct.replace("&nbsp;", " ")
+check("شمارهٔ اصلی" in ct_plain and "شمارهٔ دوم" in ct_plain, "contact: phone labels FA")
+check("— primary" in ct_plain and "— secondary" in ct_plain, "contact: phone labels EN")
 
 print("\n### resumes")
 check("همه با لینک مستقیم" not in rfa, "resume FA: direct-link claim removed")
