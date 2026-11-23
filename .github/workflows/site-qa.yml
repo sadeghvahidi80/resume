@@ -1,0 +1,99 @@
+name: Site QA
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */6 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-qa-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  static:
+    name: Static contracts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Tag balance
+        run: python qa/tag_balance.py
+
+      - name: Page contract
+        run: python qa/verify_site.py
+
+      - name: Second-audit contract
+        run: python qa/verify_audit2c.py
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: qa/package-lock.json
+
+      - name: Install QA tools
+        run: npm ci --prefix qa
+
+      - name: HTML validation
+        run: >-
+          qa/node_modules/.bin/html-validate
+          -c qa/htmlvalidate.json
+          "*.html" "magazine/*.html" "resume/*/index.html"
+
+      - name: Internal links
+        run: python qa/link_check.py
+
+  a11y:
+    name: Accessibility
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: qa/package-lock.json
+
+      - name: Install QA tools
+        run: npm ci --prefix qa
+
+      - name: Install Playwright
+        run: |
+          pip install playwright==1.62.0
+          python -m playwright install --with-deps chromium
+
+      - name: axe-core gate
+        run: python qa/axe_probe.py
+
+  live:
+    name: Live deploy
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    needs: static
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Wait for Pages
+        run: python qa/wait_for_pages.py
+
+      - name: Live contract
+        run: python qa/check_live_deploy.py
