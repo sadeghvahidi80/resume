@@ -80,6 +80,17 @@ def check(name, ok):
     RESULTS.append((name, ok))
 
 
+def h1_ok(text):
+    """Exactly one h1 per language view (bilingual pages render two views)."""
+    marker = re.search(r'<(?:div|section) class="lang-en">', text)
+    if marker is None:
+        return len(re.findall(r"<h1[ >]", text)) == 1
+    return (
+        len(re.findall(r"<h1[ >]", text[: marker.start()])) == 1
+        and len(re.findall(r"<h1[ >]", text[marker.start() :])) == 1
+    )
+
+
 status, home = get("")
 check("home 200", status == 200)
 check("home: Ravan Yar 2.0 ready (fa)", home.count("نسخهٔ ۲٫۰ آمادهٔ انتشار") == 1)
@@ -87,7 +98,7 @@ check("home: old in-development wording gone", "در حال توسعه" not in h
 check("home: works nav fa x4", home.count('<a href="works.html">آثار</a>') == 4)
 check("home: works nav en x4", home.count('<a href="works.html">Works</a>') == 4)
 check("home: body font preload", "vazirmatn-arabic.woff2" in home)
-check("home: exactly one h1", len(re.findall(r"<h1[ >]", home)) == 1)
+check("home: one h1 per language view", h1_ok(home))
 check("home: no /index.html links", 'href="index.html"' not in home)
 
 status, works = get("works.html")
@@ -97,7 +108,7 @@ check(
     "works: title",
     bool(title) and title.group(1).strip() == "آثار و شواهد — صادق وحیدی",
 )
-check("works: one h1", len(re.findall(r"<h1[ >]", works)) == 1)
+check("works: one h1 per language view", h1_ok(works))
 check("works: 8 self links", works.count('href="works.html"') == 8)
 check("works: 2 JSON-LD blocks", works.count("application/ld+json") == 2)
 check("works: Ravan Yar 2.0 (fa)", "نسخهٔ ۲٫۰ آمادهٔ انتشار است" in works)
@@ -246,7 +257,7 @@ check(
     "gallery: title",
     bool(gtitle) and gtitle.group(1).strip() == "گزیدهٔ تصاویر — صادق وحیدی",
 )
-check("gallery: one h1", len(re.findall(r"<h1[ >]", gallery)) == 1)
+check("gallery: one h1 per language view", h1_ok(gallery))
 check("gallery: grid container", "data-gallery" in gallery)
 check("gallery: footer self link x4", gallery.count('href="gallery.html"') == 4)
 check("home: gallery footer link x4", home.count('href="gallery.html"') == 4)
