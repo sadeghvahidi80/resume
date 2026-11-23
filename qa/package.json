@@ -1,0 +1,11 @@
+{
+  "name": "sadeghvahidi-site-qa",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Quality gates for sadeghvahidi.ir (static site)",
+  "devDependencies": {
+    "axe-core": "4.14.0",
+    "html-validate": "11.21.1",
+    "linkinator": "8.1.0"
+  }
+}

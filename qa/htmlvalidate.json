@@ -1,0 +1,18 @@
+{
+  "root": true,
+  "extends": ["html-validate:recommended"],
+  "rules": {
+    "no-inline-style": "off",
+
+    "void-style": ["warn", { "style": "selfclosing" }],
+    "attribute-boolean-style": "warn",
+    "attribute-allowed-values": "warn",
+    "no-redundant-for": "warn",
+    "tel-non-breaking": "warn",
+    "no-implicit-button-type": "warn",
+    "no-implicit-input-type": "warn",
+    "prefer-native-element": "warn",
+    "hidden-focusable": "warn",
+    "long-title": "warn"
+  }
+}
