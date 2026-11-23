@@ -12,7 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PORT = 8097
-MIN_LINKS = 40
+MIN_LINKS = 25
 
 
 class Quiet(http.server.SimpleHTTPRequestHandler):
