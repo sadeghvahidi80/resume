@@ -56,8 +56,14 @@ try:
         + [
             "http://127.0.0.1:%d/" % PORT,
             "--recurse",
+            # Stay on this origin, and keep out of the self-contained demo apps.
+            # They are Next.js exports built for a domain root (their hrefs are
+            # "/about", "/repair-request", ...), are marked noindex and are
+            # disallowed in robots.txt; their entry pages are covered by
+            # qa/verify_site.py. Crawling them here only produces false 404s.
             "--skip",
-            r"^(?!http://127\.0\.0\.1:%d)" % PORT,
+            r"^(?!http://127\.0\.0\.1:%d)|^http://127\.0\.0\.1:%d/demos/"
+            % (PORT, PORT),
             "--format",
             "json",
         ],
