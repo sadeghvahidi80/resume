@@ -686,6 +686,8 @@ a:focus-visible,button:focus-visible{
 .card-post .meta{font-size:.7rem;color:var(--gold);letter-spacing:.08em}
 .site-footer{padding:1.7rem 3rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.05);z-index:1;position:relative;flex-wrap:wrap;gap:1rem}
 .site-footer .ft-copy{font-size:.75rem;color:var(--mid);font-weight:300}
+.enamad-seal{margin:.6rem 0}
+.enamad-seal img{height:64px;width:auto;display:block}
 .site-footer .ft-id{font-size:.75rem;color:var(--gold);letter-spacing:.08em}                                          
 
 
