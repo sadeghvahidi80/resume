@@ -61,6 +61,18 @@ def measure(axe_src):
         browser = pw.chromium.launch()
         page = browser.new_page(viewport={"width": 1280, "height": 900})
         page.emulate_media(reduced_motion="reduce")
+
+        # The gate checks our own markup, not third-party uptime. The eNamad
+        # seal lives on an Iranian host that can hang the load event on CI
+        # runners, so only local documents and data URLs are fetched.
+        def local_only(route):
+            url = route.request.url
+            if url.startswith("http://127.0.0.1:%d/" % PORT) or url.startswith("data:"):
+                route.continue_()
+            else:
+                route.abort()
+
+        page.route("**/*", local_only)
         for path in PAGES:
             page.goto("http://127.0.0.1:%d%s" % (PORT, path), wait_until="load")
             page.add_style_tag(
