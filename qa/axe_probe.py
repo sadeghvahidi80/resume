@@ -23,14 +23,25 @@ PORT = 8098
 
 PAGES = [
     "/index.html",
+    "/index.html?lang=en",
+    "/about.html",
+    "/about.html?lang=en",
+    "/projects.html",
+    "/projects.html?lang=en",
+    "/services.html",
+    "/services.html?lang=en",
+    "/gallery.html",
+    "/gallery.html?lang=en",
+    "/works.html",
+    "/contact.html",
     "/magazine.html",
+    "/magazine.html?lang=en",
     "/magazine/agency-mongol-narrative.html",
     "/magazine/content-system-customers.html",
     "/resume/fa/index.html",
     "/resume/en/index.html",
-    "/works.html",
     "/shop.html",
-    "/contact.html",
+    "/shop.html?lang=en",
 ]
 
 

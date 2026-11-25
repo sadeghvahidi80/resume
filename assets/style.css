@@ -960,8 +960,11 @@ html[lang="fa"] .nas-keep.hero-h1{font-size:clamp(2.5rem,7vw,5rem);line-height:2
    the focused pill shrink-wrapped instead of stretching across the viewport. */
 a.skip-link{left:auto;right:auto;inset-inline-start:1rem;top:-6rem;width:max-content;max-width:calc(100% - 2rem);height:auto;overflow:visible}
 a.skip-link:focus{top:1rem;width:max-content;max-width:calc(100% - 2rem)}
-.evi-label a{color:var(--gold);text-decoration:none}
-.evi-label a:hover,.evi-label a:focus-visible{text-decoration:underline}
+.evi-label a{color:var(--gold);text-decoration:underline;text-underline-offset:.18em}
+.evi-label a:hover,.evi-label a:focus-visible{text-decoration-thickness:2px}
+/* Prose links keep the accent colour and an underline so they never fall back
+   to the UA blue on the dark background (WCAG 1.4.1, axe link-in-text-block). */
+.hero-sub a,.wrap dd a{color:var(--gold);text-decoration:underline;text-underline-offset:.18em}
 .case-fig{margin:1.25rem 0 .25rem;border:1px solid rgba(255,255,255,.08);border-radius:10px;overflow:hidden;background:#0b1220}
 .case-fig img{display:block;width:100%;height:auto}
 .case-fig figcaption{padding:.6rem .85rem;border-top:1px solid rgba(255,255,255,.06);font-size:.74rem;line-height:1.75;color:var(--muted)}

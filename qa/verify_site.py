@@ -358,10 +358,18 @@ check(
     and min(lastmods) >= "2026-11-15",
     "sitemap: lastmod values current, not stale (got %s)" % sorted(set(lastmods)),
 )
-_shop_mod = re.findall(r"<loc>([^<]+)</loc><lastmod>2026-11-25</lastmod>", sm)
+_latest = re.findall(r"<loc>([^<]+)</loc><lastmod>2026-11-25</lastmod>", sm)
 check(
-    _shop_mod == ["https://sadeghvahidi.ir/shop.html"],
-    "sitemap: only the shop carries the 2026-11-25 lastmod (got %s)" % (_shop_mod,),
+    sorted(_latest)
+    == [
+        "https://sadeghvahidi.ir/",
+        "https://sadeghvahidi.ir/about.html",
+        "https://sadeghvahidi.ir/contact.html",
+        "https://sadeghvahidi.ir/gallery.html",
+        "https://sadeghvahidi.ir/shop.html",
+    ],
+    "sitemap: only the pages edited on 2026-11-25 carry that lastmod (got %s)"
+    % (_latest,),
 )
 _changed = re.findall(r"<loc>([^<]+)</loc><lastmod>2026-11-22</lastmod>", sm)
 check(

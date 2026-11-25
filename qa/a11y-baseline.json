@@ -1,14 +1,25 @@
 {
   "note": "Node counts per page/rule. A higher count fails the gate.",
   "pages": {
+    "/about.html": {},
+    "/about.html?lang=en": {},
     "/contact.html": {},
+    "/gallery.html": {},
+    "/gallery.html?lang=en": {},
     "/index.html": {},
+    "/index.html?lang=en": {},
     "/magazine.html": {},
+    "/magazine.html?lang=en": {},
     "/magazine/agency-mongol-narrative.html": {},
     "/magazine/content-system-customers.html": {},
+    "/projects.html": {},
+    "/projects.html?lang=en": {},
     "/resume/en/index.html": {},
     "/resume/fa/index.html": {},
+    "/services.html": {},
+    "/services.html?lang=en": {},
     "/shop.html": {},
+    "/shop.html?lang=en": {},
     "/works.html": {}
   }
 }
