@@ -1,0 +1,13 @@
+{
+  "name": "sadeghvahidi-shop-worker",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "ZarinPal checkout worker for the sadeghvahidi.ir services shop",
+  "scripts": {
+    "sync": "node scripts/sync-catalog.mjs",
+    "test": "npm run sync && node --test test/*.test.js",
+    "dev": "npm run sync && wrangler dev",
+    "deploy": "npm run sync && wrangler deploy"
+  }
+}

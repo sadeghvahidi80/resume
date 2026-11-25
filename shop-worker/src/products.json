@@ -1,0 +1,265 @@
+{
+  "version": 1,
+  "currency": "IRT",
+  "updated": "2026-11-25",
+  "products": [
+    {
+      "id": "consult-45",
+      "visible": true,
+      "title": {
+        "fa": "جلسه مشاوره ۴۵ دقیقه‌ای",
+        "en": "45-minute consulting call"
+      },
+      "summary": {
+        "fa": "یک جلسهٔ متمرکز برای بررسی وضعیت پروژه یا فرآیند و تصمیم دربارهٔ گام بعدی؛ با جمع‌بندی کتبی.",
+        "en": "One focused call to review your project or process and decide the next step, with a written summary."
+      },
+      "deliverables": {
+        "fa": [
+          "جلسهٔ ۴۵ دقیقه‌ای",
+          "جمع‌بندی کتبی",
+          "فهرست گام‌های بعدی"
+        ],
+        "en": [
+          "45-minute call",
+          "Written summary",
+          "Next-step checklist"
+        ]
+      },
+      "duration": {
+        "fa": "۴۵ دقیقه",
+        "en": "45 minutes"
+      },
+      "priceToman": 1500000,
+      "priceFrom": false,
+      "badge": {
+        "fa": "شروع سریع",
+        "en": "Fast start"
+      }
+    },
+    {
+      "id": "process-audit",
+      "visible": true,
+      "title": {
+        "fa": "بازبینی فرآیند و نقشهٔ راه",
+        "en": "Process audit and roadmap"
+      },
+      "summary": {
+        "fa": "بررسی فرآیند فعلی، شناسایی گلوگاه‌ها و تحویل نقشهٔ راه اجرایی با اولویت‌بندی.",
+        "en": "Review of the current process, bottleneck analysis, and a prioritized execution roadmap."
+      },
+      "deliverables": {
+        "fa": [
+          "نقشهٔ فرآیند",
+          "گزارش گلوگاه‌ها",
+          "نقشهٔ راه اولویت‌دار"
+        ],
+        "en": [
+          "Process map",
+          "Bottleneck report",
+          "Prioritized roadmap"
+        ]
+      },
+      "duration": {
+        "fa": "۱ تا ۲ هفته",
+        "en": "1–2 weeks"
+      },
+      "priceToman": 5000000,
+      "priceFrom": false,
+      "badge": {
+        "fa": "پروژه‌ای",
+        "en": "Project"
+      }
+    },
+    {
+      "id": "sop-sprint",
+      "visible": true,
+      "title": {
+        "fa": "اسپرینت مستندسازی SOP",
+        "en": "SOP documentation sprint"
+      },
+      "summary": {
+        "fa": "مستندسازی فرآیندهای حیاتی در قالب SOP قابل‌اجرا، با آموزش تیم و شاخص‌های پایش.",
+        "en": "Documentation of critical processes as executable SOPs, with team training and monitoring metrics."
+      },
+      "deliverables": {
+        "fa": [
+          "SOP مستند",
+          "دیاگرام فرآیند",
+          "داشبورد شاخص"
+        ],
+        "en": [
+          "Documented SOPs",
+          "Process diagrams",
+          "Metrics dashboard"
+        ]
+      },
+      "duration": {
+        "fa": "۲ تا ۳ هفته",
+        "en": "2–3 weeks"
+      },
+      "priceToman": 5000000,
+      "priceFrom": false,
+      "badge": {
+        "fa": "سیستم‌سازی",
+        "en": "Systems"
+      }
+    },
+    {
+      "id": "site-build",
+      "visible": true,
+      "title": {
+        "fa": "طراحی و ساخت وب‌سایت",
+        "en": "Website design and build"
+      },
+      "summary": {
+        "fa": "طراحی رابط، پیاده‌سازی، انتشار و بهینه‌سازی پایهٔ سایت با ساختار محتوا و سئوی فنی.",
+        "en": "Interface design, build, launch, and baseline optimization with content structure and technical SEO."
+      },
+      "deliverables": {
+        "fa": [
+          "طراحی صفحه‌ها",
+          "سایت منتشرشده",
+          "چک‌لیست سئوی فنی"
+        ],
+        "en": [
+          "Page designs",
+          "Published site",
+          "Technical SEO checklist"
+        ]
+      },
+      "duration": {
+        "fa": "۳ تا ۶ هفته",
+        "en": "3–6 weeks"
+      },
+      "priceToman": 15000000,
+      "priceFrom": false,
+      "badge": {
+        "fa": "پروژه‌ای",
+        "en": "Project"
+      }
+    },
+    {
+      "id": "research-report",
+      "visible": true,
+      "title": {
+        "fa": "گزارش پژوهش بازار",
+        "en": "Market research report"
+      },
+      "summary": {
+        "fa": "پاسخ به یک پرسش تصمیم‌ساز با داده، تحلیل رقبا و سناریوهای پیش‌رو.",
+        "en": "An answer to one decision-critical question with data, competitor analysis, and scenarios."
+      },
+      "deliverables": {
+        "fa": [
+          "گزارش پژوهش",
+          "تحلیل رقبا",
+          "توصیهٔ مسیر"
+        ],
+        "en": [
+          "Research report",
+          "Competitor analysis",
+          "Path recommendation"
+        ]
+      },
+      "duration": {
+        "fa": "۲ تا ۴ هفته",
+        "en": "2–4 weeks"
+      },
+      "priceToman": 5000000,
+      "priceFrom": false,
+      "badge": {
+        "fa": "پژوهش",
+        "en": "Research"
+      }
+    },
+    {
+      "id": "lead-harvest",
+      "visible": true,
+      "title": {
+        "fa": "جمع‌آوری سفارشی و اختصاصی شماره تماس مشتری",
+        "en": "Custom, exclusive customer contact list"
+      },
+      "summary": {
+        "fa": "جمع‌آوری شماره تماس مشتریان هدف بر اساس معیارهای شما (شهر، صنف، نقش)؛ هر بسته ۱٬۰۰۰ شماره، فقط از منابع عمومی و با رعایت قوانین.",
+        "en": "Customer phone numbers collected to your criteria (city, sector, role); each batch is 1,000 contacts, from public sources only and within the rules."
+      },
+      "deliverables": {
+        "fa": [
+          "فهرست شماره با منبع هر رکورد",
+          "پاک‌سازی و حذف تکراری",
+          "فایل CSV/XLSX اختصاصی"
+        ],
+        "en": [
+          "Contact list with the source per record",
+          "Cleaned and de-duplicated",
+          "Exclusive CSV/XLSX file"
+        ]
+      },
+      "duration": {
+        "fa": "۳ تا ۷ روز کاری",
+        "en": "3–7 working days"
+      },
+      "priceToman": 5000000,
+      "priceFrom": false,
+      "badge": {
+        "fa": "هر ۱٬۰۰۰ شماره",
+        "en": "Per 1,000"
+      }
+    },
+    {
+      "id": "sandbox-demo",
+      "visible": false,
+      "sandboxOnly": true,
+      "title": {
+        "fa": "تست درگاه (فقط sandbox)",
+        "en": "Gateway test (sandbox only)"
+      },
+      "summary": {
+        "fa": "محصول مخفی برای تست چرخهٔ پرداخت.",
+        "en": "Hidden product used to test the payment cycle."
+      },
+      "deliverables": {
+        "fa": [],
+        "en": []
+      },
+      "duration": {
+        "fa": "—",
+        "en": "—"
+      },
+      "priceToman": 10000,
+      "priceFrom": false,
+      "badge": {
+        "fa": "تست",
+        "en": "Test"
+      }
+    },
+    {
+      "id": "unpriced-demo",
+      "visible": false,
+      "sandboxOnly": true,
+      "title": {
+        "fa": "تست بدون قیمت",
+        "en": "Unpriced test product"
+      },
+      "summary": {
+        "fa": "محصول مخفی برای تست خطای نبودن قیمت.",
+        "en": "Hidden product used to test the missing-price path."
+      },
+      "deliverables": {
+        "fa": [],
+        "en": []
+      },
+      "duration": {
+        "fa": "—",
+        "en": "—"
+      },
+      "priceToman": null,
+      "priceFrom": false,
+      "badge": {
+        "fa": "تست",
+        "en": "Test"
+      }
+    }
+  ]
+}

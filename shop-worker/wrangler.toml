@@ -1,0 +1,17 @@
+name = "sadeghvahidi-shop"
+main = "src/index.js"
+compatibility_date = "2026-11-01"
+workers_dev = true
+
+[observability]
+enabled = true
+
+[vars]
+SITE_ORIGIN = "https://sadeghvahidi.ir"
+ZARINPAL_SANDBOX = "1"
+
+# D1 binding is added by `wrangler d1 create sadeghvahidi-shop`.
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "sadeghvahidi-shop"
+# database_id = "<id>"

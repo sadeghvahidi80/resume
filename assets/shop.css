@@ -1,0 +1,306 @@
+/* Shop page additions — layered on assets/style.css. */
+
+.shop-status {
+  max-width: 1200px;
+  margin: 6.5rem auto 0;
+  padding: 1rem 1.4rem;
+  border: 1px solid var(--gold-border, rgba(200, 164, 74, .35));
+  border-radius: var(--r-sm, 5px);
+  background: rgba(200, 164, 74, .08);
+  color: var(--off-white, #edeae4);
+  font-size: .92rem;
+  line-height: 1.9;
+}
+
+.shop-status[data-state="paid"] {
+  border-color: rgba(120, 200, 140, .45);
+  background: rgba(120, 200, 140, .1);
+}
+
+.shop-status[data-state="canceled"],
+.shop-status[data-state="failed"],
+.shop-status[data-state="error"] {
+  border-color: rgba(255, 120, 120, .45);
+  background: rgba(255, 120, 120, .08);
+}
+
+.shop-status a {
+  color: var(--gold);
+}
+
+/* The oversized background word is absolutely positioned at -2rem; clip it
+   exactly like #hero does, otherwise RTL pages gain 32px of scroll width. */
+:is(#shop-hero, #en-shop-hero) {
+  position: relative;
+  overflow: hidden;
+}
+
+.shop-hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .8rem;
+  margin-top: -.6rem;
+}
+
+.shop-intro {
+  max-width: 760px;
+}
+
+.shop-sandbox-note {
+  margin-top: 1.2rem;
+  padding: .7rem 1rem;
+  border-inline-start: 2px solid var(--gold);
+  background: rgba(200, 164, 74, .07);
+  color: var(--pale, #ccc);
+  font-size: .85rem;
+}
+
+.shop-grid {
+  align-items: stretch;
+}
+
+.shop-card {
+  display: flex;
+  flex-direction: column;
+  gap: .55rem;
+}
+
+.shop-card h3 {
+  margin: 0;
+}
+
+.shop-card p {
+  margin: 0;
+}
+
+.shop-badge {
+  align-self: flex-start;
+  padding: .18rem .6rem;
+  border: 1px solid rgba(200, 164, 74, .35);
+  border-radius: 100px;
+  color: var(--gold);
+  font-size: .68rem;
+  letter-spacing: .12em;
+}
+
+html[lang="fa"] .shop-badge {
+  letter-spacing: 0;
+}
+
+.shop-card .value-chips {
+  margin: .1rem 0 .2rem;
+}
+
+.shop-meta {
+  color: var(--muted, #aaa);
+  font-size: .82rem;
+}
+
+.shop-price {
+  margin-top: auto;
+  padding-top: .9rem;
+  border-top: 1px solid rgba(255, 255, 255, .07);
+  font-size: 1.05rem;
+  color: var(--gold-light, #e4c06a);
+}
+
+.shop-price-value {
+  font-weight: 500;
+}
+
+.shop-price-value[data-empty="1"] {
+  color: var(--muted, #aaa);
+  font-weight: 400;
+  font-size: .95rem;
+}
+
+.shop-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin-top: .4rem;
+}
+
+.shop-actions .btn-primary,
+.shop-actions .btn-secondary {
+  padding: .7rem 1.2rem;
+  font-size: .88rem;
+}
+
+.shop-actions [hidden] {
+  display: none !important;
+}
+
+.shop-note {
+  max-width: 780px;
+  margin-top: 1.6rem;
+  color: var(--muted, #aaa);
+  font-size: .84rem;
+  line-height: 1.95;
+}
+
+.shop-step {
+  margin: 0 0 .4rem;
+  color: var(--gold);
+  font-size: 1.6rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.shop-dialog {
+  width: min(560px, calc(100vw - 2rem));
+  padding: 1.8rem;
+  border: 1px solid rgba(200, 164, 74, .35);
+  border-radius: var(--r, 10px);
+  background: #111;
+  color: var(--off-white, #edeae4);
+  direction: inherit;
+}
+
+.shop-dialog::backdrop {
+  background: rgba(0, 0, 0, .72);
+  backdrop-filter: blur(2px);
+}
+
+.shop-dialog h2 {
+  margin: 0 0 .5rem;
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+
+.shop-dialog-product {
+  margin: 0 0 .2rem;
+  color: var(--pale, #ccc);
+}
+
+.shop-dialog-price {
+  margin: 0 0 1.2rem;
+  color: var(--gold-light, #e4c06a);
+  font-size: 1.05rem;
+}
+
+.shop-dialog .cf-field label {
+  color: var(--pale, #ccc);
+}
+
+.shop-dialog-note {
+  margin: .4rem 0 0;
+  color: var(--muted, #aaa);
+  font-size: .78rem;
+  line-height: 1.85;
+}
+
+.shop-dialog-error {
+  color: #ff9a9a;
+  min-height: 1.2em;
+}
+
+.shop-dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .7rem;
+  margin-top: .9rem;
+}
+
+.shop-dialog-actions .btn-primary,
+.shop-dialog-actions .btn-secondary {
+  padding: .75rem 1.4rem;
+  font-size: .9rem;
+}
+
+.shop-dialog-actions [disabled] {
+  opacity: .6;
+  cursor: progress;
+}
+
+.shop-hp {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  inset-inline-start: -9999px;
+}
+
+.shop-tariff {
+  width: 100%;
+  margin-top: 1.4rem;
+  border-collapse: collapse;
+  font-size: .9rem;
+}
+
+.shop-tariff caption {
+  text-align: start;
+  color: var(--muted, #aaa);
+  font-size: .8rem;
+  padding-bottom: .6rem;
+}
+
+.shop-tariff th,
+.shop-tariff td {
+  padding: .8rem .6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, .07);
+  text-align: start;
+  vertical-align: top;
+}
+
+.shop-tariff thead th {
+  color: var(--gold);
+  font-weight: 400;
+  font-size: .78rem;
+  letter-spacing: .08em;
+}
+
+html[lang="fa"] .shop-tariff thead th {
+  letter-spacing: 0;
+}
+
+.shop-tariff td:last-child,
+.shop-tariff th:last-child {
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .shop-status {
+    margin-top: 5.4rem;
+    margin-inline: 1.2rem;
+  }
+
+  .shop-dialog {
+    padding: 1.3rem;
+  }
+
+  .shop-tariff,
+  .shop-tariff thead,
+  .shop-tariff tbody,
+  .shop-tariff tr,
+  .shop-tariff th,
+  .shop-tariff td {
+    display: block;
+  }
+
+  .shop-tariff thead {
+    display: none;
+  }
+
+  .shop-tariff tr {
+    padding: .6rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+  }
+
+  .shop-tariff td {
+    border: 0;
+    padding: .15rem 0;
+  }
+
+  .shop-tariff td:first-child {
+    color: var(--pale, #ccc);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shop-actions .btn-primary,
+  .shop-actions .btn-secondary {
+    transition: none;
+  }
+}

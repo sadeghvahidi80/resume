@@ -29,6 +29,7 @@ PAGES = [
     "/resume/fa/index.html",
     "/resume/en/index.html",
     "/works.html",
+    "/shop.html",
     "/contact.html",
 ]
 

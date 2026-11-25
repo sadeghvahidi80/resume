@@ -331,8 +331,9 @@ check("Disallow: /demos/" in rb, "robots: demos disallowed")
 
 sm = read("sitemap.xml")
 urls = re.findall(r"<loc>([^<]+)</loc>", sm)
-check(len(urls) == 20, "sitemap: 20 urls (got %d)" % len(urls))
+check(len(urls) == 21, "sitemap: 21 urls (got %d)" % len(urls))
 check(any(u.endswith("/gallery.html") for u in urls), "sitemap: gallery listed")
+check("https://sadeghvahidi.ir/shop.html" in urls, "sitemap: shop listed")
 check(not any("/demos/" in u for u in urls), "sitemap: no demos")
 check(
     "https://sadeghvahidi.ir/magazine.html" in urls,
@@ -347,14 +348,20 @@ check(
     "sitemap: ensaf essay listed",
 )
 lastmods = re.findall(r"<lastmod>([^<]+)</lastmod>", sm)
-check(len(lastmods) == 20, "sitemap: 20 lastmod values (got %d)" % len(lastmods))
+check(len(lastmods) == 21, "sitemap: 21 lastmod values (got %d)" % len(lastmods))
 check(
     all(len(d) == 10 and d[4] == "-" for d in lastmods),
     "sitemap: lastmod is ISO date",
 )
 check(
-    set(lastmods) <= {"2026-11-15", "2026-11-22"} and min(lastmods) >= "2026-11-15",
+    set(lastmods) <= {"2026-11-15", "2026-11-22", "2026-11-25"}
+    and min(lastmods) >= "2026-11-15",
     "sitemap: lastmod values current, not stale (got %s)" % sorted(set(lastmods)),
+)
+_shop_mod = re.findall(r"<loc>([^<]+)</loc><lastmod>2026-11-25</lastmod>", sm)
+check(
+    _shop_mod == ["https://sadeghvahidi.ir/shop.html"],
+    "sitemap: only the shop carries the 2026-11-25 lastmod (got %s)" % (_shop_mod,),
 )
 _changed = re.findall(r"<loc>([^<]+)</loc><lastmod>2026-11-22</lastmod>", sm)
 check(
