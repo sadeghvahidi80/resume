@@ -3,6 +3,10 @@ main = "src/index.js"
 compatibility_date = "2026-11-01"
 workers_dev = true
 
+routes = [
+  { pattern = "pay.sadeghvahidi.ir", custom_domain = true }
+]
+
 [observability]
 enabled = true
 
@@ -10,8 +14,7 @@ enabled = true
 SITE_ORIGIN = "https://sadeghvahidi.ir"
 ZARINPAL_SANDBOX = "1"
 
-# D1 binding is added by `wrangler d1 create sadeghvahidi-shop`.
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "sadeghvahidi-shop"
-# database_id = "<id>"
+[[d1_databases]]
+binding = "DB"
+database_name = "sadeghvahidi-shop"
+database_id = "1206a36f-e352-4d05-8b61-c06a3eb0b0ca"

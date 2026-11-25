@@ -183,6 +183,7 @@ async function checkout(request, env) {
   });
 
   if (!payment.ok) {
+    console.error("zarinpal_request_failed", payment.code, payment.message);
     await env.DB.prepare("UPDATE orders SET status = 'failed' WHERE id = ?").bind(id).run();
     return json({ ok: false, error: "gateway_error", code: payment.code }, 502);
   }
