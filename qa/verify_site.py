@@ -200,7 +200,34 @@ check(
     "first opportunity — Telegram is faster" not in pr,
     "projects: old reply wording gone",
 )
-check('href="https://ronix.ir"' in ix, "index: Ronix evidence linked")
+check(
+    'href="https://www.ronix.ir/mag/"' in ix,
+    "index: Ronix evidence linked to the live magazine",
+)
+check('href="https://ronix.ir"' not in ix, "index: no dead Ronix apex link")
+
+# --- 2026-11-25: retire dead publishers --------------------------------------
+# lediamont.shop has no NS record (SERVFAIL at Cloudflare + Google) and
+# virgool.io answers NXDOMAIN, confirmed from 5 Iranian and 4 global nodes.
+# ronix.ir's apex returned 504 while www.ronix.ir/mag/ returns 200.
+_dead = ("lediamont.shop", "virgool.io")
+_offenders = []
+for _dir, _dirs, _files in os.walk(S):
+    _dirs[:] = [
+        d
+        for d in _dirs
+        if d not in {"demos", "qa", "node_modules", ".git", "shop-worker"}
+    ]
+    for _name in _files:
+        if not _name.endswith(".html"):
+            continue
+        _path = os.path.join(_dir, _name)
+        _text = io.open(_path, encoding="utf-8", errors="replace").read()
+        for _domain in _dead:
+            if 'href="https://%s' % _domain in _text:
+                _offenders.append(os.path.relpath(_path, S) + " -> " + _domain)
+check(not _offenders, "no link to a dead publisher (got %s)" % (_offenders,))
+
 check('href="https://poolaki.app"' in ix, "index: Poolaki evidence linked")
 check('href="/demos/karabi/"' in ix, "index: Karabi demo linked")
 check('href="/demos/ravanyar/"' in ix, "index: Ravan Yar demo linked")
