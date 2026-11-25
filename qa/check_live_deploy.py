@@ -72,6 +72,64 @@ def get(path):
     return status, body.decode("utf-8", "replace")
 
 
+def head(path, base=BASE):
+    """Return (status, headers) for one request; the last header block wins."""
+    proc = subprocess.run(
+        [
+            CURL,
+            "-sS",
+            "-D",
+            "-",
+            "-o",
+            os.devnull,
+            "--noproxy",
+            "*",
+            "--max-time",
+            "45",
+            "-A",
+            "Mozilla/5.0 site-check",
+            base + path,
+        ],
+        capture_output=True,
+        text=True,
+        timeout=60,
+    )
+    headers = {}
+    status = 0
+    for line in proc.stdout.splitlines():
+        line = line.strip()
+        if line.lower().startswith("http/"):
+            headers = {}
+            parts = line.split()
+            if len(parts) > 1 and parts[1].isdigit():
+                status = int(parts[1])
+        elif ":" in line:
+            key, _, value = line.partition(":")
+            headers[key.strip().lower()] = value.strip()
+    return status, headers
+
+
+def doh(name, rtype):
+    """Resolve through Cloudflare's DNS-over-HTTPS so the check is OS-agnostic."""
+    proc = subprocess.run(
+        [
+            CURL,
+            "-sS",
+            "--noproxy",
+            "*",
+            "--max-time",
+            "30",
+            "-H",
+            "accept: application/dns-json",
+            "https://cloudflare-dns.com/dns-query?name=%s&type=%s" % (name, rtype),
+        ],
+        capture_output=True,
+        text=True,
+        timeout=45,
+    )
+    return proc.stdout
+
+
 def fetch_bytes(path):
     return _fetch(path)
 
@@ -410,6 +468,49 @@ check(
         "https://sadeghvahidi.ir/works.html",
     ],
 )
+
+# --- 2026-11-25: the edge must send the baseline headers to every visitor.
+# These live in a Cloudflare response-header rule, not in the repository, so a
+# silent deletion there is exactly the regression this check exists to catch.
+EDGE_HEADERS = {
+    "strict-transport-security": "max-age=31536000",
+    "x-content-type-options": "nosniff",
+    "x-frame-options": "SAMEORIGIN",
+    "referrer-policy": "strict-origin-when-cross-origin",
+}
+for _page in ("", "shop.html", "resume/fa/"):
+    _label = _page or "/"
+    _st, _h = head(_page)
+    check("edge %s: 200" % _label, _st == 200)
+    for _name, _want in EDGE_HEADERS.items():
+        check(
+            "edge %s: %s" % (_label, _name),
+            _h.get(_name, "").startswith(_want),
+        )
+    check(
+        "edge %s: permissions-policy" % _label,
+        "geolocation=()" in _h.get("permissions-policy", ""),
+    )
+
+# pay. is served by the worker; the zone rule is scoped to the two site hosts so
+# it must not downgrade the worker's stricter values.
+_st, _pay = head("api/health", base="https://pay.sadeghvahidi.ir/")
+check("pay: reachable", _st == 200)
+check("pay: frame denied", _pay.get("x-frame-options") == "DENY")
+check("pay: no-referrer", _pay.get("referrer-policy") == "no-referrer")
+check(
+    "pay: CSP locked",
+    "default-src 'none'" in _pay.get("content-security-policy", ""),
+)
+
+# Mail authentication: SPF must exist and DMARC must stay published, otherwise
+# mail from the domain can be spoofed without any signal.
+_spf = doh("sadeghvahidi.ir", "TXT")
+check("mail: SPF published", "v=spf1 include:_spf.mx.cloudflare.net" in _spf)
+_dmarc = doh("_dmarc.sadeghvahidi.ir", "TXT")
+check("mail: DMARC published", "v=DMARC1" in _dmarc)
+check("mail: DMARC policy is p=none", "p=none" in _dmarc)
+check("mail: DMARC reports to the domain address", "contact@sadeghvahidi.ir" in _dmarc)
 
 fails = 0
 for name, ok in RESULTS:
