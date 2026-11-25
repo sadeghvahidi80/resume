@@ -157,9 +157,37 @@ check("css: no stale 820 query", "max-width:820px" not in css)
 status, sitemap = get("sitemap.xml")
 locs = re.findall(r"<loc>(.*?)</loc>", sitemap)
 check("sitemap 200", status == 200)
-check("sitemap: 20 urls", len(locs) == 20)
+check("sitemap: 21 urls", len(locs) == 21)
 check("sitemap: works listed", any("works.html" in u for u in locs))
 check("sitemap: gallery listed", any(u.endswith("/gallery.html") for u in locs))
+check("sitemap: shop listed", "https://sadeghvahidi.ir/shop.html" in locs)
+
+status, shop = get("shop.html")
+check("shop 200", status == 200)
+check(
+    "shop: public tariff in both languages",
+    'id="shop-tariff"' in shop and 'id="en-shop-tariff"' in shop,
+)
+check(
+    "shop: six buyable products",
+    all(
+        ('data-product="%s"' % pid) in shop
+        for pid in (
+            "consult-45",
+            "process-audit",
+            "sop-sprint",
+            "site-build",
+            "research-report",
+            "lead-harvest",
+        )
+    ),
+)
+check(
+    "shop: prices are static html, no js needed",
+    'data-price-toman="1500000"' in shop
+    and 'data-price-toman="15000000"' in shop
+    and 'data-price-toman="5000000"' in shop,
+)
 
 status, rfa = get("resume/fa/")
 check("resume fa 200", status == 200)
