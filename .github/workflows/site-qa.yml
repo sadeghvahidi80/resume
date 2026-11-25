@@ -80,6 +80,24 @@ jobs:
       - name: axe-core gate
         run: python qa/axe_probe.py
 
+  worker:
+    name: Shop worker
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: shop-worker/package-lock.json
+
+      - name: Install worker deps
+        run: npm ci --prefix shop-worker
+
+      - name: Worker tests
+        run: npm test --prefix shop-worker
+
   live:
     name: Live deploy
     if: github.event_name != 'pull_request'
