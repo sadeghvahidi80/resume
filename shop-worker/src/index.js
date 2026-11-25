@@ -299,7 +299,25 @@ async function callback(request, env) {
   return siteRedirect(env, { status: "paid", order: order.id });
 }
 
-export default {
+// This worker only speaks JSON, so the policy can forbid everything the API
+// does not need. It is applied to every response — success, error, preflight
+// and the redirect back to the site — so no code path can forget it.
+const SECURITY_HEADERS = {
+  "strict-transport-security": "max-age=31536000; includeSubDomains",
+  "x-content-type-options": "nosniff",
+  "x-frame-options": "DENY",
+  "referrer-policy": "no-referrer",
+  "permissions-policy": "geolocation=(), microphone=(), camera=(), payment=(), usb=()",
+  "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'",
+};
+
+function withSecurityHeaders(response) {
+  const headers = new Headers(response.headers);
+  Object.entries(SECURITY_HEADERS).forEach(([key, value]) => headers.set(key, value));
+  return new Response(response.body, { status: response.status, headers });
+}
+
+const worker = {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     const cors = corsHeaders(request, env);
@@ -340,5 +358,11 @@ export default {
       console.error("shop_worker_error", error && error.stack ? error.stack : String(error));
       return json({ ok: false, error: "server_error" }, 500, cors);
     }
+  },
+};
+
+export default {
+  async fetch(request, env) {
+    return withSecurityHeaders(await worker.fetch(request, env));
   },
 };
