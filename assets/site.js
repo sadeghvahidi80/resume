@@ -3,12 +3,11 @@
   'use strict';
 
   var root = document.documentElement;
-  var burger = document.getElementById('burger');
-  var mobile = document.getElementById('navMobile');
+  var menu = document.getElementById('navMenu');
+  var menuSummary = menu ? menu.querySelector('summary') : null;
   var toggle = document.getElementById('langToggle');
   var nav = document.getElementById('nav');
   var valid = ['fa', 'en'];
-  var isOpen = false;
 
   function safeStorageGet(key) {
     try { return window.localStorage.getItem(key); } catch (e) { return null; }
@@ -51,8 +50,6 @@
       toggle.setAttribute('title', lang === 'fa' ? 'English' : 'فارسی');
     }
 
-    if (burger) burger.setAttribute('aria-label', menuLabel(isOpen));
-
     var title = document.querySelector('title[data-fa][data-en]');
     if (title) title.textContent = title.getAttribute(lang === 'en' ? 'data-en' : 'data-fa');
     updateMeta('meta[name="description"][data-fa][data-en]', 'content', lang);
@@ -75,67 +72,29 @@
     }
   }
 
-  function menuLabel(next) {
-    var fa = root.lang !== 'en';
-    if (fa) return next ? 'بستن منو' : 'باز کردن منو';
-    return next ? 'Close menu' : 'Open menu';
-  }
-
-  function menuLinks() {
-    if (!mobile) return [];
-    return Array.prototype.filter.call(mobile.querySelectorAll('a'), function (a) {
-      return a.offsetParent !== null;
-    });
-  }
-
-  function setMenu(next) {
-    if (!mobile || !burger) return;
-    isOpen = !!next;
-    mobile.classList.toggle('open', isOpen);
-    burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    burger.setAttribute('aria-label', menuLabel(isOpen));
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-    void mobile.offsetHeight; // flush layout so the panel is measurable before focusing
-  }
-
-  function closeMenu(restoreFocus) {
-    if (!isOpen) return;
-    setMenu(false);
-    if (restoreFocus && burger) burger.focus();
-  }
-
-  if (burger && mobile) {
-    burger.addEventListener('click', function () {
-      if (isOpen) { closeMenu(true); return; }
-      setMenu(true);
-      var links = menuLinks();
-      if (links.length) links[0].focus();
-    });
-    mobile.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { closeMenu(false); }); });
-    mobile.addEventListener('click', function (event) {
-      if (event.target === mobile) closeMenu(false);
+  // The menu is a native <details>, so it opens without JavaScript. These
+  // listeners only add the expected conveniences: Escape closes and returns
+  // focus to the trigger, an outside click closes it, and following a link
+  // closes it so the next page never shows a stale open panel.
+  if (menu && menuSummary) {
+    var syncMenu = function () {
+      menuSummary.setAttribute('aria-expanded', menu.open ? 'true' : 'false');
+    };
+    menu.addEventListener('toggle', syncMenu);
+    syncMenu();
+    menu.querySelectorAll('.nav-menu-panel a').forEach(function (a) {
+      a.addEventListener('click', function () { menu.open = false; });
     });
     document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape' && isOpen) { event.preventDefault(); closeMenu(true); return; }
-      if (event.key !== 'Tab' || !isOpen) return;
-      var focusables = [burger].concat(menuLinks());
-      if (!focusables.length) return;
-      event.preventDefault();
-      var index = focusables.indexOf(document.activeElement);
-      if (index === -1) index = event.shiftKey ? 0 : -1;
-      var next = (index + (event.shiftKey ? -1 : 1) + focusables.length) % focusables.length;
-      focusables[next].focus();
+      if (event.key === 'Escape' && menu.open) {
+        event.preventDefault();
+        menu.open = false;
+        menuSummary.focus();
+      }
     });
     document.addEventListener('click', function (event) {
-      if (isOpen && !mobile.contains(event.target) && !burger.contains(event.target)) closeMenu(false);
+      if (menu.open && !menu.contains(event.target)) menu.open = false;
     });
-    var mobileQuery = window.matchMedia('(max-width: 820px)');
-    var onViewportChange = function (event) { if (!event.matches) closeMenu(false); };
-    if (mobileQuery.addEventListener) mobileQuery.addEventListener('change', onViewportChange);
-    else if (mobileQuery.addListener) mobileQuery.addListener(onViewportChange);
-    window.addEventListener('resize', function () {
-      if (window.innerWidth > 820) closeMenu(false);
-    }, { passive: true });
   }
 
   if (toggle) {
@@ -156,9 +115,11 @@
   }
 
   var current = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
-  document.querySelectorAll('.nav-links a, .nav-mobile a').forEach(function (a) {
-    var href = (a.getAttribute('href') || '').split('?')[0].toLowerCase();
-    if (href === current || (current === 'index.html' && (href === '/' || href === 'index.html'))) {
+  document.querySelectorAll('.nav-menu-panel a').forEach(function (a) {
+    var path = (a.getAttribute('href') || '').split('?')[0].split('#')[0];
+    var file = (path.split('/').pop() || '').toLowerCase();
+    if (!file) file = path === '/' ? 'index.html' : '';
+    if (file && file === current) {
       a.classList.add('active');
       a.setAttribute('aria-current', 'page');
     }

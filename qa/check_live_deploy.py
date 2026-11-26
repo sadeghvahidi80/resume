@@ -207,8 +207,14 @@ status, home = get("")
 check("home 200", status == 200)
 check("home: Ravan Yar 2.0 ready (fa)", home.count("نسخهٔ ۲٫۰ آمادهٔ انتشار") == 1)
 check("home: old in-development wording gone", "در حال توسعه" not in home)
-check("home: works nav fa x4", home.count('<a href="works.html">آثار</a>') == 4)
-check("home: works nav en x4", home.count('<a href="works.html">Works</a>') == 4)
+check(
+    "home: menu label visible (fa)",
+    '<span class="nav-menu-label"><span class="lang-fa">منو</span>' in home,
+)
+check("home: menu has shop link", '<a href="/shop.html">فروشگاه</a>' in home)
+check("home: menu has gallery link", '<a href="/gallery.html">گالری</a>' in home)
+check("home: works links fa", home.count('<a href="works.html">آثار</a>') == 2)
+check("home: works links en", home.count('<a href="works.html">Works</a>') == 2)
 check("home: body font preload", "vazirmatn-arabic.woff2" in home)
 check("home: one h1 per language view", h1_ok(home))
 check("home: no /index.html links", 'href="index.html"' not in home)
@@ -221,7 +227,8 @@ check(
     bool(title) and title.group(1).strip() == "آثار و شواهد — صادق وحیدی",
 )
 check("works: one h1 per language view", h1_ok(works))
-check("works: 8 self links", works.count('href="works.html"') == 8)
+check("works: self links", works.count('href="works.html"') == 4)
+check("works: menu self links", works.count('href="/works.html"') == 2)
 check("works: 2 JSON-LD blocks", works.count("application/ld+json") == 2)
 check("works: Ravan Yar 2.0 (fa)", "نسخهٔ ۲٫۰ آمادهٔ انتشار است" in works)
 check("works: Ravan Yar 2.0 (en)", "version 2.0 is ready for release" in works)

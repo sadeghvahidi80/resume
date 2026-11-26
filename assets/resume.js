@@ -5,10 +5,9 @@
   var rtl = locale === 'fa' || locale === 'ar';
   var root = document.querySelector('.resume-language[data-resume-locale="' + locale + '"]');
   var select = document.getElementById('languageToggle');
-  var burger = document.getElementById('burger');
-  var mobile = document.getElementById('navMobile');
+  var menu = document.getElementById('navMenu');
+  var menuSummary = menu ? menu.querySelector('summary') : null;
   var nav = document.getElementById('nav');
-  var open = false;
 
   document.documentElement.dir = rtl ? 'rtl' : 'ltr';
   document.body.dir = rtl ? 'rtl' : 'ltr';
@@ -24,15 +23,20 @@
   });
 
   var labels = {
-    en: ['About','MATEN','Experience','Contact'], it: ['Profilo','MATEN','Esperienza','Contatti'],
-    de: ['Profil','MATEN','Berufserfahrung','Kontakt'], fr: ['Profil','MATEN','Expérience','Contact'],
-    zh: ['个人简介','MATEN','工作经历','联系'], ru: ['Обо мне','MATEN','Опыт','Контакты'],
-    es: ['Perfil','MATEN','Experiencia','Contacto'], ar: ['نبذة عني','ماتن','الخبرة','التواصل'],
-    fa: ['درباره من','ماتن','سوابق شغلی','ارتباط با من']
+    en: {home:'Home',about:'About',maten:'MATEN',experience:'Experience',contact:'Contact'},
+    it: {home:'Home',about:'Profilo',maten:'MATEN',experience:'Esperienza',contact:'Contatti'},
+    de: {home:'Start',about:'Profil',maten:'MATEN',experience:'Berufserfahrung',contact:'Kontakt'},
+    fr: {home:'Accueil',about:'Profil',maten:'MATEN',experience:'Expérience',contact:'Contact'},
+    zh: {home:'首页',about:'个人简介',maten:'MATEN',experience:'工作经历',contact:'联系'},
+    ru: {home:'Главная',about:'Обо мне',maten:'MATEN',experience:'Опыт',contact:'Контакты'},
+    es: {home:'Inicio',about:'Perfil',maten:'MATEN',experience:'Experiencia',contact:'Contacto'},
+    ar: {home:'الرئيسية',about:'نبذة عني',maten:'ماتن',experience:'الخبرة',contact:'التواصل'},
+    fa: {home:'خانه',about:'درباره من',maten:'ماتن',experience:'سوابق شغلی',contact:'ارتباط با من'}
   };
   var navLabels = labels[locale] || labels.en;
-  document.querySelectorAll('#nav .nav-links a, #navMobile a').forEach(function (a, i) {
-    if (navLabels[i % 4]) a.textContent = navLabels[i % 4];
+  document.querySelectorAll('.nav-menu-panel a[data-nav]').forEach(function (a) {
+    var key = a.getAttribute('data-nav');
+    if (navLabels[key]) a.textContent = navLabels[key];
   });
 
   var person = document.getElementById('navPersonName');
@@ -40,17 +44,19 @@
   if (person) { person.textContent = names[locale] || names.en; person.lang = locale; person.dir = 'auto'; }
 
   var ui = {
-    en:{select:'Choose language',label:'Change language',print:'View and print PDF',open:'Open menu',close:'Close menu'},
-    it:{select:'Scegli la lingua',label:'Cambia lingua',print:'Visualizza e stampa PDF',open:'Apri il menu',close:'Chiudi il menu'},
-    de:{select:'Sprache auswählen',label:'Sprache wechseln',print:'PDF ansehen und drucken',open:'Menü öffnen',close:'Menü schließen'},
-    fr:{select:'Choisir la langue',label:'Changer la langue',print:'Voir et imprimer le PDF',open:'Ouvrir le menu',close:'Fermer le menu'},
-    zh:{select:'选择语言',label:'切换语言',print:'查看并打印 PDF',open:'打开菜单',close:'关闭菜单'},
-    ru:{select:'Выбрать язык',label:'Сменить язык',print:'Открыть и распечатать PDF',open:'Открыть меню',close:'Закрыть меню'},
-    es:{select:'Elegir idioma',label:'Cambiar idioma',print:'Ver e imprimir PDF',open:'Abrir menú',close:'Cerrar menú'},
-    ar:{select:'اختر اللغة',label:'تغيير اللغة',print:'عرض ملف PDF وطباعته',open:'فتح القائمة',close:'إغلاق القائمة'},
-    fa:{select:'انتخاب زبان',label:'تغییر زبان',print:'چاپ و مشاهدهٔ PDF',open:'باز کردن منو',close:'بستن منو'}
+    en:{select:'Choose language',label:'Change language',print:'View and print PDF',menu:'Menu'},
+    it:{select:'Scegli la lingua',label:'Cambia lingua',print:'Visualizza e stampa PDF',menu:'Menu'},
+    de:{select:'Sprache auswählen',label:'Sprache wechseln',print:'PDF ansehen und drucken',menu:'Menü'},
+    fr:{select:'Choisir la langue',label:'Changer la langue',print:'Voir et imprimer le PDF',menu:'Menu'},
+    zh:{select:'选择语言',label:'切换语言',print:'查看并打印 PDF',menu:'菜单'},
+    ru:{select:'Выбрать язык',label:'Сменить язык',print:'Открыть и распечатать PDF',menu:'Меню'},
+    es:{select:'Elegir idioma',label:'Cambiar idioma',print:'Ver e imprimir PDF',menu:'Menú'},
+    ar:{select:'اختر اللغة',label:'تغيير اللغة',print:'عرض ملف PDF وطباعته',menu:'القائمة'},
+    fa:{select:'انتخاب زبان',label:'تغییر زبان',print:'چاپ و مشاهدهٔ PDF',menu:'منو'}
   };
   var text = ui[locale] || ui.en;
+  var menuLabel = document.getElementById('navMenuLabel');
+  if (menuLabel) { menuLabel.textContent = text.menu; menuLabel.lang = locale; }
   var switcher = document.getElementById('languageSwitcher');
   var switcherLabel = document.getElementById('languageSwitcherLabel');
   var printLabel = document.getElementById('printButtonLabel');
@@ -73,57 +79,29 @@
     printButton.addEventListener('click', function () { window.print(); });
   }
 
-  function menuLinks() {
-    if (!mobile) return [];
-    return Array.prototype.filter.call(mobile.querySelectorAll('a'), function (a) {
-      return a.offsetParent !== null;
-    });
-  }
-  function setMenu(next, restoreFocus) {
-    if (!burger || !mobile) return;
-    open = !!next;
-    mobile.classList.toggle('open', open);
-    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-    burger.setAttribute('aria-label', open ? text.close : text.open);
-    document.body.style.overflow = open ? 'hidden' : '';
-    void mobile.offsetHeight; // flush layout so the panel is measurable before focusing
-    if (open) {
-      var links = menuLinks();
-      if (links.length) links[0].focus();
-    } else if (restoreFocus) {
-      burger.focus();
-    }
-  }
-  if (burger && mobile) {
-    burger.setAttribute('aria-label', text.open);
-    burger.addEventListener('click', function () { setMenu(!open, true); });
-    mobile.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false, false); }); });
-    mobile.addEventListener('click', function (e) {
-      if (e.target === mobile) setMenu(false, false);
+  // Native <details> opens without JavaScript; add Escape, outside-click and
+  // close-on-link so the panel behaves like a conventional dropdown.
+  if (menu && menuSummary) {
+    var syncMenu = function () {
+      menuSummary.setAttribute('aria-expanded', menu.open ? 'true' : 'false');
+    };
+    menu.addEventListener('toggle', syncMenu);
+    syncMenu();
+    menu.querySelectorAll('.nav-menu-panel a').forEach(function (a) {
+      a.addEventListener('click', function () { menu.open = false; });
     });
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && open) { e.preventDefault(); setMenu(false, true); return; }
-      if (e.key !== 'Tab' || !open) return;
-      var focusables = [burger].concat(menuLinks());
-      if (!focusables.length) return;
-      e.preventDefault();
-      var index = focusables.indexOf(document.activeElement);
-      if (index === -1) index = e.shiftKey ? 0 : -1;
-      var next = (index + (e.shiftKey ? -1 : 1) + focusables.length) % focusables.length;
-      focusables[next].focus();
+      if (e.key === 'Escape' && menu.open) {
+        e.preventDefault();
+        menu.open = false;
+        menuSummary.focus();
+      }
     });
     document.addEventListener('click', function (e) {
-      if (open && !mobile.contains(e.target) && !burger.contains(e.target)) setMenu(false, false);
+      if (menu.open && !menu.contains(e.target)) menu.open = false;
     });
-    var mobileQuery = window.matchMedia('(max-width: 820px)');
-    var onViewportChange = function (e) { if (!e.matches) setMenu(false, false); };
-    if (mobileQuery.addEventListener) mobileQuery.addEventListener('change', onViewportChange);
-    else if (mobileQuery.addListener) mobileQuery.addListener(onViewportChange);
-    window.addEventListener('resize', function () {
-      if (window.innerWidth > 820) setMenu(false, false);
-    }, { passive: true });
   }
-  document.querySelectorAll('.nav-links a[href^="#"], #navMobile a[href^="#"]').forEach(function (a) {
+  document.querySelectorAll('.nav-menu-panel a[href^="#"]').forEach(function (a) {
     a.addEventListener('click', function (e) {
       var target = document.querySelector(this.getAttribute('href'));
       if (target) { e.preventDefault(); target.scrollIntoView({behavior:'smooth',block:'start'}); }

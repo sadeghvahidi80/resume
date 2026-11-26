@@ -43,10 +43,12 @@ for name in pages:
     t = read(name)
     check(h1_ok(t), "%s: one h1 per language view (%d total)" % (name, t.count("<h1")))
     check("پروۚه" not in t, "%s: no broken glyph" % name)
-    nav_blk = re.search(r'<div class="nav-links">(.*?)</div>', t, re.S)
+    nav_blk = re.search(r'<div class="nav-menu-panel"[^>]*>(.*?)</div>', t, re.S)
     check(
-        nav_blk is not None and "gallery.html" not in nav_blk.group(1),
-        "%s: no gallery link in the desktop nav (950px width budget)" % name,
+        nav_blk is not None
+        and "gallery.html" in nav_blk.group(1)
+        and "shop.html" in nav_blk.group(1),
+        "%s: menu carries shop and gallery links" % name,
     )
     for m in re.finditer(
         r'<script type="application/ld\+json">(.*?)</script>', t, re.S
@@ -281,8 +283,8 @@ check(
     "works: page title present (en)",
 )
 check(
-    wk.count('href="works.html"') == 8,
-    "works: 8 self links (nav/mobile/footer x2 langs x2 blocks)",
+    wk.count('href="works.html"') == 4 and wk.count('href="/works.html"') == 2,
+    "works: 4 relative + 2 menu self links",
 )
 check('href="https://ensafnews.com/647785/"' in wk, "works: Ensaf article linked")
 check('href="/demos/ravanyar/"' in wk, "works: Ravan Yar demo linked")
@@ -332,10 +334,10 @@ check("Sabzevar24" not in wk, "works: internal product name not in HTML")
 
 for name in pages:
     t = read(name)
-    nav = re.search(r'<div class="nav-links">(.*?)</div>', t, re.S)
+    nav = re.search(r'<div class="nav-menu-panel"[^>]*>(.*?)</div>', t, re.S)
     check(
         nav is not None and nav.group(1).count("works.html") == 2,
-        "%s: works link in desktop nav" % name,
+        "%s: works link in the menu for both languages" % name,
     )
 
 ga = read("gallery.html")
@@ -634,13 +636,13 @@ if os.path.exists(ENS):
     check(".article .note{" in read("assets/style.css"), "style: article note styled")
     # the shared chrome must be absolute and complete on a nested page
     check(
-        ens.count('href="/works.html"') == 6,
-        "ensaf essay: works link x2 per block",
+        ens.count('href="/works.html"') == 4,
+        "ensaf essay: works link x2 per block (menu + footer)",
     )
     check(
         ens.count('href="gallery.html"') == 0
-        and ens.count('href="/gallery.html"') == 2,
-        "ensaf essay: gallery link absolute",
+        and ens.count('href="/gallery.html"') == 4,
+        "ensaf essay: gallery link absolute (menu + footer)",
     )
     check(
         ens.count('href="http://sadeghvahidi.ir') == 0,
