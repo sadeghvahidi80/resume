@@ -985,6 +985,7 @@ body.is-en .resume-language.lang-en{display:block!important}
   .p-part-label{font-size:7pt;color:#9b7626;margin-top:1mm;font-weight:600}
   .p-card-grid{display:grid;gap:4mm}
   .p-card-grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .p-card-grid .p-card-wide{grid-column:1/-1}
   .p-card{border:1px solid rgba(22,55,88,.13);border-radius:4mm;padding:4.5mm;background:#fbf9f4;break-inside:avoid;page-break-inside:avoid}
   .navy .p-card{background:#102e52;border-color:rgba(199,160,74,.25);color:#f7f3e9}
   .p-card h3{font-size:10.5pt;line-height:1.45;margin:0 0 2mm;color:inherit;font-weight:700}
@@ -1060,7 +1061,7 @@ body.is-en .resume-language.lang-en{display:block!important}
   .p-contact-links{display:flex;flex-wrap:wrap;justify-content:center;gap:2mm 6mm;border-top:1px solid rgba(199,160,74,.35);padding-top:4mm}
   .p-contact-links a{font-size:7pt;color:#f7f3e9;text-decoration:none}
   .p-contact-button{display:inline-block;margin:4mm 1mm 0;padding:2.5mm 4mm;border:1px solid rgba(199,160,74,.5);border-radius:2.5mm;color:#f7f3e9;text-decoration:none;font-size:7.5pt}
-  .p-contact-cta{display:inline-block;margin-top:5mm;padding:2.5mm 5mm;border:1px solid #c7a04a;border-radius:3mm;color:#c7a04a;font-size:7.5pt;font-weight:700}
+  .p-contact-cta{display:inline-block;margin-top:5mm;padding:2.5mm 5mm;border:1px solid #c7a04a;border-radius:3mm;color:#c7a04a;font-size:7.5pt;font-weight:700;text-decoration:none}
 }
 
 

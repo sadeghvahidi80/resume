@@ -881,6 +881,20 @@ check(
     "resume en: focus areas vs capabilities",
 )
 
+# shipped PDFs: present, valid header, and small enough to email
+for _pdf in ("assets/pdf/resume-fa.pdf", "assets/pdf/resume-en.pdf"):
+    _p = os.path.join(S, _pdf)
+    _ok = os.path.exists(_p)
+    _size = os.path.getsize(_p) if _ok else 0
+    _head = b""
+    if _ok:
+        with open(_p, "rb") as _f:
+            _head = _f.read(5)
+    check(
+        _ok and _head == b"%PDF-" and 200000 < _size < 1258291,
+        "%s: valid PDF and under 1.2 MB (got %.2f MB)" % (_pdf, _size / 1048576),
+    )
+
 print("\nFAILURES:", len(fails))
 for f in fails:
     print("  -", f)
