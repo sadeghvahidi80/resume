@@ -36,6 +36,11 @@ def _fetch(path):
                     "45",
                     "-A",
                     "Mozilla/5.0 site-check",
+                    # Cloudflare only injects the Web Analytics beacon into
+                    # responses that look like a browser navigation, so ask for
+                    # HTML explicitly; without this the beacon check is a lie.
+                    "-H",
+                    "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
                     # Fastly serves HTML gzipped (~5x smaller). The local link
                     # truncates large identity downloads around 64KB, so ask for
                     # compression and let curl decode it.
@@ -107,6 +112,55 @@ def head(path, base=BASE):
             key, _, value = line.partition(":")
             headers[key.strip().lower()] = value.strip()
     return status, headers
+
+
+def post(path, data, base=BASE, headers=None, ua="Mozilla/5.0 site-check"):
+    """POST one small text body and return (status, headers)."""
+    cmd = [
+        CURL,
+        "-sS",
+        "-D",
+        "-",
+        "-o",
+        os.devnull,
+        "-X",
+        "POST",
+        "--noproxy",
+        "*",
+        "--max-time",
+        "45",
+        "-A",
+        ua,
+        "-H",
+        "content-type: text/plain",
+    ]
+    for key, value in (headers or {}).items():
+        cmd += ["-H", "%s: %s" % (key, value)]
+    cmd += ["--data-binary", data, base + path]
+    proc = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
+    out = {}
+    status = 0
+    for line in proc.stdout.splitlines():
+        line = line.strip()
+        if line.lower().startswith("http/"):
+            out = {}
+            parts = line.split()
+            if len(parts) > 1 and parts[1].isdigit():
+                status = int(parts[1])
+        elif ":" in line:
+            key, _, value = line.partition(":")
+            out[key.strip().lower()] = value.strip()
+    return status, out
+
+
+def csp_directives(value):
+    """Split a CSP header into {directive: [sources]} for precise assertions."""
+    out = {}
+    for part in value.split(";"):
+        bits = part.strip().split()
+        if bits:
+            out[bits[0]] = bits[1:]
+    return out
 
 
 def doh(name, rtype):
@@ -496,6 +550,7 @@ for _page in ("", "shop.html", "resume/fa/"):
 # where the demo apps rely on their own inline scripts.
 _csp_status, _csp_headers = head("")
 _csp_value = _csp_headers.get("content-security-policy", "")
+_csp_map = csp_directives(_csp_value)
 check("edge /: CSP present", _csp_status == 200 and bool(_csp_value))
 for _directive in (
     "default-src 'none'",
@@ -505,6 +560,14 @@ for _directive in (
     "frame-ancestors 'self'",
 ):
     check("edge /: CSP has %s" % _directive, _directive in _csp_value)
+check(
+    "edge /: CSP script-src allows the RUM script",
+    "https://static.cloudflareinsights.com" in _csp_map.get("script-src", []),
+)
+check(
+    "edge /: CSP connect-src allows the RUM endpoint",
+    "https://cloudflareinsights.com" in _csp_map.get("connect-src", []),
+)
 
 _demo_status, _demo_headers = head("demos/karabi/")
 check("demos: reachable", _demo_status == 200)
@@ -523,6 +586,51 @@ check(
     "pay: CSP locked",
     "default-src 'none'" in _pay.get("content-security-policy", ""),
 )
+
+# --- 2026-11-26: analytics. Cloudflare RUM supplies visits and Core Web
+# Vitals; the first-party counter stores only paths and referrer hosts. The
+# live checks below prove the endpoint is up and that it refuses anything that
+# is not a real pageview, without writing a row from CI.
+check("home: first-party counter loaded", "/assets/analytics.js" in home)
+check("resume fa: first-party counter loaded", "/assets/analytics.js" in rfa)
+check("home: Cloudflare RUM beacon injected", "cloudflareinsights.com" in home)
+
+_analytics_status, _analytics_js = get("assets/analytics.js")
+check("analytics.js 200", _analytics_status == 200)
+check(
+    "analytics.js: posts to the worker",
+    "pay.sadeghvahidi.ir/api/hit" in _analytics_js,
+)
+check(
+    "analytics.js: honours DNT and GPC",
+    "doNotTrack" in _analytics_js and "globalPrivacyControl" in _analytics_js,
+)
+
+_hit_get, _ = head("api/hit", base="https://pay.sadeghvahidi.ir/")
+check("hit: GET is 405", _hit_get == 405)
+
+_hit_bad, _ = post(
+    "api/hit",
+    '{"path":"shop.html"}',
+    base="https://pay.sadeghvahidi.ir/",
+    headers={"origin": "https://sadeghvahidi.ir"},
+)
+check("hit: invalid path is 400", _hit_bad == 400)
+
+_hit_foreign, _ = post(
+    "api/hit",
+    '{"path":"/shop.html"}',
+    base="https://pay.sadeghvahidi.ir/",
+    headers={"origin": "https://evil.example"},
+)
+check("hit: foreign origin is 403", _hit_foreign == 403)
+
+_hit_anon, _ = post(
+    "api/hit",
+    '{"path":"/shop.html"}',
+    base="https://pay.sadeghvahidi.ir/",
+)
+check("hit: missing origin is 403", _hit_anon == 403)
 
 # Mail authentication: SPF must exist and DMARC must stay published, otherwise
 # mail from the domain can be spoofed without any signal.

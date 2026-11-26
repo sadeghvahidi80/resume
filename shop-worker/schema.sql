@@ -17,3 +17,19 @@ CREATE TABLE IF NOT EXISTS orders (
 
 CREATE UNIQUE INDEX IF NOT EXISTS idx_orders_authority ON orders (authority);
 CREATE INDEX IF NOT EXISTS idx_orders_created_at ON orders (created_at);
+
+-- Cookieless, first-party pageview counter. No IP and no user agent are stored:
+-- ts is Unix seconds, referrer holds only a host name (or "direct"/"internal").
+CREATE TABLE IF NOT EXISTS pageviews (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  ts INTEGER NOT NULL,
+  path TEXT NOT NULL,
+  referrer TEXT NOT NULL DEFAULT 'direct',
+  country TEXT NOT NULL DEFAULT '',
+  device TEXT NOT NULL DEFAULT 'desktop',
+  lang TEXT NOT NULL DEFAULT 'other',
+  viewport INTEGER NOT NULL DEFAULT 0
+);
+
+CREATE INDEX IF NOT EXISTS idx_pageviews_ts ON pageviews (ts);
+CREATE INDEX IF NOT EXISTS idx_pageviews_path ON pageviews (path);

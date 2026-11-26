@@ -4,12 +4,19 @@ import { isSandbox, requestPayment, verifyPayment } from "./zarinpal.js";
 const MAX_NAME = 80;
 const MAX_CONTACT = 120;
 const MAX_NOTE = 600;
+const MAX_HIT_BYTES = 4096;
 const RATE_WINDOW_MS = 60_000;
 const RATE_LIMIT = 12;
+const HIT_RATE_LIMIT = 40;
 
 // Best-effort per-isolate throttle. Cloudflare may run several isolates, so
 // this only blunts accidental double submits and naive scripts.
 const buckets = new Map();
+const hitBuckets = new Map();
+
+// Crawlers that execute JavaScript would otherwise inflate the counter.
+const BOT_UA =
+  /(googlebot|bingbot|yandexbot|duckduckbot|baiduspider|applebot|petalbot|semrushbot|ahrefsbot|mj12bot|dotbot|facebookexternalhit|twitterbot|linkedinbot|headlesschrome|python-requests|curl\/|wget\/|go-http-client|uptime|monitor|crawler|spider|slurp)/i;
 
 function json(payload, status = 200, extraHeaders = {}) {
   return new Response(JSON.stringify(payload), {
@@ -79,6 +86,51 @@ function throttled(request) {
   return entry.count > RATE_LIMIT;
 }
 
+function hitThrottled(request) {
+  const key = clientIp(request);
+  const now = Date.now();
+  const entry = hitBuckets.get(key);
+  if (!entry || now - entry.start > RATE_WINDOW_MS) {
+    hitBuckets.set(key, { start: now, count: 1 });
+    return false;
+  }
+  entry.count += 1;
+  if (hitBuckets.size > 5000) hitBuckets.clear();
+  return entry.count > HIT_RATE_LIMIT;
+}
+
+function hitPath(value) {
+  const raw = text(value, 200);
+  if (!raw || raw[0] !== "/") return null;
+  const path = raw.split(/[?#]/)[0].slice(0, 200);
+  return path || "/";
+}
+
+function referrerHost(value) {
+  const raw = text(value, 500);
+  if (!raw) return "direct";
+  try {
+    const url = new URL(raw);
+    if (url.protocol !== "https:" && url.protocol !== "http:") return "direct";
+    const host = url.hostname.toLowerCase();
+    if (host === "sadeghvahidi.ir" || host.endsWith(".sadeghvahidi.ir")) return "internal";
+    return host.slice(0, 120) || "direct";
+  } catch (error) {
+    return "direct";
+  }
+}
+
+function deviceClass(userAgent) {
+  return /Mobi|Android|iPhone|iPad|iPod|Mobile/i.test(userAgent) ? "mobile" : "desktop";
+}
+
+function hitLang(value) {
+  const raw = text(value, 8).toLowerCase();
+  if (raw.slice(0, 2) === "fa") return "fa";
+  if (raw.slice(0, 2) === "en") return "en";
+  return "other";
+}
+
 function siteBase(env) {
   return String((env && env.SITE_ORIGIN) || "https://sadeghvahidi.ir").replace(/\/+$/, "");
 }
@@ -113,6 +165,72 @@ function products(env) {
     purchasable: priceRial(item) !== null,
   }));
   return json({ ok: true, sandbox, products: items });
+}
+
+// Cookieless, first-party pageview counter. The row holds no IP and no user
+// agent: only the path, the referrer host, the Cloudflare country, a coarse
+// device class, the page language and the viewport width.
+async function hit(request, env) {
+  if (!request.headers.get("Origin") || !originAllowed(request, env)) {
+    return json({ ok: false, error: "origin_not_allowed" }, 403);
+  }
+  const userAgent = request.headers.get("User-Agent") || "";
+  if (BOT_UA.test(userAgent)) {
+    return new Response(null, { status: 204, headers: { "cache-control": "no-store" } });
+  }
+  if (hitThrottled(request)) {
+    return new Response(null, { status: 204, headers: { "cache-control": "no-store" } });
+  }
+  const declared = Number(request.headers.get("Content-Length") || 0);
+  if (declared > MAX_HIT_BYTES) {
+    return json({ ok: false, error: "too_large" }, 413);
+  }
+  if (!env || !env.DB) {
+    return json({ ok: false, error: "db_not_configured" }, 500);
+  }
+
+  let body;
+  try {
+    const raw = await request.text();
+    if (raw.length > MAX_HIT_BYTES) {
+      return json({ ok: false, error: "too_large" }, 413);
+    }
+    body = JSON.parse(raw);
+  } catch (error) {
+    return json({ ok: false, error: "bad_json" }, 400);
+  }
+  if (!body || typeof body !== "object") {
+    return json({ ok: false, error: "bad_json" }, 400);
+  }
+
+  const path = hitPath(body.path);
+  if (!path) {
+    return json({ ok: false, error: "bad_path" }, 400);
+  }
+
+  const viewport = Math.max(0, Math.min(9999, Math.round(Number(body.viewport) || 0)));
+  const country =
+    request.cf && request.cf.country ? String(request.cf.country).toUpperCase().slice(0, 2) : "";
+
+  try {
+    await env.DB.prepare(
+      "INSERT INTO pageviews (ts, path, referrer, country, device, lang, viewport) VALUES (?, ?, ?, ?, ?, ?, ?)"
+    )
+      .bind(
+        Math.floor(Date.now() / 1000),
+        path,
+        referrerHost(body.referrer),
+        country,
+        deviceClass(userAgent),
+        hitLang(body.lang),
+        viewport
+      )
+      .run();
+  } catch (error) {
+    return json({ ok: false, error: "db_write_failed" }, 500);
+  }
+
+  return new Response(null, { status: 204, headers: { "cache-control": "no-store" } });
 }
 
 async function checkout(request, env) {
@@ -345,6 +463,12 @@ const worker = {
         response = await health(env);
       } else if (url.pathname === "/api/products") {
         response = products(env);
+      } else if (url.pathname === "/api/hit") {
+        if (request.method !== "POST") {
+          response = json({ ok: false, error: "method_not_allowed" }, 405);
+        } else {
+          response = await hit(request, env);
+        }
       } else if (url.pathname === "/") {
         response = json({ ok: true, service: "sadeghvahidi-shop" });
       } else {

@@ -5,6 +5,7 @@
 export class FakeDB {
   constructor() {
     this.rows = new Map();
+    this.hits = [];
   }
 
   prepare(sql) {
@@ -64,6 +65,12 @@ class FakeStatement {
     if (sql.startsWith("UPDATE orders SET authority = ?")) {
       const [authority, id] = this.args;
       this.#patch(id, { authority });
+      return { success: true };
+    }
+
+    if (sql.startsWith("INSERT INTO pageviews")) {
+      const [ts, path, referrer, country, device, lang, viewport] = this.args;
+      this.db.hits.push({ ts, path, referrer, country, device, lang, viewport });
       return { success: true };
     }
 
