@@ -492,6 +492,27 @@ for _page in ("", "shop.html", "resume/fa/"):
         "geolocation=()" in _h.get("permissions-policy", ""),
     )
 
+# The CSP comes from the same edge rule, but it is scoped to skip /demos/,
+# where the demo apps rely on their own inline scripts.
+_csp_status, _csp_headers = head("")
+_csp_value = _csp_headers.get("content-security-policy", "")
+check("edge /: CSP present", _csp_status == 200 and bool(_csp_value))
+for _directive in (
+    "default-src 'none'",
+    "script-src 'self'",
+    "object-src 'none'",
+    "base-uri 'none'",
+    "frame-ancestors 'self'",
+):
+    check("edge /: CSP has %s" % _directive, _directive in _csp_value)
+
+_demo_status, _demo_headers = head("demos/karabi/")
+check("demos: reachable", _demo_status == 200)
+check(
+    "demos: site CSP not applied",
+    "content-security-policy" not in _demo_headers,
+)
+
 # pay. is served by the worker; the zone rule is scoped to the two site hosts so
 # it must not downgrade the worker's stricter values.
 _st, _pay = head("api/health", base="https://pay.sadeghvahidi.ir/")
