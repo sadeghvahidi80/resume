@@ -276,7 +276,7 @@ check("css: no stale 820 query", "max-width:820px" not in css)
 status, sitemap = get("sitemap.xml")
 locs = re.findall(r"<loc>(.*?)</loc>", sitemap)
 check("sitemap 200", status == 200)
-check("sitemap: 22 urls", len(locs) == 22)
+check("sitemap: 15 urls", len(locs) == 15)
 check("sitemap: works listed", any("works.html" in u for u in locs))
 check("sitemap: gallery listed", any(u.endswith("/gallery.html") for u in locs))
 check("sitemap: shop listed", "https://sadeghvahidi.ir/shop.html" in locs)
@@ -364,23 +364,15 @@ check(
     "Jenzadegi" in ren and "Jen-zedegi" not in ren,
 )
 
-_ensaf_live = {
-    "ar": "16 يونيو 2026",
-    "de": "16. Juni 2026",
-    "es": "16 jun 2026",
-    "fr": "16 juin 2026",
-    "it": "16 giu 2026",
-    "ru": "16 июн. 2026",
-    "zh": "2026 年 6 月 16 日",
-}
-_bad = []
-for _loc, _want in _ensaf_live.items():
+_retired_bad = []
+for _loc in ("ar", "de", "es", "fr", "it", "ru", "zh"):
     _st, _body = get("resume/%s/" % _loc)
-    if _st != 200 or _want not in _body:
-        _bad.append(_loc)
+    if _st != 200 or 'content="noindex, follow"' not in _body:
+        _retired_bad.append(_loc)
 check(
-    "resume locales: Ensaf date is 16 June 2026 live (bad: %s)" % (_bad,),
-    not _bad,
+    "resume locales: seven retired editions answer with a noindex stub (bad: %s)"
+    % (_retired_bad,),
+    not _retired_bad,
 )
 
 status, projects = get("projects.html")
@@ -532,24 +524,29 @@ _new = sorted(
     if d == "2026-11-22"
 )
 check(
-    "sitemap: 15 edited pages at 2026-11-22",
+    "sitemap: 6 edited pages at 2026-11-22",
     _new
     == [
         "https://sadeghvahidi.ir/magazine.html",
         "https://sadeghvahidi.ir/magazine/agency-mongol-narrative.html",
         "https://sadeghvahidi.ir/magazine/content-system-customers.html",
         "https://sadeghvahidi.ir/projects.html",
-        "https://sadeghvahidi.ir/resume/ar/",
-        "https://sadeghvahidi.ir/resume/de/",
-        "https://sadeghvahidi.ir/resume/en/",
-        "https://sadeghvahidi.ir/resume/es/",
-        "https://sadeghvahidi.ir/resume/fa/",
-        "https://sadeghvahidi.ir/resume/fr/",
-        "https://sadeghvahidi.ir/resume/it/",
-        "https://sadeghvahidi.ir/resume/ru/",
-        "https://sadeghvahidi.ir/resume/zh/",
         "https://sadeghvahidi.ir/services.html",
         "https://sadeghvahidi.ir/works.html",
+    ],
+)
+_retired = sorted(
+    u
+    for u, d in re.findall(r"<loc>(.*?)</loc><lastmod>(.*?)</lastmod>", sitemap)
+    if d == "2026-11-28"
+)
+check(
+    "sitemap: 3 edited pages at 2026-11-28",
+    _retired
+    == [
+        "https://sadeghvahidi.ir/resume.html",
+        "https://sadeghvahidi.ir/resume/en/",
+        "https://sadeghvahidi.ir/resume/fa/",
     ],
 )
 

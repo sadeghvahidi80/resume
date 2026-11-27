@@ -368,7 +368,7 @@ check("Disallow: /demos/" in rb, "robots: demos disallowed")
 
 sm = read("sitemap.xml")
 urls = re.findall(r"<loc>([^<]+)</loc>", sm)
-check(len(urls) == 22, "sitemap: 22 urls (got %d)" % len(urls))
+check(len(urls) == 15, "sitemap: 15 urls (got %d)" % len(urls))
 check(any(u.endswith("/gallery.html") for u in urls), "sitemap: gallery listed")
 check("https://sadeghvahidi.ir/shop.html" in urls, "sitemap: shop listed")
 check(
@@ -389,13 +389,14 @@ check(
     "sitemap: ensaf essay listed",
 )
 lastmods = re.findall(r"<lastmod>([^<]+)</lastmod>", sm)
-check(len(lastmods) == 22, "sitemap: 22 lastmod values (got %d)" % len(lastmods))
+check(len(lastmods) == 15, "sitemap: 15 lastmod values (got %d)" % len(lastmods))
 check(
     all(len(d) == 10 and d[4] == "-" for d in lastmods),
     "sitemap: lastmod is ISO date",
 )
 check(
-    set(lastmods) <= {"2026-11-15", "2026-11-22", "2026-11-25", "2026-11-27"}
+    set(lastmods)
+    <= {"2026-11-15", "2026-11-22", "2026-11-25", "2026-11-27", "2026-11-28"}
     and min(lastmods) >= "2026-11-15",
     "sitemap: lastmod values current, not stale (got %s)" % sorted(set(lastmods)),
 )
@@ -420,15 +421,6 @@ check(
         "https://sadeghvahidi.ir/magazine/agency-mongol-narrative.html",
         "https://sadeghvahidi.ir/magazine/content-system-customers.html",
         "https://sadeghvahidi.ir/projects.html",
-        "https://sadeghvahidi.ir/resume/ar/",
-        "https://sadeghvahidi.ir/resume/de/",
-        "https://sadeghvahidi.ir/resume/en/",
-        "https://sadeghvahidi.ir/resume/es/",
-        "https://sadeghvahidi.ir/resume/fa/",
-        "https://sadeghvahidi.ir/resume/fr/",
-        "https://sadeghvahidi.ir/resume/it/",
-        "https://sadeghvahidi.ir/resume/ru/",
-        "https://sadeghvahidi.ir/resume/zh/",
         "https://sadeghvahidi.ir/services.html",
         "https://sadeghvahidi.ir/works.html",
     ],
@@ -441,6 +433,42 @@ check(
     _new == ["https://sadeghvahidi.ir/lead-harvest.html"],
     "sitemap: only the standalone data page carries the 2026-11-27 lastmod (got %s)"
     % (_new,),
+)
+
+# --- ISS-13: seven machine-translated editions retired, not deleted. -------
+_retired = re.findall(r"<loc>([^<]+)</loc><lastmod>2026-11-28</lastmod>", sm)
+check(
+    sorted(_retired)
+    == [
+        "https://sadeghvahidi.ir/resume.html",
+        "https://sadeghvahidi.ir/resume/en/",
+        "https://sadeghvahidi.ir/resume/fa/",
+    ],
+    "sitemap: only the pages edited on 2026-11-28 carry that lastmod (got %s)"
+    % (_retired,),
+)
+
+for _lang in ("ar", "de", "es", "fr", "it", "ru", "zh"):
+    _stub = read("resume/%s/index.html" % _lang)
+    check(
+        'http-equiv="refresh"' in _stub
+        and 'rel="canonical" href="https://sadeghvahidi.ir/resume/en/"' in _stub
+        and 'content="noindex, follow"' in _stub,
+        "resume/%s: retired edition redirects to English" % _lang,
+    )
+    check(
+        _stub.count("<h1") == 1,
+        "resume/%s: stub keeps one h1" % _lang,
+    )
+
+_rl = read("resume.html")
+check(
+    not re.search(r'href="resume/(?:ar|de|es|fr|it|ru|zh)/"', _rl),
+    "resume.html: retired editions unlinked",
+)
+check(
+    _rl.count('href="resume/fa/"') == 2 and _rl.count('href="resume/en/"') == 2,
+    "resume.html: two live editions in both language views",
 )
 
 # ISS-02: contact-list sales moved out of the shop to a standalone page.
@@ -491,36 +519,9 @@ check(
     and "Jenzadegi" in read("resume/en/index.html"),
     "resume/en: Jenzadegi transliteration matches projects",
 )
-_ensaf = {
-    "ar": "16 يونيو 2026",
-    "de": "16. Juni 2026",
-    "es": "16 jun 2026",
-    "fr": "16 juin 2026",
-    "it": "16 giu 2026",
-    "ru": "16 июн. 2026",
-    "zh": "2026 年 6 月 16 日",
-}
-_stale = {
-    "ar": "1 يونيو 2026",
-    "de": "01. Juni 2026",
-    "es": "01 jun 2026",
-    "fr": "01 juin 2026",
-    "it": "01 giu 2026",
-    "ru": "01 июн. 2026",
-    "zh": "2026 年 6 月 1 日",
-}
-_bad = [
-    loc
-    for loc in _ensaf
-    if _ensaf[loc] not in read("resume/%s/index.html" % loc)
-    or _stale[loc] in read("resume/%s/index.html" % loc)
-]
-check(
-    not _bad,
-    "resume locales: Ensaf date is 16 June 2026 as published (bad: %s)" % (_bad,),
-)
 
-for loc in ("fa", "en", "de", "fr", "it", "es", "ru", "ar", "zh"):
+
+for loc in ("fa", "en"):
     t = read("resume/%s/index.html" % loc)
     check("Shara Ghasemi" not in t, "resume/%s: name removed" % loc)
     check("شارا" not in t, "resume/%s: fa name removed" % loc)
@@ -724,13 +725,6 @@ for name in (
     "projects.html",
     "resume/fa/index.html",
     "resume/en/index.html",
-    "resume/de/index.html",
-    "resume/fr/index.html",
-    "resume/it/index.html",
-    "resume/es/index.html",
-    "resume/ru/index.html",
-    "resume/ar/index.html",
-    "resume/zh/index.html",
 ):
     body = read(name)
     hits = [p for p in LEAD_BAD if p in body]
