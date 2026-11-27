@@ -66,8 +66,11 @@
     if (updateUrl && window.history && window.history.replaceState) {
       try {
         var url = new URL(window.location.href);
-        url.searchParams.set('lang', lang);
-        window.history.replaceState({}, '', url.pathname + url.search + url.hash);
+        // Persian is the default document: never keep a third ?lang=fa URL.
+        if (lang === 'fa') url.searchParams.delete('lang');
+        else url.searchParams.set('lang', lang);
+        var query = url.searchParams.toString();
+        window.history.replaceState({}, '', url.pathname + (query ? '?' + query : '') + url.hash);
       } catch (e) {}
     }
   }
@@ -107,6 +110,16 @@
   try { requested = new URLSearchParams(window.location.search).get('lang'); } catch (e) {}
   var initial = valid.indexOf(requested) !== -1 ? requested : (safeStorageGet('site-lang') || root.getAttribute('data-default-locale') || root.lang || 'fa');
   applyLang(initial, false);
+
+  // A shared ?lang=fa link points at a duplicate of the default page; drop it.
+  if (requested === 'fa' && window.history && window.history.replaceState) {
+    try {
+      var clean = new URL(window.location.href);
+      clean.searchParams.delete('lang');
+      var cleanQuery = clean.searchParams.toString();
+      window.history.replaceState({}, '', clean.pathname + (cleanQuery ? '?' + cleanQuery : '') + clean.hash);
+    } catch (e) {}
+  }
 
   if (nav) {
     var onScroll = function () { nav.classList.toggle('scrolled', window.scrollY > 40); };
