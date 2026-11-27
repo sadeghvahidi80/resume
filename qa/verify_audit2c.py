@@ -66,7 +66,7 @@ check(
     "projects: Karabi named",
 )
 check(
-    "۲۲۴ اسکیل ثبت‌شده در رجیستری" in pr and "224 registry skills" in pr,
+    "۲۲۴ مهارت ثبت‌شده" in pr and "224 registered skills" in pr,
     "MATEN: registry skills",
 )
 check("2 base platforms" not in pr, "MATEN: EN parity (no 2 platforms)")

@@ -65,7 +65,9 @@ check("۲ پلتفرم" not in pr, "projects: no ۲ پلتفرم")
 check("لینک‌های قابل بررسی" not in pr, "projects: no checkable-links claim (fa)")
 check("checkable links" not in pr, "projects: no checkable-links claim (en)")
 check("پروجه" not in pr, "projects: breadcrumb fixed")
-check(pr.count("۵ ایجنتی") == 1, "projects: ۵ ایجنتی present")
+check(pr.count("۵ ایجنتی") == 0, "projects: no ۵ ایجنتی jargon")
+check("ربات‌های کمکی" in pr, "projects: plain-language assistants (fa)")
+check("software assistants" in pr, "projects: plain-language assistants (en)")
 check(pr.count('href="/demos/karabi/"') == 2, "projects: 2 Karabi demo links")
 check(pr.count('href="/demos/ravanyar/"') == 2, "projects: 2 Ravan Yar demo links")
 
@@ -797,8 +799,8 @@ check("شش نمونه‌کار <em>منتخب</em>" in pr, "projects: selected-
 check(
     "Six <em>selected</em> case studies" in pr, "projects: selected-case heading (en)"
 )
-check("۲۲۴ اسکیل ثبت‌شده در رجیستری" in pr, "projects: registry skills (fa)")
-check("224 registry skills" in pr, "projects: registry skills (en)")
+check("۲۲۴ مهارت ثبت‌شده" in pr, "projects: registry skills (fa)")
+check("224 registered skills" in pr, "projects: registry skills (en)")
 check("2 base platforms" not in pr, "projects: MATEN EN parity")
 check(
     "نمونهٔ عمومی این سامانه منتشر نشده است." in pr,
