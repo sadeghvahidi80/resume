@@ -882,7 +882,12 @@ check(
 )
 
 # shipped PDFs: present, valid header, and small enough to email
-for _pdf in ("assets/pdf/resume-fa.pdf", "assets/pdf/resume-en.pdf"):
+for _pdf in (
+    "assets/pdf/resume-fa.pdf",
+    "assets/pdf/resume-en.pdf",
+    "assets/pdf/portfolio-fa.pdf",
+    "assets/pdf/portfolio-en.pdf",
+):
     _p = os.path.join(S, _pdf)
     _ok = os.path.exists(_p)
     _size = os.path.getsize(_p) if _ok else 0
@@ -894,6 +899,29 @@ for _pdf in ("assets/pdf/resume-fa.pdf", "assets/pdf/resume-en.pdf"):
         _ok and _head == b"%PDF-" and 200000 < _size < 1258291,
         "%s: valid PDF and under 1.2 MB (got %.2f MB)" % (_pdf, _size / 1048576),
     )
+
+# portfolio print edition + dual print chooser
+for _lang, _doc in (("fa", rfa), ("en", ren)):
+    check(
+        '<div class="print-portfolio" id="print-portfolio">' in _doc,
+        "resume %s: portfolio print block present" % _lang,
+    )
+    check(
+        _doc.count('data-print-locale="%s"' % _lang) == 21,
+        "resume %s: 13 resume + 8 portfolio print pages" % _lang,
+    )
+    check(
+        'data-print-doc="resume"' in _doc and 'data-print-doc="portfolio"' in _doc,
+        "resume %s: dual print chooser present" % _lang,
+    )
+    check(
+        'href="/assets/pdf/portfolio-%s.pdf"' % _lang in _doc,
+        "resume %s: portfolio download linked" % _lang,
+    )
+check(
+    "print-doc-portfolio" in read("assets/resume.js"),
+    "resume.js: portfolio print mode wired",
+)
 
 print("\nFAILURES:", len(fails))
 for f in fails:

@@ -22,6 +22,13 @@
     if (index === pages.length - 1) page.classList.add('last-active');
   });
 
+  var portfolioPages = Array.prototype.slice.call(document.querySelectorAll('#print-portfolio .print-page[data-print-locale="' + locale + '"]'));
+  portfolioPages.forEach(function (page, index) {
+    page.classList.add('is-print-active');
+    page.setAttribute('aria-hidden', 'false');
+    if (index === portfolioPages.length - 1) page.classList.add('last-active');
+  });
+
   var labels = {
     en: {home:'Home',about:'About',maten:'MATEN',experience:'Experience',contact:'Contact'},
     it: {home:'Home',about:'Profilo',maten:'MATEN',experience:'Esperienza',contact:'Contatti'},
@@ -55,6 +62,8 @@
     fa:{select:'انتخاب زبان',label:'تغییر زبان',print:'چاپ و مشاهدهٔ PDF',menu:'منو'}
   };
   var text = ui[locale] || ui.en;
+  if (locale === 'fa') text.print = 'چاپ / PDF';
+  else if (locale === 'en') text.print = 'Print / PDF';
   var menuLabel = document.getElementById('navMenuLabel');
   if (menuLabel) { menuLabel.textContent = text.menu; menuLabel.lang = locale; }
   var switcher = document.getElementById('languageSwitcher');
@@ -74,8 +83,41 @@
     });
   }
   if (printLabel) printLabel.textContent = text.print;
-  if (printButton) {
-    printButton.setAttribute('aria-label', text.print);
+  var printMenu = document.querySelector('.print-menu');
+  var setDocMode = function (mode) {
+    document.body.classList.toggle('print-doc-portfolio', mode === 'portfolio');
+  };
+  if (printButton) printButton.setAttribute('aria-label', text.print);
+  if (printMenu) {
+    printMenu.querySelectorAll('[data-print-doc]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        setDocMode(this.getAttribute('data-print-doc'));
+        printMenu.open = false;
+        window.setTimeout(function () { window.print(); }, 60);
+      });
+    });
+    document.addEventListener('click', function (e) {
+      if (printMenu.open && !printMenu.contains(e.target)) printMenu.open = false;
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && printMenu.open) {
+        e.preventDefault();
+        printMenu.open = false;
+        var summary = printMenu.querySelector('summary');
+        if (summary) summary.focus();
+      }
+    });
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('print') === 'portfolio' && portfolioPages.length) {
+      setDocMode('portfolio');
+      window.addEventListener('load', function () {
+        window.setTimeout(function () { window.print(); }, 400);
+      });
+    }
+    window.addEventListener('afterprint', function () {
+      setDocMode('resume');
+    });
+  } else if (printButton) {
     printButton.addEventListener('click', function () { window.print(); });
   }
 
