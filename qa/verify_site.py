@@ -133,8 +133,14 @@ check(
     pr.count("public build has not been published yet") == 1,
     "projects: public build not released (en)",
 )
-check(pr.count("(داده نمونه)") == 2, "projects: demos labelled sample data (fa)")
-check(pr.count("(sample data)") == 2, "projects: demos labelled sample data (en)")
+check(
+    "مشاهده دمو (داده نمونه)" in pr and "دمو با دادهٔ نمونه" in pr,
+    "projects: demos labelled sample data (fa)",
+)
+check(
+    "Open the demo (sample data)" in pr and "demo with sample data" in pr,
+    "projects: demos labelled sample data (en)",
+)
 check(
     rfa.count("نسخهٔ عمومی هنوز منتشر نشده") == 4,
     "resume fa: public build not released x4",
@@ -321,8 +327,8 @@ check(
     "works: MATEN console image in both locales",
 )
 check(
-    wk.count("بخشی از شناسهٔ داخلی محصول محو شده است") == 1
-    and wk.count("Part of the internal product name is masked") == 1,
+    wk.count("نام داخلی محصول و شناسه‌های مشتری برای حفظ محرمانگی محو شده‌اند.") == 1
+    and wk.count("customer identifiers are masked for confidentiality") == 1,
     "works: console redaction disclosed in both captions",
 )
 _console = os.path.join(S, "assets", "maten-console.webp")
