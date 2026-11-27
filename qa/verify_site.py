@@ -360,9 +360,13 @@ check("Disallow: /demos/" in rb, "robots: demos disallowed")
 
 sm = read("sitemap.xml")
 urls = re.findall(r"<loc>([^<]+)</loc>", sm)
-check(len(urls) == 21, "sitemap: 21 urls (got %d)" % len(urls))
+check(len(urls) == 22, "sitemap: 22 urls (got %d)" % len(urls))
 check(any(u.endswith("/gallery.html") for u in urls), "sitemap: gallery listed")
 check("https://sadeghvahidi.ir/shop.html" in urls, "sitemap: shop listed")
+check(
+    "https://sadeghvahidi.ir/lead-harvest.html" in urls,
+    "sitemap: standalone data page listed",
+)
 check(not any("/demos/" in u for u in urls), "sitemap: no demos")
 check(
     "https://sadeghvahidi.ir/magazine.html" in urls,
@@ -377,13 +381,13 @@ check(
     "sitemap: ensaf essay listed",
 )
 lastmods = re.findall(r"<lastmod>([^<]+)</lastmod>", sm)
-check(len(lastmods) == 21, "sitemap: 21 lastmod values (got %d)" % len(lastmods))
+check(len(lastmods) == 22, "sitemap: 22 lastmod values (got %d)" % len(lastmods))
 check(
     all(len(d) == 10 and d[4] == "-" for d in lastmods),
     "sitemap: lastmod is ISO date",
 )
 check(
-    set(lastmods) <= {"2026-11-15", "2026-11-22", "2026-11-25"}
+    set(lastmods) <= {"2026-11-15", "2026-11-22", "2026-11-25", "2026-11-27"}
     and min(lastmods) >= "2026-11-15",
     "sitemap: lastmod values current, not stale (got %s)" % sorted(set(lastmods)),
 )
@@ -422,6 +426,50 @@ check(
     ],
     "sitemap: only the edited pages carry the 2026-11-22 lastmod (got %s)"
     % (_changed,),
+)
+
+_new = re.findall(r"<loc>([^<]+)</loc><lastmod>2026-11-27</lastmod>", sm)
+check(
+    _new == ["https://sadeghvahidi.ir/lead-harvest.html"],
+    "sitemap: only the standalone data page carries the 2026-11-27 lastmod (got %s)"
+    % (_new,),
+)
+
+# ISS-02: contact-list sales moved out of the shop to a standalone page.
+_lh = read("lead-harvest.html")
+_sh = read("shop.html")
+check(
+    _lh.count('class="lang-fa"') >= 2 and _lh.count('class="lang-en"') >= 2,
+    "lead-harvest: both languages present",
+)
+check(
+    "https://sadeghvahidi.ir/lead-harvest.html" in _lh,
+    "lead-harvest: canonical url",
+)
+check(
+    _sh.count('href="lead-harvest.html"') == 2,
+    "shop: standalone data page linked in both languages",
+)
+check(
+    _sh.count('data-product="lead-harvest"') == 0
+    and _sh.count('data-buy="lead-harvest"') == 0,
+    "shop: contact-list product card and buy button removed",
+)
+check(
+    len(re.findall(r'<article class="case-card shop-card" data-product="', _sh)) == 10,
+    "shop: five buyable services in both languages",
+)
+check(
+    "فقط منبع عمومی" in _lh and "Public sources only" in _lh,
+    "lead-harvest: public-source boundary stated",
+)
+check(
+    "بدون خرید لیست" in _lh and "No purchased lists" in _lh,
+    "lead-harvest: purchased lists refused",
+)
+check(
+    "بررسی پیش از شروع" in _lh and "Review before work" in _lh,
+    "lead-harvest: pre-project compliance review stated",
 )
 
 _fa = read("resume/fa/index.html")

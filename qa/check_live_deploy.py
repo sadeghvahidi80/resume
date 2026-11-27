@@ -276,10 +276,14 @@ check("css: no stale 820 query", "max-width:820px" not in css)
 status, sitemap = get("sitemap.xml")
 locs = re.findall(r"<loc>(.*?)</loc>", sitemap)
 check("sitemap 200", status == 200)
-check("sitemap: 21 urls", len(locs) == 21)
+check("sitemap: 22 urls", len(locs) == 22)
 check("sitemap: works listed", any("works.html" in u for u in locs))
 check("sitemap: gallery listed", any(u.endswith("/gallery.html") for u in locs))
 check("sitemap: shop listed", "https://sadeghvahidi.ir/shop.html" in locs)
+check(
+    "sitemap: standalone data page listed",
+    "https://sadeghvahidi.ir/lead-harvest.html" in locs,
+)
 
 status, shop = get("shop.html")
 check("shop 200", status == 200)
@@ -288,7 +292,7 @@ check(
     'id="shop-tariff"' in shop and 'id="en-shop-tariff"' in shop,
 )
 check(
-    "shop: six buyable products",
+    "shop: five buyable products",
     all(
         ('data-product="%s"' % pid) in shop
         for pid in (
@@ -297,15 +301,34 @@ check(
             "sop-sprint",
             "site-build",
             "research-report",
-            "lead-harvest",
         )
-    ),
+    )
+    and 'data-product="lead-harvest"' not in shop,
+)
+check(
+    "shop: links the standalone data page",
+    shop.count('href="lead-harvest.html"') == 2,
 )
 check(
     "shop: prices are static html, no js needed",
     'data-price-toman="1500000"' in shop
     and 'data-price-toman="15000000"' in shop
     and 'data-price-toman="5000000"' in shop,
+)
+
+status, lh = get("lead-harvest.html")
+check("lead-harvest 200", status == 200)
+check(
+    "lead-harvest: both languages present",
+    "داده و لید، با" in lh and "Data and leads, with" in lh,
+)
+check(
+    "lead-harvest: public-source boundary",
+    "فقط منبع عمومی" in lh and "Public sources only" in lh,
+)
+check(
+    "lead-harvest: no per-1,000 sale language",
+    "هر ۱٬۰۰۰ شماره" not in lh and "Per 1,000" not in lh,
 )
 
 status, rfa = get("resume/fa/")

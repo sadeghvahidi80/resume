@@ -175,7 +175,7 @@
     },
     {
       "id": "lead-harvest",
-      "visible": true,
+      "visible": false,
       "title": {
         "fa": "جمع‌آوری سفارشی و اختصاصی شماره تماس مشتری",
         "en": "Custom, exclusive customer contact list"
