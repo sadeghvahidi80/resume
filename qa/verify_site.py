@@ -885,7 +885,7 @@ check(
     all(len(d.get("mainEntity", [])) == 4 for d in _faqs),
     "services: 4 questions per locale in schema",
 )
-_summ = re.findall(r"<summary>(.*?)</summary>", sv, re.S)
+_summ = re.findall(r'<details class="faq-item"[^>]*><summary>(.*?)</summary>', sv, re.S)
 _schema_q = [q["name"] for d in _faqs for q in d["mainEntity"]]
 check(len(_summ) == 8, "services: 8 visible FAQ summaries (got %d)" % len(_summ))
 check(_summ == _schema_q, "services: visible FAQ questions match the schema")

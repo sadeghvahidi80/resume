@@ -429,7 +429,9 @@ footer{padding:1.7rem 3rem;display:flex;justify-content:space-between;align-item
 
   .hero-eye{font-size:clamp(.85rem,3vw,1.1rem)}
 
-  :is(#hero,#en-hero){padding:5rem 1.2rem 3rem}
+  /* ISS-07: on phones the hero hugs its content instead of a full viewport,
+     so the page title lands in the first ~120px and real content follows. */
+  :is(#hero,#en-hero){min-height:auto;justify-content:flex-start;padding:5rem 1.2rem 3rem}
 
   section{padding:3.5rem 1.2rem}
 
@@ -445,7 +447,7 @@ footer{padding:1.7rem 3rem;display:flex;justify-content:space-between;align-item
 
   .hero-stats{flex-direction:column;gap:.8rem}
 
-  .hero-eye{font-size:.85rem}
+  .hero-eye{font-size:.85rem;margin-bottom:1.2rem}
 
   .hero-h1{font-size:1.8rem}
 
@@ -939,6 +941,15 @@ html[lang="fa"] .nas-keep.hero-h1{font-size:clamp(2.5rem,7vw,5rem);line-height:2
 .faq-item>summary:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .faq-a p{margin:0;padding:0 0 1rem;font-size:.85rem;color:var(--muted);line-height:1.95}
 
+/* ISS-14: long service details collapse by default so each card fits one phone screen. */
+.svc-more{margin:.9rem 0 .2rem;border-top:1px solid rgba(255,255,255,.07)}
+.svc-more>summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.8rem 0;font-size:.78rem;letter-spacing:.03em;color:var(--gold-light)}
+.svc-more>summary::-webkit-details-marker{display:none}
+.svc-more>summary::after{content:"+";color:var(--gold);font-size:1.05rem;line-height:1;flex:0 0 auto}
+.svc-more[open]>summary::after{content:"\2013"}
+.svc-more>summary:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.svc-more .svc-meta{margin-top:.2rem}
+
 /* GALLERY-001: masonry gallery (owner decision 2026-11-12) + lightbox */
 .gal-grid{column-count:3;column-gap:14px}
 .gal-item{break-inside:avoid;page-break-inside:avoid;margin:0 0 14px;border:1px solid rgba(255,255,255,.08);border-radius:var(--r);overflow:hidden;background:var(--charcoal)}
@@ -1031,3 +1042,15 @@ a.skip-link:focus{top:1rem;width:max-content;max-width:calc(100% - 2rem)}
 .case-fig{margin:1.25rem 0 .25rem;border:1px solid rgba(255,255,255,.08);border-radius:10px;overflow:hidden;background:#0b1220}
 .case-fig img{display:block;width:100%;height:auto}
 .case-fig figcaption{padding:.6rem .85rem;border-top:1px solid rgba(255,255,255,.06);font-size:.74rem;line-height:1.75;color:var(--muted)}
+
+/* ISS-14: a fixed contact action on phones so the request link is always one tap away. */
+.svc-sticky-cta{display:none}
+@media(max-width:768px){
+  .svc-sticky-cta{display:flex;position:fixed;inset-inline:0;bottom:0;z-index:120;
+    padding:.65rem 1rem calc(.65rem + env(safe-area-inset-bottom));
+    background:rgba(3,31,68,.96);border-top:1px solid rgba(200,164,74,.28);
+    -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+  .svc-sticky-cta .btn-primary{flex:1;padding:.8rem 1rem;font-size:.9rem;border-radius:var(--r-sm)}
+  body.has-sticky-cta{padding-bottom:4.4rem}
+  body.has-sticky-cta .back-to-top{bottom:5.2rem}
+}
