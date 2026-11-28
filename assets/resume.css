@@ -329,6 +329,12 @@ footer{padding:1.7rem 3rem;display:flex;justify-content:space-between;align-item
 
 .ft-copy{font-size:.67rem;color:var(--mid);letter-spacing:.05em}
 
+/* The chooser page (editions + PDF downloads) had no inbound link at all, so
+   its buttons were only reachable from the sitemap. Underlined on purpose:
+   axe's link-in-text-block rule wants more than colour to set it apart. */
+.ft-link{color:var(--gold);text-decoration:underline;text-underline-offset:.18em}
+.ft-link:hover{color:var(--gold-light)}
+
 .ft-id{font-size:.62rem;color:rgba(255,255,255,.13);letter-spacing:.1em}
 
 
@@ -1268,8 +1274,15 @@ html[lang="fa"] .nas-keep.hero-h1{font-size:clamp(2.5rem,7vw,5rem);line-height:2
 .print-menu-panel{
   position:absolute;
   bottom:calc(100% + .5rem);
-  inset-inline-start:0;
+  /* The trigger is a bottom-left floating button, so the panel has to grow
+     rightward from its left edge. Anchoring to the inline start flipped it off
+     the screen in RTL (the panel ran 98px past the viewport edge). */
+  left:0;
+  right:auto;
   min-width:15rem;
+  max-width:calc(100vw - 4rem);
+  max-height:calc(100vh - 9rem);
+  overflow:auto;
   display:flex;
   flex-direction:column;
   gap:.2rem;

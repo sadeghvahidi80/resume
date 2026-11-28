@@ -995,23 +995,33 @@ check(
     "resume en: focus areas vs capabilities",
 )
 
-# shipped PDFs: present, valid header, and small enough to email
-for _pdf in (
-    "assets/pdf/resume-fa.pdf",
-    "assets/pdf/resume-en.pdf",
-    "assets/pdf/portfolio-fa.pdf",
-    "assets/pdf/portfolio-en.pdf",
+
+# shipped PDFs: present, valid header, right page count, small enough to email
+def _pdf_pages(_raw):
+    """Page count from the /Pages tree; Chromium writes /Count on each node."""
+    return max([int(_n) for _n in re.findall(rb"/Count\s+(\d+)", _raw)] or [0])
+
+
+for _pdf, _want in (
+    ("assets/pdf/resume-fa.pdf", 13),
+    ("assets/pdf/resume-en.pdf", 13),
+    ("assets/pdf/portfolio-fa.pdf", 8),
+    ("assets/pdf/portfolio-en.pdf", 8),
 ):
     _p = os.path.join(S, _pdf)
     _ok = os.path.exists(_p)
     _size = os.path.getsize(_p) if _ok else 0
-    _head = b""
+    _raw = b""
     if _ok:
         with open(_p, "rb") as _f:
-            _head = _f.read(5)
+            _raw = _f.read()
     check(
-        _ok and _head == b"%PDF-" and 200000 < _size < 1258291,
+        _ok and _raw[:5] == b"%PDF-" and 200000 < _size < 1258291,
         "%s: valid PDF and under 1.2 MB (got %.2f MB)" % (_pdf, _size / 1048576),
+    )
+    check(
+        _pdf_pages(_raw) == _want,
+        "%s: exactly %d pages (got %d)" % (_pdf, _want, _pdf_pages(_raw)),
     )
 
 # two-page CV (ISS-10): a recruiter-facing file that has to stay emailable
@@ -1019,13 +1029,17 @@ for _pdf in ("assets/pdf/cv-fa.pdf", "assets/pdf/cv-en.pdf"):
     _p = os.path.join(S, _pdf)
     _ok = os.path.exists(_p)
     _size = os.path.getsize(_p) if _ok else 0
-    _head = b""
+    _raw = b""
     if _ok:
         with open(_p, "rb") as _f:
-            _head = _f.read(5)
+            _raw = _f.read()
     check(
-        _ok and _head == b"%PDF-" and 10000 < _size < 307200,
+        _ok and _raw[:5] == b"%PDF-" and 10000 < _size < 307200,
         "%s: valid PDF and under 300 KB (got %.0f KB)" % (_pdf, _size / 1024),
+    )
+    check(
+        _pdf_pages(_raw) == 2,
+        "%s: exactly 2 pages (got %d)" % (_pdf, _pdf_pages(_raw)),
     )
 
 # portfolio + CV print editions and the three-way print chooser

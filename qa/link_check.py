@@ -12,7 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PORT = 8097
-MIN_LINKS = 25
+MIN_LINKS = 55
 MIN_EN_LINKS = 10
 
 
@@ -23,6 +23,10 @@ class Quiet(http.server.SimpleHTTPRequestHandler):
 
 class Server(http.server.ThreadingHTTPServer):
     daemon_threads = True
+    # linkinator opens connections in bursts; the default backlog of 5 made the
+    # server refuse some of them, which linkinator reports as status 0 / BROKEN.
+    # That silently shrank every crawl (65 to 200 links on identical content).
+    request_queue_size = 256
 
     def handle_error(self, request, client_address):
         pass
@@ -81,12 +85,24 @@ finally:
     httpd.shutdown()
 
 links = data.get("links", [])
-broken = [item for item in links if (item.get("status") or 0) >= 400]
+# linkinator dedupes by URL, so len(links) is the number of distinct targets.
+# A target that was never fetched keeps status 0 and state BROKEN, which the old
+# ">= 400" filter quietly ignored: the gate printed OK while a third of the site
+# had not been looked at. Judge on state, and only count fetched targets.
+broken = [
+    item
+    for item in links
+    if item.get("state") != "OK" or (item.get("status") or 0) >= 400
+]
+fetched = [item for item in links if item.get("status")]
 # The English pages live under /en/ and are only reachable through the
 # language switch; make sure the crawl actually got there.
 en_links = [item for item in links if "/en/" in (item.get("url") or "")]
 
-print("links checked: %d (%d under /en/)" % (len(links), len(en_links)))
+print(
+    "links checked: %d distinct (%d fetched, %d under /en/)"
+    % (len(links), len(fetched), len(en_links))
+)
 for item in broken:
     print("  %s %s" % (item.get("status"), item.get("url")))
 
@@ -99,4 +115,6 @@ if len(en_links) < MIN_EN_LINKS:
     )
 if broken:
     sys.exit("FAIL: %d broken link(s)" % len(broken))
+if not data.get("passed"):
+    sys.exit("FAIL: linkinator reported a failure")
 print("OK: no broken internal links")

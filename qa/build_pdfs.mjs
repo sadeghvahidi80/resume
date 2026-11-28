@@ -8,8 +8,14 @@
  *
  * Usage:
  *   node qa/build_pdfs.mjs            # rebuild the two CVs (default)
- *   node qa/build_pdfs.mjs --all      # rebuild all six files
  *   node qa/build_pdfs.mjs --only=cv  # explicit
+ *
+ * Only the CVs are rebuilt by default. The 13-page resume and the 8-page
+ * portfolio are shipped as they were verified: Chromium's page.pdf() embeds
+ * full-resolution images, so re-rendering them here produces files roughly
+ * twice the size (1.9 MB vs 978 KB for resume-fa). Those two editions were
+ * compressed separately; rebuild them with --only=resume / --only=portfolio
+ * only if you are prepared to re-check size and pagination by hand.
  *
  * Chromium comes from the local Playwright cache; override with CHROME_PATH.
  * A throwaway static server is used because file:// URLs drop the stylesheet
@@ -85,9 +91,7 @@ const origin = `http://127.0.0.1:${server.address().port}`;
 
 const args = process.argv.slice(2);
 const onlyArg = args.find((a) => a.startsWith('--only='));
-const only = onlyArg ? onlyArg.split('=')[1] : args.includes('--all') ? 'all' : 'cv';
-
-const JOBS = [
+const only = onlyArg ? onlyArg.split('=')[1] : args.includes('--all') ? 'all' : 'cv';const JOBS = [
   { id: 'cv', locale: 'fa', mode: 'print-doc-cv', out: 'assets/pdf/cv-fa.pdf' },
   { id: 'cv', locale: 'en', mode: 'print-doc-cv', out: 'assets/pdf/cv-en.pdf' },
   { id: 'resume', locale: 'fa', mode: '', out: 'assets/pdf/resume-fa.pdf' },
@@ -99,6 +103,13 @@ const JOBS = [
 if (!JOBS.length) {
   console.error(`Unknown --only=${only}. Use cv, resume, portfolio or all.`);
   process.exit(1);
+}
+
+if (JOBS.some((job) => job.id !== 'cv')) {
+  console.warn(
+    'WARNING: resume/portfolio come out ~2x larger than the shipped files ' +
+      '(full-resolution images). Check size and pagination before committing.',
+  );
 }
 
 const browser = await chromium.launch({ executablePath, args: ['--font-render-hinting=none'] });
