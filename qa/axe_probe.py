@@ -42,6 +42,17 @@ PAGES = [
     "/resume/en/index.html",
     "/shop.html",
     "/shop.html?lang=en",
+    # ISS-08: the real English pages, served as static English documents.
+    "/en/index.html",
+    "/en/about.html",
+    "/en/projects.html",
+    "/en/works.html",
+    "/en/services.html",
+    "/en/shop.html",
+    "/en/magazine.html",
+    "/en/gallery.html",
+    "/en/contact.html",
+    "/en/lead-harvest.html",
 ]
 
 

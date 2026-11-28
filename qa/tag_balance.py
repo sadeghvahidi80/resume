@@ -7,23 +7,41 @@ import sys
 from html.parser import HTMLParser
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-FILES = [
-    "404.html",
-    "about.html",
-    "contact.html",
-    "gallery.html",
-    "index.html",
-    "magazine.html",
-    "magazine/agency-mongol-narrative.html",
-    "magazine/content-system-customers.html",
-    "projects.html",
-    "resume.html",
-    "services.html",
-    "works.html",
-] + [
-    "resume/%s/index.html" % loc
-    for loc in ("fa", "en", "de", "fr", "it", "es", "ru", "ar", "zh")
-]
+FILES = (
+    [
+        "404.html",
+        "about.html",
+        "contact.html",
+        "gallery.html",
+        "index.html",
+        "magazine.html",
+        "magazine/agency-mongol-narrative.html",
+        "magazine/content-system-customers.html",
+        "projects.html",
+        "resume.html",
+        "services.html",
+        "works.html",
+    ]
+    + [
+        "resume/%s/index.html" % loc
+        for loc in ("fa", "en", "de", "fr", "it", "es", "ru", "ar", "zh")
+    ]
+    + [
+        "en/%s.html" % page
+        for page in (
+            "about",
+            "contact",
+            "gallery",
+            "index",
+            "lead-harvest",
+            "magazine",
+            "projects",
+            "services",
+            "shop",
+            "works",
+        )
+    ]
+)
 VOID = {
     "area",
     "base",

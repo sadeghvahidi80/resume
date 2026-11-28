@@ -13,6 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 PORT = 8097
 MIN_LINKS = 25
+MIN_EN_LINKS = 10
 
 
 class Quiet(http.server.SimpleHTTPRequestHandler):
@@ -81,13 +82,21 @@ finally:
 
 links = data.get("links", [])
 broken = [item for item in links if (item.get("status") or 0) >= 400]
+# The English pages live under /en/ and are only reachable through the
+# language switch; make sure the crawl actually got there.
+en_links = [item for item in links if "/en/" in (item.get("url") or "")]
 
-print("links checked: %d" % len(links))
+print("links checked: %d (%d under /en/)" % (len(links), len(en_links)))
 for item in broken:
     print("  %s %s" % (item.get("status"), item.get("url")))
 
 if len(links) < MIN_LINKS:
     sys.exit("FAIL: only %d links crawled (expected >= %d)" % (len(links), MIN_LINKS))
+if len(en_links) < MIN_EN_LINKS:
+    sys.exit(
+        "FAIL: only %d links crawled under /en/ (expected >= %d)"
+        % (len(en_links), MIN_EN_LINKS)
+    )
 if broken:
     sys.exit("FAIL: %d broken link(s)" % len(broken))
 print("OK: no broken internal links")

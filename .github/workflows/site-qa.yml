@@ -48,7 +48,7 @@ jobs:
         run: >-
           qa/node_modules/.bin/html-validate
           -c qa/htmlvalidate.json
-          "*.html" "magazine/*.html" "resume/*/index.html"
+          "*.html" "magazine/*.html" "resume/*/index.html" "en/*.html"
 
       - name: Internal links
         run: python qa/link_check.py

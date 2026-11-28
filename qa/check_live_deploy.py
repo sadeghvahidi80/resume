@@ -276,7 +276,7 @@ check("css: no stale 820 query", "max-width:820px" not in css)
 status, sitemap = get("sitemap.xml")
 locs = re.findall(r"<loc>(.*?)</loc>", sitemap)
 check("sitemap 200", status == 200)
-check("sitemap: 15 urls", len(locs) == 15)
+check("sitemap: 25 urls", len(locs) == 25)
 check("sitemap: works listed", any("works.html" in u for u in locs))
 check("sitemap: gallery listed", any(u.endswith("/gallery.html") for u in locs))
 check("sitemap: shop listed", "https://sadeghvahidi.ir/shop.html" in locs)
@@ -541,12 +541,22 @@ _retired = sorted(
     if d == "2026-11-28"
 )
 check(
-    "sitemap: 3 edited pages at 2026-11-28",
+    "sitemap: 13 edited pages at 2026-11-28",
     _retired
     == [
         "https://sadeghvahidi.ir/resume.html",
         "https://sadeghvahidi.ir/resume/en/",
         "https://sadeghvahidi.ir/resume/fa/",
+        "https://sadeghvahidi.ir/en/",
+        "https://sadeghvahidi.ir/en/about.html",
+        "https://sadeghvahidi.ir/en/contact.html",
+        "https://sadeghvahidi.ir/en/gallery.html",
+        "https://sadeghvahidi.ir/en/lead-harvest.html",
+        "https://sadeghvahidi.ir/en/magazine.html",
+        "https://sadeghvahidi.ir/en/projects.html",
+        "https://sadeghvahidi.ir/en/services.html",
+        "https://sadeghvahidi.ir/en/shop.html",
+        "https://sadeghvahidi.ir/en/works.html",
     ],
 )
 

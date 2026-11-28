@@ -660,12 +660,13 @@ a:focus-visible,button:focus-visible{
 /* ========== Publish polish ========== */
 .nav-logo a{display:flex;align-items:center;gap:.7rem;text-decoration:none;color:inherit}
 .nav-logo a:hover img{opacity:.9}
-#langToggle{
+#langToggle,.lang-switch{
   background:transparent;border:1px solid var(--gold-border);color:var(--gold);
   padding:.4rem .9rem;font-size:.75rem;cursor:pointer;border-radius:var(--r-sm);
-  letter-spacing:.12em;font-family:var(--font);transition:all var(--t);flex-shrink:0
+  letter-spacing:.12em;font-family:var(--font);transition:all var(--t);flex-shrink:0;
+  display:inline-block;text-decoration:none;text-align:center
 }
-#langToggle:hover{background:var(--gold-dim);border-color:var(--gold)}
+#langToggle:hover,.lang-switch:hover{background:var(--gold-dim);border-color:var(--gold)}
 .nav-links a.active,.nav-mobile a.active{color:var(--gold)}
 .ccta{
   display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
@@ -734,7 +735,7 @@ html[lang="fa"] .ft-links > span.lang-fa,
 html[lang="en"] .ft-links > span.lang-en{display:contents}
 @media(max-width:768px){
   .site-footer{padding:1.4rem 1.4rem;flex-direction:column;text-align:center}
-  #langToggle{padding:.35rem .7rem}
+  #langToggle,.lang-switch{padding:.35rem .7rem}
   /* Signature: centre it with the rest of the mobile footer column
      (as a RTL block box it previously hugged the start edge off-centre). */
   .site-footer .signature-img{margin-inline:auto}
@@ -1019,7 +1020,7 @@ html[lang="fa"] .nas-keep.hero-h1{font-size:clamp(2.5rem,7vw,5rem);line-height:2
 .nav-burger[aria-expanded="true"] span:nth-child(1){transform:translate(-50%,-50%) rotate(45deg)}
 .nav-burger[aria-expanded="true"] span:nth-child(2){transform:translate(-50%,-50%) rotate(-45deg)}
 /* Keyboard focus must stay visible on the navy surface. */
-.nav-links a:focus-visible,.nav-mobile a:focus-visible,.nav-burger:focus-visible,#langToggle:focus-visible,.language-toggle:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:var(--r-sm)}
+.nav-links a:focus-visible,.nav-mobile a:focus-visible,.nav-burger:focus-visible,#langToggle:focus-visible,.lang-switch:focus-visible,.language-toggle:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:var(--r-sm)}
 @media (prefers-reduced-motion:reduce){
   .nav-burger span,.nav-mobile a,.nav-links a{transition:none!important}
 }

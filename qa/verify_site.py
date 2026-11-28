@@ -368,7 +368,7 @@ check("Disallow: /demos/" in rb, "robots: demos disallowed")
 
 sm = read("sitemap.xml")
 urls = re.findall(r"<loc>([^<]+)</loc>", sm)
-check(len(urls) == 15, "sitemap: 15 urls (got %d)" % len(urls))
+check(len(urls) == 25, "sitemap: 25 urls (got %d)" % len(urls))
 check(any(u.endswith("/gallery.html") for u in urls), "sitemap: gallery listed")
 check("https://sadeghvahidi.ir/shop.html" in urls, "sitemap: shop listed")
 check(
@@ -389,7 +389,7 @@ check(
     "sitemap: ensaf essay listed",
 )
 lastmods = re.findall(r"<lastmod>([^<]+)</lastmod>", sm)
-check(len(lastmods) == 15, "sitemap: 15 lastmod values (got %d)" % len(lastmods))
+check(len(lastmods) == 25, "sitemap: 25 lastmod values (got %d)" % len(lastmods))
 check(
     all(len(d) == 10 and d[4] == "-" for d in lastmods),
     "sitemap: lastmod is ISO date",
@@ -440,6 +440,16 @@ _retired = re.findall(r"<loc>([^<]+)</loc><lastmod>2026-11-28</lastmod>", sm)
 check(
     sorted(_retired)
     == [
+        "https://sadeghvahidi.ir/en/",
+        "https://sadeghvahidi.ir/en/about.html",
+        "https://sadeghvahidi.ir/en/contact.html",
+        "https://sadeghvahidi.ir/en/gallery.html",
+        "https://sadeghvahidi.ir/en/lead-harvest.html",
+        "https://sadeghvahidi.ir/en/magazine.html",
+        "https://sadeghvahidi.ir/en/projects.html",
+        "https://sadeghvahidi.ir/en/services.html",
+        "https://sadeghvahidi.ir/en/shop.html",
+        "https://sadeghvahidi.ir/en/works.html",
         "https://sadeghvahidi.ir/resume.html",
         "https://sadeghvahidi.ir/resume/en/",
         "https://sadeghvahidi.ir/resume/fa/",
@@ -469,6 +479,60 @@ check(
 check(
     _rl.count('href="resume/fa/"') == 2 and _rl.count('href="resume/en/"') == 2,
     "resume.html: two live editions in both language views",
+)
+
+# --- ISS-08: the real English pages, generated from the .lang-en blocks ---
+import importlib.util
+
+_spec = importlib.util.spec_from_file_location(
+    "build_en_pages",
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "build_en_pages.py"),
+)
+_builder = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_builder)
+
+_generated = _builder.build()
+check(
+    len(_generated) == 10, "en: ten English pages generated (got %d)" % len(_generated)
+)
+for _rel, _html in sorted(_generated.items()):
+    _disk = read(_rel)
+    check(_disk == _html, "%s: current with its .lang-en source" % _rel)
+    check(_disk.count("<h1") == 1, "%s: one h1" % _rel)
+    check(
+        '<html data-default-locale="en" data-lang-locked="en" dir="ltr" lang="en">'
+        in _disk,
+        "%s: English document, no JS required" % _rel,
+    )
+    check(
+        'content="en_US" property="og:locale"' in _disk,
+        "%s: English share locale" % _rel,
+    )
+
+for _src, _out, _fa, _en in _builder.PAGES:
+    _fa_page = read(_src)
+    check(
+        '<link href="https://sadeghvahidi.ir%s" hreflang="en" rel="alternate"/>' % _en
+        in _fa_page,
+        "%s: hreflang points at the real English page" % _src,
+    )
+    check(
+        '<a class="lang-switch" href="%s"' % _en in _fa_page,
+        "%s: EN control is a real link" % _src,
+    )
+    _canon = re.search(r'<link href="([^"]+)" rel="canonical"/>', read(_out))
+    check(
+        _canon is not None and _canon.group(1) == "https://sadeghvahidi.ir" + _en,
+        "%s: self-canonical" % _out,
+    )
+check(
+    '<a class="lang-switch" href="/resume/en/"' in read("resume.html"),
+    "resume.html: EN control opens the English resume",
+)
+check(
+    "data-lang-locked"
+    in io.open(os.path.join(S, "assets", "site.js"), encoding="utf-8").read(),
+    "site.js: locked locale respected",
 )
 
 # ISS-02: contact-list sales moved out of the shop to a standalone page.

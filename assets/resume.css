@@ -1278,7 +1278,7 @@ html[lang="fa"] .nas-keep.hero-h1{font-size:clamp(2.5rem,7vw,5rem);line-height:2
 .nav-burger[aria-expanded="true"] span:nth-child(1){transform:translate(-50%,-50%) rotate(45deg)}
 .nav-burger[aria-expanded="true"] span:nth-child(2){transform:translate(-50%,-50%) rotate(-45deg)}
 /* Keyboard focus must stay visible on the navy surface. */
-.nav-links a:focus-visible,.nav-mobile a:focus-visible,.nav-burger:focus-visible,#langToggle:focus-visible,.language-toggle:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:var(--r-sm)}
+.nav-links a:focus-visible,.nav-mobile a:focus-visible,.nav-burger:focus-visible,#langToggle:focus-visible,.lang-switch:focus-visible,.language-toggle:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:var(--r-sm)}
 @media (prefers-reduced-motion:reduce){
   .nav-burger span,.nav-mobile a,.nav-links a{transition:none!important}
 }

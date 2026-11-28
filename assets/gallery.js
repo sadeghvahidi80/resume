@@ -40,7 +40,9 @@
       );
       var img = document.createElement("img");
       img.className = "gal-img";
-      img.src = p.src;
+      // Gallery data lists site-root paths ("assets/gallery/..."); resolve
+      // them against the origin so the English pages under /en/ work too.
+      img.src = new URL(p.src, "/").pathname;
       img.alt = caption;
       img.loading = "lazy";
       img.decoding = "async";

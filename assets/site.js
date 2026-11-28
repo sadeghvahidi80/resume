@@ -8,6 +8,9 @@
   var toggle = document.getElementById('langToggle');
   var nav = document.getElementById('nav');
   var valid = ['fa', 'en'];
+  // The real English pages (/en/) declare their locale; a stored
+  // preference or a stale ?lang= must never flip them back.
+  var locked = root.getAttribute('data-lang-locked');
 
   function safeStorageGet(key) {
     try { return window.localStorage.getItem(key); } catch (e) { return null; }
@@ -62,7 +65,7 @@
 
     syncCanonical(lang);
 
-    safeStorageSet('site-lang', lang);
+    if (!locked) safeStorageSet('site-lang', lang);
     if (updateUrl && window.history && window.history.replaceState) {
       try {
         var url = new URL(window.location.href);
@@ -108,7 +111,9 @@
 
   var requested = null;
   try { requested = new URLSearchParams(window.location.search).get('lang'); } catch (e) {}
-  var initial = valid.indexOf(requested) !== -1 ? requested : (safeStorageGet('site-lang') || root.getAttribute('data-default-locale') || root.lang || 'fa');
+  var initial = locked && valid.indexOf(locked) !== -1
+    ? locked
+    : (valid.indexOf(requested) !== -1 ? requested : (safeStorageGet('site-lang') || root.getAttribute('data-default-locale') || root.lang || 'fa'));
   applyLang(initial, false);
 
   // A shared ?lang=fa link points at a duplicate of the default page; drop it.
