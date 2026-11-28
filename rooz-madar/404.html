@@ -362,6 +362,42 @@ body {
   letter-spacing: 0.02em;
 }
 
+/* ---------- credit ---------- */
+
+.credit {
+  margin: 2.1rem 0 0;
+  padding-top: 1rem;
+  position: relative;
+  font-size: 0.72rem;
+  line-height: 1.9;
+  color: rgba(138, 115, 104, 0.8);
+  letter-spacing: 0.02em;
+}
+
+.credit::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 50%;
+  transform: translateX(50%);
+  width: 2.4rem;
+  height: 1px;
+  background: var(--line);
+}
+
+.credit b {
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.credit a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(185, 138, 70, 0.4);
+  padding-bottom: 1px;
+  unicode-bidi: plaintext;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -428,6 +464,12 @@ body {
   <h1 class="name">این کارت پیدا نشد</h1>
   <p class="lede">لینک ناقص است یا کارت قدیمی شده. کارت را دوباره اسکن کن.</p>
   <p class="closing">اگر مشکل ادامه داشت، از مسئول کلاس لینک تازه بخواه.</p>
+
+  <footer class="credit">
+    طراحی شده توسط <b>صادق وحیدی</b>
+    <span aria-hidden="true">·</span>
+    <a href="tel:+989153753859">۰۹۱۵۳۷۵۳۸۵۹</a>
+  </footer>
 </main>
 </body>
 </html>
