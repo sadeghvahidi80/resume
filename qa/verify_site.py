@@ -144,12 +144,12 @@ check(
     "projects: demos labelled sample data (en)",
 )
 check(
-    rfa.count("نسخهٔ عمومی هنوز منتشر نشده") == 4,
-    "resume fa: public build not released x4",
+    rfa.count("نسخهٔ عمومی هنوز منتشر نشده") == 6,
+    "resume fa: public build not released x6",
 )
 check(
-    ren.count("not publicly released yet") == 2,
-    "resume en: public build not released x2",
+    ren.count("ready for release") == 6,
+    "resume en: public build not released x6",
 )
 check("روان‌یار — بهبود دسترسی" in rfa, "resume fa: Ravan Yar named")
 check("Ravan Yar — improving" in ren, "resume en: Ravan Yar named")

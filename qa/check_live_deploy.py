@@ -333,8 +333,8 @@ check(
 
 status, rfa = get("resume/fa/")
 check("resume fa 200", status == 200)
-check("resume fa: 2.0 ready x4", rfa.count("نسخهٔ ۲٫۰ آمادهٔ انتشار") == 4)
-check("resume fa: not released x4", rfa.count("نسخهٔ عمومی هنوز منتشر نشده") == 4)
+check("resume fa: 2.0 ready x6", rfa.count("نسخهٔ ۲٫۰ آمادهٔ انتشار") == 6)
+check("resume fa: not released x6", rfa.count("نسخهٔ عمومی هنوز منتشر نشده") == 6)
 check(
     "resume fa: Sabzevar claim softened",
     "سامانه فعال — در حال استفاده" not in rfa
@@ -441,8 +441,9 @@ check(
 )
 check(
     "works: console redaction disclosed",
-    "بخشی از شناسهٔ داخلی محصول محو شده است" in works
-    and "Part of the internal product name is masked" in works,
+    "نام داخلی محصول و شناسه‌های مشتری برای حفظ محرمانگی محو شده‌اند" in works
+    and "The internal product name and customer identifiers are masked for confidentiality"
+    in works,
 )
 
 for i in (1, 5, 11):
@@ -462,7 +463,10 @@ check(
 )
 check("services: 6 offers in Service catalog", svc.count('"@type":"Offer"') == 6)
 check("services: 8 FAQ items", svc.count('<details class="faq-item"') == 8)
-check("services: 8 FAQ summaries", svc.count("<summary>") == 8)
+check(
+    "services: 12 service detail toggles", svc.count('<details class="svc-more"') == 12
+)
+check("services: 20 summaries", svc.count("<summary>") == 20)
 check(
     "services: FAQ sections in both locales",
     '<section id="faq">' in svc and '<section id="en-faq">' in svc,
@@ -543,21 +547,23 @@ _retired = sorted(
 check(
     "sitemap: 13 edited pages at 2026-11-28",
     _retired
-    == [
-        "https://sadeghvahidi.ir/resume.html",
-        "https://sadeghvahidi.ir/resume/en/",
-        "https://sadeghvahidi.ir/resume/fa/",
-        "https://sadeghvahidi.ir/en/",
-        "https://sadeghvahidi.ir/en/about.html",
-        "https://sadeghvahidi.ir/en/contact.html",
-        "https://sadeghvahidi.ir/en/gallery.html",
-        "https://sadeghvahidi.ir/en/lead-harvest.html",
-        "https://sadeghvahidi.ir/en/magazine.html",
-        "https://sadeghvahidi.ir/en/projects.html",
-        "https://sadeghvahidi.ir/en/services.html",
-        "https://sadeghvahidi.ir/en/shop.html",
-        "https://sadeghvahidi.ir/en/works.html",
-    ],
+    == sorted(
+        [
+            "https://sadeghvahidi.ir/resume.html",
+            "https://sadeghvahidi.ir/resume/en/",
+            "https://sadeghvahidi.ir/resume/fa/",
+            "https://sadeghvahidi.ir/en/",
+            "https://sadeghvahidi.ir/en/about.html",
+            "https://sadeghvahidi.ir/en/contact.html",
+            "https://sadeghvahidi.ir/en/gallery.html",
+            "https://sadeghvahidi.ir/en/lead-harvest.html",
+            "https://sadeghvahidi.ir/en/magazine.html",
+            "https://sadeghvahidi.ir/en/projects.html",
+            "https://sadeghvahidi.ir/en/services.html",
+            "https://sadeghvahidi.ir/en/shop.html",
+            "https://sadeghvahidi.ir/en/works.html",
+        ]
+    ),
 )
 
 # --- 2026-11-25: the edge must send the baseline headers to every visitor.
