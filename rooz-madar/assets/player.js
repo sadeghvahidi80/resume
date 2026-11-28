@@ -132,6 +132,13 @@
 
   function playWeb() {
     if (loading) return;
+    /* ساخت/بازکردن AudioContext باید داخل خود لمس باشد، وگرنه iOS آن را قفل می‌کند */
+    try {
+      ensureContext();
+    } catch (error) {
+      showError();
+      return;
+    }
     loading = true;
     loadBuffer()
       .then(function (decoded) {
