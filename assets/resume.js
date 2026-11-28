@@ -29,6 +29,13 @@
     if (index === portfolioPages.length - 1) page.classList.add('last-active');
   });
 
+  var cvPages = Array.prototype.slice.call(document.querySelectorAll('#print-cv .print-page[data-print-locale="' + locale + '"]'));
+  cvPages.forEach(function (page, index) {
+    page.classList.add('is-print-active');
+    page.setAttribute('aria-hidden', 'false');
+    if (index === cvPages.length - 1) page.classList.add('last-active');
+  });
+
   var labels = {
     en: {home:'Home',about:'About',maten:'MATEN',experience:'Experience',contact:'Contact'},
     it: {home:'Home',about:'Profilo',maten:'MATEN',experience:'Esperienza',contact:'Contatti'},
@@ -86,6 +93,7 @@
   var printMenu = document.querySelector('.print-menu');
   var setDocMode = function (mode) {
     document.body.classList.toggle('print-doc-portfolio', mode === 'portfolio');
+    document.body.classList.toggle('print-doc-cv', mode === 'cv');
   };
   if (printButton) printButton.setAttribute('aria-label', text.print);
   if (printMenu) {
@@ -108,8 +116,9 @@
       }
     });
     var params = new URLSearchParams(window.location.search);
-    if (params.get('print') === 'portfolio' && portfolioPages.length) {
-      setDocMode('portfolio');
+    var autoDoc = params.get('print');
+    if ((autoDoc === 'portfolio' && portfolioPages.length) || (autoDoc === 'cv' && cvPages.length)) {
+      setDocMode(autoDoc);
       window.addEventListener('load', function () {
         window.setTimeout(function () { window.print(); }, 400);
       });

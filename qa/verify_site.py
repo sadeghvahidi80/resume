@@ -1014,28 +1014,60 @@ for _pdf in (
         "%s: valid PDF and under 1.2 MB (got %.2f MB)" % (_pdf, _size / 1048576),
     )
 
-# portfolio print edition + dual print chooser
+# two-page CV (ISS-10): a recruiter-facing file that has to stay emailable
+for _pdf in ("assets/pdf/cv-fa.pdf", "assets/pdf/cv-en.pdf"):
+    _p = os.path.join(S, _pdf)
+    _ok = os.path.exists(_p)
+    _size = os.path.getsize(_p) if _ok else 0
+    _head = b""
+    if _ok:
+        with open(_p, "rb") as _f:
+            _head = _f.read(5)
+    check(
+        _ok and _head == b"%PDF-" and 10000 < _size < 307200,
+        "%s: valid PDF and under 300 KB (got %.0f KB)" % (_pdf, _size / 1024),
+    )
+
+# portfolio + CV print editions and the three-way print chooser
 for _lang, _doc in (("fa", rfa), ("en", ren)):
     check(
         '<div class="print-portfolio" id="print-portfolio">' in _doc,
         "resume %s: portfolio print block present" % _lang,
     )
     check(
-        _doc.count('data-print-locale="%s"' % _lang) == 21,
-        "resume %s: 13 resume + 8 portfolio print pages" % _lang,
+        '<div class="print-cv" id="print-cv">' in _doc,
+        "resume %s: two-page CV print block present" % _lang,
     )
     check(
-        'data-print-doc="resume"' in _doc and 'data-print-doc="portfolio"' in _doc,
-        "resume %s: dual print chooser present" % _lang,
+        _doc.count('data-print-locale="%s"' % _lang) == 23,
+        "resume %s: 13 resume + 8 portfolio + 2 CV print pages" % _lang,
+    )
+    check(
+        all('data-print-doc="%s"' % _d in _doc for _d in ("resume", "portfolio", "cv")),
+        "resume %s: three-way print chooser present" % _lang,
     )
     check(
         'href="/assets/pdf/portfolio-%s.pdf"' % _lang in _doc,
         "resume %s: portfolio download linked" % _lang,
     )
+    check(
+        'href="/assets/pdf/cv-%s.pdf"' % _lang in _doc,
+        "resume %s: CV download linked" % _lang,
+    )
 check(
-    "print-doc-portfolio" in read("assets/resume.js"),
-    "resume.js: portfolio print mode wired",
+    "print-doc-portfolio" in read("assets/resume.js")
+    and "print-doc-cv" in read("assets/resume.js"),
+    "resume.js: portfolio + CV print modes wired",
 )
+
+# the chooser page offers both editions per language, so a visitor picks by need
+_chooser = read("resume.html")
+for _lang in ("fa", "en"):
+    check(
+        _chooser.count('href="/assets/pdf/cv-%s.pdf"' % _lang) == 1
+        and _chooser.count('href="/assets/pdf/resume-%s.pdf"' % _lang) == 1,
+        "resume.html: CV + full edition offered for %s" % _lang,
+    )
 
 print("\nFAILURES:", len(fails))
 for f in fails:
